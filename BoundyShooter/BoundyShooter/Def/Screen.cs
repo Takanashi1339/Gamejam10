@@ -8,7 +8,7 @@ namespace BoundyShooter.Def
 {
     static class Screen
     {
-        public static readonly int Width = 512;
-        public static readonly int Height = 768;
+        public static readonly int Width = 512;     //64 * 8
+        public static readonly int Height = 768;    //64 * 12
     }
 }
