@@ -9,7 +9,7 @@ using BoundyShooter.Device;
 using BoundyShooter.Util;
 using BoundyShooter.Def;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Entity
 {
     abstract class Entity : GameObject
     {
@@ -17,7 +17,7 @@ namespace BoundyShooter.Actor
         {
             get;
             protected set;
-        } = 0.4f;
+        } = 0.0f;
 
         public static readonly float MaxFallSpeed = 9.8f;
 
