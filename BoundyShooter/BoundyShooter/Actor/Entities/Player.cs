@@ -7,6 +7,7 @@ using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace BoundyShooter.Actor.Entities
 {
@@ -59,6 +60,11 @@ namespace BoundyShooter.Actor.Entities
         {
             GameDevice.Instance().DisplayModify = new Vector2(0, -Position.Y + Screen.Height / 2);
             Velocity = Front;
+            if (Input.GetKeyState(Keys.Space))
+            {
+                Velocity = Vector2.Zero;
+                Rotation++;
+            }
             base.Update(gameTime);
         }
 

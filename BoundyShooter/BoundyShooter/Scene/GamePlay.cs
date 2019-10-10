@@ -75,7 +75,7 @@ namespace BoundyShooter.Scene
                 next = Scene.Ending;
             }
 
-            if (Input.GetKeyTrigger(Keys.Space))
+            if (Input.GetKeyTrigger(Keys.RightControl))
             {
                 //シーン移動
                 isEndFlag = true;
