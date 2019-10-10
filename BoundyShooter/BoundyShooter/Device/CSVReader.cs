@@ -92,6 +92,7 @@ namespace BoundyShooter.Device
 
         public void Read(string filename, string path = Path)
         {
+            stringData.Clear();
             try
             {
                 using (var sr = new System.IO.StreamReader(@"Content/" + path + filename))

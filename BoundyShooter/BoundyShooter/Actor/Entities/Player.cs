@@ -19,6 +19,15 @@ namespace BoundyShooter.Actor.Entities
             private set;
         } = 0.0f;
 
+        public float Speed
+        {
+            get;
+            private set;
+        }
+
+        public const float Deceleration = 0.05f; //減速度
+        public const float RotaionSpeed = 7f; //減速度
+
         public Vector2 Front
         {
             set
@@ -58,12 +67,18 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
-            GameDevice.Instance().DisplayModify = new Vector2(0, -Position.Y + Screen.Height / 2);
-            Velocity = Front;
+            Velocity = Front * Speed;
+            Speed -= Deceleration;
+            if (Speed < 0)
+            {
+                Speed = 0;
+            }
+
             if (Input.GetKeyState(Keys.Space))
             {
                 Velocity = Vector2.Zero;
-                Rotation++;
+                Rotation += RotaionSpeed;
+                Speed = 10f;
             }
             base.Update(gameTime);
         }

@@ -9,6 +9,7 @@ using BoundyShooter.Actor;
 using BoundyShooter.Device;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
+using BoundyShooter.Def;
 
 namespace BoundyShooter.Scene
 {
@@ -19,6 +20,8 @@ namespace BoundyShooter.Scene
 
         private GameObjectManager gameObjectManager;
         private ParticleManager particleManager;
+
+        private float scroll = 0;
 
         public GamePlay()
         {
@@ -50,6 +53,7 @@ namespace BoundyShooter.Scene
             reader.Read("map01.csv");
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
+            scroll = map.Height;
         }
 
         public bool IsEnd()
@@ -82,6 +86,8 @@ namespace BoundyShooter.Scene
                 next = Scene.GameOver;
             }
 
+            scroll--;
+            GameDevice.Instance().DisplayModify = new Vector2(0, -scroll + Screen.Height);
             gameObjectManager.Update(gameTime);
             particleManager.Update(gameTime);
         }
