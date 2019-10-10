@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Block
 {
     abstract class Block : GameObject
     {
