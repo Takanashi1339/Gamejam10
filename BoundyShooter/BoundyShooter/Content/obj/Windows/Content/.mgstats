@@ -1,4 +1,18 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+<<<<<<< HEAD
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/CSV/map01.csv","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content\CSV/map01.csv","CopyItem","File",2442,2442,0.0070156
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blade.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/blade.xnb","TextureProcessor","Texture2DContent",310,4181,0.1183316
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/death.xnb","TextureProcessor","Texture2DContent",1683,57429,0.0148313
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/gun.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/gun.xnb","TextureProcessor","Texture2DContent",2286,16469,0.0289699
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/life_wall.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/life_wall.xnb","TextureProcessor","Texture2DContent",724,28757,0.0277699
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/player.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/player.xnb","TextureProcessor","Texture2DContent",767,16469,0.0339089
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_block.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_block.xnb","TextureProcessor","Texture2DContent",2703,4181,0.0260348
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_boss.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_boss.xnb","TextureProcessor","Texture2DContent",3060,262229,0.0508929
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_bullet.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_bullet.xnb","TextureProcessor","Texture2DContent",339,4181,0.021918
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_enemy.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_enemy.xnb","TextureProcessor","Texture2DContent",802,16469,0.0309235
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_gage.xnb","TextureProcessor","Texture2DContent",2099,12373,0.0329398
+"C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage_empty.png","C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_gage_empty.xnb","TextureProcessor","Texture2DContent",1059,12373,0.0304457
+=======
 "C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/CSV/map01.csv","C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content\CSV/map01.csv","CopyItem","File",2112,2112,0.0049881
 "C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blade.png","C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/blade.xnb","TextureProcessor","Texture2DContent",310,4181,0.3380981
 "C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png","C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/death.xnb","TextureProcessor","Texture2DContent",1683,57429,0.0109702
@@ -11,3 +25,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_enemy.png","C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_enemy.xnb","TextureProcessor","Texture2DContent",802,16469,0.0099969
 "C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage.png","C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_gage.xnb","TextureProcessor","Texture2DContent",2099,12373,0.0099288
 "C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage_empty.png","C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/test_gage_empty.xnb","TextureProcessor","Texture2DContent",1059,12373,0.0099734
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
+>>>>>>> Stashed changes

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Entities
@@ -40,6 +41,13 @@ namespace BoundyShooter.Actor.Entities
                 Velocity = velocity;
             }
             base.Update(gameTime);
+        }
+
+        public override void Draw()
+        {
+            var drawer = Drawer.Default;
+            drawer.DisplayModify = true;
+            base.Draw(drawer);
         }
     }
 }

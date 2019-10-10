@@ -37,5 +37,6 @@ namespace BoundyShooter.Actor.Entities
         {
             base.Hit(gameObject);
         }
+
     }
 }

@@ -19,6 +19,7 @@ namespace BoundyShooter.Def
                 { "player", Path},
                 { "test_block", Path},
                 {"test_boss", Path },
+                { "test_enemy", Path },
 
                 //必要に応じて自分で追加
             };
