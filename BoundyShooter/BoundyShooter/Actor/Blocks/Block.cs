@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Blocks
@@ -28,6 +29,12 @@ namespace BoundyShooter.Actor.Blocks
         {
             Position = position;
             return this;
+        }
+
+        protected override void Draw(Drawer drawer)
+        {
+            drawer.DisplayModify = true;
+            base.Draw(drawer);
         }
     }
 }
