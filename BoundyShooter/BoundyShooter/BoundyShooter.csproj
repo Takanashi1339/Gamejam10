@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Actor\Blocks\Block.cs" />
     <Compile Include="Actor\Entities\Entity.cs" />
+　　<Compile Include="Actor\Entities\TestEnemy.cs" />
     <Compile Include="Actor\Entities\Player.cs" />
     <Compile Include="Actor\GameObject.cs" />
     <Compile Include="Actor\Map.cs" />
