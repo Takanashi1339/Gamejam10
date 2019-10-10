@@ -7,11 +7,12 @@ using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Entities
 {
-    class TestEnemy : Entity
+    class TestEnemy : Enemy
     {
         public TestEnemy(Vector2 position)
-            : base("test_enemy", position, new Point(64, 64))
+            : base("test_enemy", position, new Point(64, 64),3f)
         {
+            MaxSpeed = 3;
         }
 
         public TestEnemy(TestEnemy other)
@@ -25,7 +26,10 @@ namespace BoundyShooter.Actor.Entities
         public override void Update(GameTime gameTime)
         {
             if (!IsInScreen()) return;
-            Velocity = new Vector2(0, -3);
+            if(Velocity.Y > MaxSpeed)
+            {
+                Velocity = new Vector2(0, MaxSpeed);
+            }
             base.Update(gameTime);
         }
 
