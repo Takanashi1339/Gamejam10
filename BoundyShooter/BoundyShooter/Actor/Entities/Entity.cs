@@ -14,11 +14,19 @@ namespace BoundyShooter.Actor.Entities
 {
     abstract class Entity : GameObject
     {
+<<<<<<< HEAD
+        //public float Gravity
+        //{
+        //    get;
+        //    protected set;
+        //} = -0.4f;
+=======
         public float Gravity
         {
             get;
             protected set;
-        } = -0.4f;
+        } = 0.0f;
+>>>>>>> master
 
         public static readonly float MaxFallSpeed = 9.8f;
 
@@ -71,7 +79,7 @@ namespace BoundyShooter.Actor.Entities
         public override void Update(GameTime gameTime)
         {
             var velocity = Velocity;
-            velocity.Y += Gravity;
+            //velocity.Y += Gravity;
             if (velocity.Y > MaxFallSpeed)
             {
                 velocity.Y = MaxFallSpeed;

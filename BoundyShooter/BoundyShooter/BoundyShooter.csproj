@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
   <PropertyGroup>
@@ -42,7 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actor\Blocks\Block.cs" />
+    <Compile Include="Actor\Entities\Boss.cs" />
+    <Compile Include="Actor\Entities\Enemy.cs" />
     <Compile Include="Actor\Entities\Entity.cs" />
+　　<Compile Include="Actor\Entities\TestEnemy.cs" />
     <Compile Include="Actor\Entities\Player.cs" />
     <Compile Include="Actor\GameObject.cs" />
     <Compile Include="Actor\Map.cs" />
