@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BoundyShooter.Actor;
 using BoundyShooter.Actor.Blocks;
+using BoundyShooter.Actor.Entities;
+using BoundyShooter.Actor.Particles;
 
 namespace BoundyShooter.Actor
 {
@@ -39,9 +41,9 @@ namespace BoundyShooter.Actor
 
         public Map(List<string[]> data)
         {
-            mapList = new List<List<Blocks>>();
+            mapList = new List<List<Block>>();
             gameDevice = GameDevice.Instance();
-            replaceList = new List<Blocks[]>();
+            replaceList = new List<Block[]>();
 
             for (int linCnt = 0; linCnt < data.Count(); linCnt++)
             {
@@ -54,7 +56,7 @@ namespace BoundyShooter.Actor
         {
             var objectDict = MapDictionary.Data;
 
-            var workList = new List<Blocks>();
+            var workList = new List<Block>();
             int colCnt = 0;
             foreach (var s in line)
             {
@@ -120,7 +122,7 @@ namespace BoundyShooter.Actor
 
         public void ReplaceBlock(Block before, Block after)
         {
-            replaceList.Add(new Blocks[] { before, after });
+            replaceList.Add(new Block[] { before, after });
         }
 
         public Block GetBlock(Vector2 position)
