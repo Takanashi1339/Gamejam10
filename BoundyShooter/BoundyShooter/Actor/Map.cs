@@ -17,7 +17,6 @@ namespace BoundyShooter.Actor
 {
     class Map
     {
-        public const int BlockSize = 64;
         public string Name
         {
             get;
@@ -65,15 +64,15 @@ namespace BoundyShooter.Actor
                     var work = objectDict[s].Clone() as GameObject;
                     var position =
                         new Vector2(
-                            colCnt * BlockSize,
-                            lineCnt * BlockSize);
+                            colCnt * Block.BlockSize,
+                            lineCnt * Block.BlockSize);
                     if (work is Block block)
                     {
                         work = block.Set(this, position);
                     }
                     else if (work is Entity entity)
                     {
-                        entity.Spawn(this, position - new Vector2(0, entity.Height - BlockSize));
+                        entity.Spawn(this, position - new Vector2(0, entity.Height - Block.BlockSize));
                         work = new Space().Set(this, position);
                     }
 
@@ -122,8 +121,8 @@ namespace BoundyShooter.Actor
 
         public Block GetBlock(Vector2 position)
         {
-            var x = (int)position.X / BlockSize;
-            var y = (int)position.Y / BlockSize;
+            var x = (int)position.X / Block.BlockSize;
+            var y = (int)position.Y / Block.BlockSize;
             return mapList[y][x];
         }
 
@@ -159,10 +158,10 @@ namespace BoundyShooter.Actor
             var otherRect = gameObject.Rectangle;
             Point workMax = otherRect.Location + otherRect.Size;
             Point workMin = otherRect.Location;
-            int minX = workMin.X / BlockSize;
-            int minY = workMin.Y / BlockSize;
-            int maxX = workMax.X / BlockSize;
-            int maxY = workMax.Y / BlockSize;
+            int minX = workMin.X / Block.BlockSize;
+            int minY = workMin.Y / Block.BlockSize;
+            int maxX = workMax.X / Block.BlockSize;
+            int maxY = workMax.Y / Block.BlockSize;
             if (minX < 1)
             {
                 minX = 1;

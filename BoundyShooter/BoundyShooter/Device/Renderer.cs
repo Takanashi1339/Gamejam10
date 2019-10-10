@@ -85,7 +85,10 @@ namespace BoundyShooter.Device
             {
                 spriteBatch.Draw(
                     textures[assetName], //テクスチャ
-                    position,
+                    position + drawer.Origin
+                        + ((drawer.DisplayModify)
+                            ? GameDevice.Instance().DisplayModify
+                            : Vector2.Zero),
                     drawer.Rectangle,
                     drawer.Color * drawer.Alpha,
                     drawer.Rotation,

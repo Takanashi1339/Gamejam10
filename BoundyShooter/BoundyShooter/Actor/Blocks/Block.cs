@@ -9,6 +9,8 @@ namespace BoundyShooter.Actor.Blocks
 {
     abstract class Block : GameObject
     {
+        public const int BlockSize = 32;
+
         //当たり判定を持つかどうか
         public bool IsSolid
         {
@@ -17,7 +19,7 @@ namespace BoundyShooter.Actor.Blocks
         }
 
         public Block(string name, bool isSolid)
-            : base(name, Vector2.Zero, new Point(Map.BlockSize, Map.BlockSize))
+            : base(name, Vector2.Zero, new Point(BlockSize, BlockSize))
         {
             IsSolid = isSolid;
         }
