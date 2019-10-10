@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Block
 {
-    class Space : Block
+    class TestBlock : Block
     {
-        public Space()
-            : base("", false)
+        public TestBlock() 
+            : base("test_block", true)
         {
         }
 
         public override object Clone()
         {
-            return new Space();
-        }
-
-        public override void Draw()
-        {
-            //描画しない
+            return new TestBlock();
         }
 
         public override void Hit(GameObject gameObject)

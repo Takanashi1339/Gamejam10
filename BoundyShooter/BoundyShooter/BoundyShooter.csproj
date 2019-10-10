@@ -41,12 +41,13 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Actor\Block.cs" />
+    <Compile Include="Actor\Block\Block.cs" />
     <Compile Include="Actor\Entity.cs" />
     <Compile Include="Actor\GameObject.cs" />
     <Compile Include="Actor\Map.cs" />
     <Compile Include="Actor\Particle.cs" />
-    <Compile Include="Actor\Space.cs" />
+    <Compile Include="Actor\Block\Space.cs" />
+    <Compile Include="Actor\Block\TestBlock.cs" />
     <Compile Include="Def\MapDictionary.cs" />
     <Compile Include="Def\Screen.cs" />
     <Compile Include="Def\Sounds.cs" />

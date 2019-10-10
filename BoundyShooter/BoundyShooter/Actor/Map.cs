@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Block
 {
     class Map
     {
