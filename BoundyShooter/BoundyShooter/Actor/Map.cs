@@ -115,11 +115,6 @@ namespace BoundyShooter.Actor
             }
         }
 
-        public void hoge(Particle particle)
-        {
-
-        }
-
         public void ReplaceBlock(Block before, Block after)
         {
             replaceList.Add(new Block[] { before, after });
