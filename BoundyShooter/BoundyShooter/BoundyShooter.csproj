@@ -42,10 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actor\Blocks\Block.cs" />
-<<<<<<< HEAD
     <Compile Include="Actor\Entities\Boss.cs" />
-=======
->>>>>>> master
     <Compile Include="Actor\Entities\Enemy.cs" />
     <Compile Include="Actor\Entities\Entity.cs" />
 　　<Compile Include="Actor\Entities\TestEnemy.cs" />

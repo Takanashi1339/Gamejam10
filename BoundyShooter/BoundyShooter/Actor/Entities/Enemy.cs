@@ -39,13 +39,6 @@ namespace BoundyShooter.Actor.Entities
                 velocity.Y += acceleration;
                 Velocity = velocity;
             }
-<<<<<<< HEAD
-=======
-            if (Velocity.Y > MaxSpeed)
-            {
-                Velocity = new Vector2(0, MaxSpeed);
-            }
->>>>>>> master
             base.Update(gameTime);
         }
     }
