@@ -16,6 +16,8 @@ namespace BoundyShooter.Def
         public static readonly string[,] Data = new string[,]
             {
                 //{ "texture_name", Path},
+                { "player", Path},
+                { "test_block", Path},
 
                 //必要に応じて自分で追加
             };

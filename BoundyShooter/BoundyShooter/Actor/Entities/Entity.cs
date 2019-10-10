@@ -18,7 +18,7 @@ namespace BoundyShooter.Actor.Entities
         {
             get;
             protected set;
-        } = 0.4f;
+        } = -0.4f;
 
         public static readonly float MaxFallSpeed = 9.8f;
 

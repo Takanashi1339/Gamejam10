@@ -29,7 +29,7 @@ namespace BoundyShooter.Scene
 
         public void Draw()
         {
-            GameDevice.Instance().GetGraphicsDevice().Clear(Color.Blue);
+            GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
 
             Renderer.Instance.Begin();
             gameObjectManager.Draw();
@@ -43,17 +43,13 @@ namespace BoundyShooter.Scene
             next = Scene.Ending;
 
             gameObjectManager.Initialize();
-
-            // 空のマップを渡す
-            gameObjectManager.Add(new Map(new List<string[]>()));
-
+            
             // csvからマップを読み込む場合
-            /*
+            
             var reader = GameDevice.Instance().GetCSVReader();
-            reader.Read("map_name.csv");
+            reader.Read("map01.csv");
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
-            */
         }
 
         public bool IsEnd()
