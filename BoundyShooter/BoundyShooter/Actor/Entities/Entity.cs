@@ -14,19 +14,11 @@ namespace BoundyShooter.Actor.Entities
 {
     abstract class Entity : GameObject
     {
-<<<<<<< HEAD
-        //public float Gravity
-        //{
-        //    get;
-        //    protected set;
-        //} = -0.4f;
-=======
         public float Gravity
         {
             get;
             protected set;
         } = 0.0f;
->>>>>>> master
 
         public static readonly float MaxFallSpeed = 9.8f;
 
