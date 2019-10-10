@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor;
+using BoundyShooter.Actor.Blocks;
 
-namespace BoundyShooter.Actor.Block
+namespace BoundyShooter.Actor
 {
     class Map
     {
@@ -37,9 +39,9 @@ namespace BoundyShooter.Actor.Block
 
         public Map(List<string[]> data)
         {
-            mapList = new List<List<Block>>();
+            mapList = new List<List<Blocks>>();
             gameDevice = GameDevice.Instance();
-            replaceList = new List<Block[]>();
+            replaceList = new List<Blocks[]>();
 
             for (int linCnt = 0; linCnt < data.Count(); linCnt++)
             {
@@ -52,7 +54,7 @@ namespace BoundyShooter.Actor.Block
         {
             var objectDict = MapDictionary.Data;
 
-            var workList = new List<Block>();
+            var workList = new List<Blocks>();
             int colCnt = 0;
             foreach (var s in line)
             {
@@ -111,9 +113,14 @@ namespace BoundyShooter.Actor.Block
             }
         }
 
+        public void hoge(Particle particle)
+        {
+
+        }
+
         public void ReplaceBlock(Block before, Block after)
         {
-            replaceList.Add(new Block[] { before, after });
+            replaceList.Add(new Blocks[] { before, after });
         }
 
         public Block GetBlock(Vector2 position)

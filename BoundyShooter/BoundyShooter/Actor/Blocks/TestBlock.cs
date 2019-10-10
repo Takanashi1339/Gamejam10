@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace BoundyShooter.Actor.Block
+namespace BoundyShooter.Actor.Blocks
 {
     class TestBlock : Block
     {

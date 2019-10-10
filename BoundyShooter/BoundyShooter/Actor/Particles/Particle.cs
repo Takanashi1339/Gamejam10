@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Particles
 {
     abstract class Particle : GameObject
     {

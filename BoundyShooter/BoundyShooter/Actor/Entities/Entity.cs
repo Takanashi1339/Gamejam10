@@ -8,8 +8,9 @@ using BoundyShooter.Manager;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using BoundyShooter.Def;
+using BoundyShooter.Actor.Blocks;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Entities
 {
     abstract class Entity : GameObject
     {
