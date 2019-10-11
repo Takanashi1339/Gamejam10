@@ -41,22 +41,22 @@ namespace BoundyShooter.Actor.Entities
             if(gameObject is Player)
             {
                 float speed = 10f;
-                var playerPos = GameObjectManager.Instance.Find<Player>().First().Position;
-                //var playerSize = GameObjectManager.Instance.Find<Player>().First().Size;
-                var rotation = Math.Atan2(playerPos.Y - Position.Y, playerPos.X - Position.X);
+                var player = GameObjectManager.Instance.Find<Player>().First();
+                var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
+                if(Math.Sqrt(
+                    Math.Pow(player.Velocity.X,2) + Math.Pow(player.Velocity.Y,2)//2乗した平方根をとる
+                    ) > player.Speed / 2)
+                {
+                    IsDead = true;//プレイヤーの最高速度/2よりも現在の速度が速い場合
+                }
                 if(rotation < 0)
                 {
-                    //var position = Position;
-                    //position.Y = playerPos.Y + playerSize.Y / 2;
-                    //Position = position;
                     Velocity = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)) * speed;
                 }
                 else
                 {
                     Velocity = new Vector2((float)Math.Cos(rotation), -(float)Math.Sin(rotation)) * speed;
                 }
-                
-                //Velocity = bounceVelocity;
             }
             base.Hit(gameObject);
         }
@@ -72,6 +72,14 @@ namespace BoundyShooter.Actor.Entities
             if (Velocity.Y > MaxSpeedY)
             {
                 velocity.Y = MaxSpeedY;
+            }
+            if(Velocity.X > 0)
+            {
+                velocity.X -= acceleration;
+            }
+            if(velocity.X <0)
+            {
+                velocity.X += acceleration;
             }
             if(Velocity.X > MaxSpeedX)
             {
