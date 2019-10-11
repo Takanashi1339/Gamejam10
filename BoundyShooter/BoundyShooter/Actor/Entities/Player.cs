@@ -20,12 +20,19 @@ namespace BoundyShooter.Actor.Entities
             private set;
         } = 0.0f;
 
+        public float BladeRotation
+        {
+            set;
+            get;
+        }
+
         public float Speed
         {
             get;
             private set;
         }
 
+        public const int BladeAmount = 3;
         public const float Deceleration = 0.05f; //減速度
         public const float RotaionSpeed = 7f; //減速度
         public const float MaxSpeed = 15f;
@@ -88,15 +95,36 @@ namespace BoundyShooter.Actor.Entities
                 Rotation += RotaionSpeed;
                 Speed = MaxSpeed;
             }
+            BladeRotation -= (Speed - MaxSpeed / 2) * 2;
             base.Update(gameTime);
         }
 
         public override void Draw()
         {
+            DrawBlade();
             var drawer = Drawer.Default;
             drawer.Rotation = MathHelper.ToRadians(Rotation);
             drawer.Origin = Size.ToVector2() / 2;
             base.Draw(drawer);
+        }
+
+        private void DrawBlade()
+        {
+            if (Speed > MaxSpeed / 2)
+            {
+                var spin = (Speed - MaxSpeed / 2) / MaxSpeed * (3f/2f);
+                var blade = Drawer.Default;
+                for (int i = 0; i < BladeAmount; i++)
+                {
+                    blade.Rotation = MathHelper.ToRadians(360 / BladeAmount * i + BladeRotation);
+                    blade.Origin = new Vector2(Size.ToVector2().X / 4, Size.ToVector2().Y / 4 + spin * Size.ToVector2().Y);
+                    //blade.Origin = Size.ToVector2() / 2 + (spin * Size.ToVector2() / 2);
+                    blade.DisplayModify = true;
+                    var bladePosition = Position + new Vector2(Size.X / 4, Size.Y / 4 - Size.Y * spin);
+                    Renderer.Instance.DrawTexture("blade", bladePosition, blade);
+                }
+
+            }
         }
     }
 }

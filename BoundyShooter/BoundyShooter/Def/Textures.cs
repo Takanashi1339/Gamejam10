@@ -17,6 +17,7 @@ namespace BoundyShooter.Def
             {
                 //{ "texture_name", Path},
                 { "player", Path},
+                { "blade", Path},
                 { "test_block", Path},
                 { "test_boss", Path },
                 { "test_enemy", Path },
