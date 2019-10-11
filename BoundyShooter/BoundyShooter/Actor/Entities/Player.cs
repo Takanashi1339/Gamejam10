@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
@@ -27,22 +28,10 @@ namespace BoundyShooter.Actor.Entities
 
         public const float Deceleration = 0.05f; //減速度
         public const float RotaionSpeed = 7f; //減速度
+        public const float MaxSpeed = 15f;
 
         public Vector2 Front
         {
-            set
-            {
-                if (!value.Equals(Vector2.Zero))
-                {
-                    value.Normalize();
-                    var radian = (float) Math.Atan2(value.X, value.Y);
-                    Rotation = MathHelper.ToDegrees(radian);
-                }
-                else
-                {
-                    Rotation = 0;
-                }
-            }
             get
             {
                 var radian = MathHelper.ToRadians(Rotation);
@@ -51,6 +40,25 @@ namespace BoundyShooter.Actor.Entities
                     -(float)Math.Cos(radian)
                     );
                 return vector;
+            }
+        }
+        public override void Hit(GameObject gameObject)
+        {
+
+            if (gameObject is Block block && block.IsSolid)
+            {
+                Direction dir = CheckDirection(block);
+                CorrectPosition(block);
+                
+                if (dir == Direction.Left || dir == Direction.Right)
+                {
+                    var rotation = Rotation;
+                    Rotation = 360 - rotation;
+                }else if (dir == Direction.Top || dir == Direction.Bottom)
+                {
+                    var rotation = Rotation;
+                    Rotation = 180 - rotation;
+                }
             }
         }
 
@@ -78,7 +86,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 Velocity = Vector2.Zero;
                 Rotation += RotaionSpeed;
-                Speed = 10f;
+                Speed = MaxSpeed;
             }
             base.Update(gameTime);
         }
