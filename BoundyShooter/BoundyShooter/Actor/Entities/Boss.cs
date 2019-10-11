@@ -52,5 +52,12 @@ namespace BoundyShooter.Actor.Entities
             }
             base.Hit(gameObject);
         }
+
+        public override void Draw()
+        {
+            var drawer = Drawer.Default;
+            drawer.DisplayModify = true;
+            base.Draw(drawer);
+        }
     }
 }
