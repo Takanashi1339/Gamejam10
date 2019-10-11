@@ -25,10 +25,6 @@ namespace BoundyShooter.Actor.Entities
         public override void Update(GameTime gameTime)
         {
             if (!IsInScreen()) return;
-            if(Velocity.Y > MaxSpeed)
-            {
-                Velocity = new Vector2(0, MaxSpeed);
-            }
             base.Update(gameTime);
         }
 
