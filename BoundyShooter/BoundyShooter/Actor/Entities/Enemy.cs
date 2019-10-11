@@ -43,9 +43,7 @@ namespace BoundyShooter.Actor.Entities
                 float speed = 10f;
                 var player = GameObjectManager.Instance.Find<Player>().First();
                 var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
-                if(Math.Sqrt(
-                    Math.Pow(player.Velocity.X,2) + Math.Pow(player.Velocity.Y,2)//2乗した平方根をとる
-                    ) > player.Speed / 2)
+                if(player.Speed > Player.MaxSpeed / 2)
                 {
                     IsDead = true;//プレイヤーの最高速度/2よりも現在の速度が速い場合
                 }
