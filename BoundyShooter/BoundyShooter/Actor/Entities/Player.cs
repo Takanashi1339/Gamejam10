@@ -115,6 +115,7 @@ namespace BoundyShooter.Actor.Entities
                 Speed = MaxSpeed;
             }
             BladeRotation -= (Speed - MaxSpeed / 2) * 2;
+            new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
         }
 

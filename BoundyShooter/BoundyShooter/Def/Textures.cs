@@ -20,6 +20,7 @@ namespace BoundyShooter.Def
                 { "blade", Path },
                 { "gun", Path },
                 { "pink_ball",Path },
+                { "pink_tail",Path },
                 { "test_block", Path },
                 { "test_boss", Path },
                 { "test_enemy", Path },
