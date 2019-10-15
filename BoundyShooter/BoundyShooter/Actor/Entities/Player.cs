@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoundyShooter.Actor.Blocks;
+using BoundyShooter.Actor.Particles;
 using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
@@ -62,10 +63,27 @@ namespace BoundyShooter.Actor.Entities
                 {
                     var rotation = Rotation;
                     Rotation = 360 - rotation;
+                    if (dir == Direction.Left)
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
+                    }
+                    else
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
+                    }
+
                 }else if (dir == Direction.Top || dir == Direction.Bottom)
                 {
                     var rotation = Rotation;
                     Rotation = 180 - rotation;
+                    if (dir == Direction.Top)
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                    }
+                    else
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
+                    }
                 }
             }
         }

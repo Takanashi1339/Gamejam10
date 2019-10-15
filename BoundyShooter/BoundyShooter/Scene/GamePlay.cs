@@ -46,6 +46,7 @@ namespace BoundyShooter.Scene
             next = Scene.Ending;
 
             gameObjectManager.Initialize();
+            particleManager.Initialize();
             
             // csvからマップを読み込む場合
             
