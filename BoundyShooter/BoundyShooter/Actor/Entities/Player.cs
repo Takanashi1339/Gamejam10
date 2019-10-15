@@ -8,6 +8,7 @@ using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BoundyShooter.Actor.Entities
@@ -102,6 +103,7 @@ namespace BoundyShooter.Actor.Entities
         public override void Draw()
         {
             DrawBlade();
+            DrawGun();
             var drawer = Drawer.Default;
             drawer.Rotation = MathHelper.ToRadians(Rotation);
             drawer.Origin = Size.ToVector2() / 2;
@@ -125,6 +127,24 @@ namespace BoundyShooter.Actor.Entities
                 }
 
             }
+        }
+
+        private void DrawGun()
+        {
+            var gunSign = Math.Sign(Front.Y); //上なら-1, 下なら1
+            var gun = Drawer.Default;
+            if (gunSign == -1)
+            {
+                gun.SpriteEffects = SpriteEffects.FlipVertically;
+            }
+            gun.DisplayModify = true;
+            var gunSpeed = -(MaxSpeed / 2) + Speed;
+            if (gunSpeed > 0)
+            {
+                return;
+            }
+            var gunPosition = Position + new Vector2(0, gunSpeed * gunSign * 6);
+            Renderer.Instance.DrawTexture("gun", gunPosition, gun);
         }
     }
 }
