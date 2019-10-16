@@ -60,7 +60,11 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Hit(GameObject gameObject)
         {
-
+            if(gameObject is LifeWall wall&& !wall.IsDead)
+            {
+                var rotation = Rotation;
+                Rotation = 180 - rotation;
+            }
             if (gameObject is Block block && block.IsSolid)
             {
                 Direction dir = CheckDirection(block);

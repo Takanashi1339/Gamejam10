@@ -54,6 +54,7 @@ namespace BoundyShooter.Actor
 
         public override void Update(GameTime gameTime)
         {
+            Console.WriteLine(Position);
             Position = -GameDevice.Instance().DisplayModify + displayPos;
             if(lifeWalls.Count <= 0)
             {
@@ -72,7 +73,7 @@ namespace BoundyShooter.Actor
         public override void Hit(GameObject gameObject)
         {
             if (IsDead) return;
-            if (gameObject is Enemy)
+            if (gameObject is Enemy enemy)
             {
                 IsDead = true;
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);

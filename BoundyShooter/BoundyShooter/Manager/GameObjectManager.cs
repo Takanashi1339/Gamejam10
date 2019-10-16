@@ -167,7 +167,7 @@ namespace BoundyShooter.Manager
                 {
                     if(wall.IsDead || obj.IsDead)
                     {
-                        return;
+                        continue;
                     }
                     if(wall.IsCollision(obj))
                     {

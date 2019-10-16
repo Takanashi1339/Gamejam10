@@ -72,7 +72,7 @@ namespace BoundyShooter.Actor
                     }
                     else if (work is Entity entity)
                     {
-                        entity.Spawn(this, position - new Vector2(0, entity.Height - Block.BlockSize));
+                        entity.Spawn(this, position - new Vector2(entity.Width / 2, entity.Height - Block.BlockSize));
                         work = new Space().Set(this, position);
                     }
 
