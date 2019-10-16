@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Blocks;
+using BoundyShooter.Actor.Particles;
 using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BoundyShooter.Actor.Entities
@@ -19,30 +22,25 @@ namespace BoundyShooter.Actor.Entities
             private set;
         } = 0.0f;
 
+        public float BladeRotation
+        {
+            set;
+            get;
+        }
+
         public float Speed
         {
             get;
             private set;
         }
 
+        public const int BladeAmount = 3;
         public const float Deceleration = 0.05f; //減速度
         public const float RotaionSpeed = 7f; //減速度
+        public const float MaxSpeed = 15f;
 
         public Vector2 Front
         {
-            set
-            {
-                if (!value.Equals(Vector2.Zero))
-                {
-                    value.Normalize();
-                    var radian = (float) Math.Atan2(value.X, value.Y);
-                    Rotation = MathHelper.ToDegrees(radian);
-                }
-                else
-                {
-                    Rotation = 0;
-                }
-            }
             get
             {
                 var radian = MathHelper.ToRadians(Rotation);
@@ -51,6 +49,42 @@ namespace BoundyShooter.Actor.Entities
                     -(float)Math.Cos(radian)
                     );
                 return vector;
+            }
+        }
+        public override void Hit(GameObject gameObject)
+        {
+
+            if (gameObject is Block block && block.IsSolid)
+            {
+                Direction dir = CheckDirection(block);
+                CorrectPosition(block);
+                
+                if (dir == Direction.Left || dir == Direction.Right)
+                {
+                    var rotation = Rotation;
+                    Rotation = 360 - rotation;
+                    if (dir == Direction.Left)
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
+                    }
+                    else
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
+                    }
+
+                }else if (dir == Direction.Top || dir == Direction.Bottom)
+                {
+                    var rotation = Rotation;
+                    Rotation = 180 - rotation;
+                    if (dir == Direction.Top)
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                    }
+                    else
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
+                    }
+                }
             }
         }
 
@@ -78,17 +112,58 @@ namespace BoundyShooter.Actor.Entities
             {
                 Velocity = Vector2.Zero;
                 Rotation += RotaionSpeed;
-                Speed = 10f;
+                Speed = MaxSpeed;
             }
+            BladeRotation -= (Speed - MaxSpeed / 2) * 2;
+            new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
         }
 
         public override void Draw()
         {
+            DrawBlade();
+            DrawGun();
             var drawer = Drawer.Default;
             drawer.Rotation = MathHelper.ToRadians(Rotation);
             drawer.Origin = Size.ToVector2() / 2;
             base.Draw(drawer);
+        }
+
+        private void DrawBlade()
+        {
+            if (Speed > MaxSpeed / 2)
+            {
+                var spin = (Speed - MaxSpeed / 2) / MaxSpeed * (3f/2f);
+                var blade = Drawer.Default;
+                for (int i = 0; i < BladeAmount; i++)
+                {
+                    blade.Rotation = MathHelper.ToRadians(360 / BladeAmount * i + BladeRotation);
+                    blade.Origin = new Vector2(Size.ToVector2().X / 4, Size.ToVector2().Y / 4 + spin * Size.ToVector2().Y);
+                    //blade.Origin = Size.ToVector2() / 2 + (spin * Size.ToVector2() / 2);
+                    blade.DisplayModify = true;
+                    var bladePosition = Position + new Vector2(Size.X / 4, Size.Y / 4 - Size.Y * spin);
+                    Renderer.Instance.DrawTexture("blade", bladePosition, blade);
+                }
+
+            }
+        }
+
+        private void DrawGun()
+        {
+            var gunSign = Math.Sign(Front.Y); //上なら-1, 下なら1
+            var gun = Drawer.Default;
+            if (gunSign == -1)
+            {
+                gun.SpriteEffects = SpriteEffects.FlipVertically;
+            }
+            gun.DisplayModify = true;
+            var gunSpeed = -(MaxSpeed / 2) + Speed;
+            if (gunSpeed > 0)
+            {
+                return;
+            }
+            var gunPosition = Position + new Vector2(0, gunSpeed * gunSign * 6);
+            Renderer.Instance.DrawTexture("gun", gunPosition, gun);
         }
     }
 }
