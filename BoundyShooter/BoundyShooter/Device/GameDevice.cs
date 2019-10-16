@@ -125,15 +125,7 @@ namespace BoundyShooter.Device
         {
             return gameTime;
         }
-
-        public void SetDisplayModify(Vector2 position)
-        {
-            this.displayModify = position;
-        }
-
-        public Vector2 GetDisplayModify()
-        {
-            return displayModify;
-        }
+        
+        
     }
 }

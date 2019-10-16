@@ -20,7 +20,7 @@ namespace BoundyShooter.Def
             Data.Add("0", new Space());
             Data.Add("1", new TestBlock());
             Data.Add("P", new Player(Vector2.Zero));
-            Data.Add("B", new Boss(Vector2.Zero));
+            Data.Add("EB", new EasyBoss(Vector2.Zero));
             Data.Add("E", new TestEnemy(Vector2.Zero));
 
             //ここにEntity/Blockを追加

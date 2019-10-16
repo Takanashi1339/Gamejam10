@@ -60,7 +60,7 @@ namespace BoundyShooter.Manager
             {
                 instance.addGameObjects.Clear();
             }
-            if(LifeWalls == null)
+            if (LifeWalls == null)
             {
                 LifeWalls = new List<LifeWall>();
             }
@@ -84,7 +84,7 @@ namespace BoundyShooter.Manager
         }
         public void AddWall(List<LifeWall> lifeWalls)
         {
-                LifeWalls = lifeWalls;
+            LifeWalls = lifeWalls;
         }
 
         public void Update(GameTime gameTime)
@@ -96,6 +96,7 @@ namespace BoundyShooter.Manager
             gameObjects.ForEach(obj => obj.Update(gameTime));
             HitToMap();
             HitToGameObject();
+            HitToLifeWall();
 
             gameObjects.RemoveAll(obj => obj.IsDead);
             if (nextMap != null)
@@ -157,5 +158,25 @@ namespace BoundyShooter.Manager
                 });
             });
         }
+
+        public void HitToLifeWall()
+        {
+            foreach (var wall in LifeWalls)
+            {
+                foreach(var obj in gameObjects)
+                {
+                    if(wall.IsDead || obj.IsDead)
+                    {
+                        return;
+                    }
+                    if(wall.IsCollision(obj))
+                    {
+                        wall.Hit(obj);
+                        obj.Hit(wall);
+                    }
+                }
+            }
+        }
+
     }
 }
