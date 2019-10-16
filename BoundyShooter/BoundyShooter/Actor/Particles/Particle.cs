@@ -42,6 +42,7 @@ namespace BoundyShooter.Actor.Particles
         public override void Draw()
         {
             Drawer drawer = new Drawer();
+            drawer.DisplayModify = true;
             drawer.Rectangle = animation.GetRectangle();
             base.Draw(drawer);
         }

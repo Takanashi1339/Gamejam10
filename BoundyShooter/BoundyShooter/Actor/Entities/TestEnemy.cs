@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Particles;
 using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Entities
@@ -31,6 +32,10 @@ namespace BoundyShooter.Actor.Entities
         public override void Hit(GameObject gameObject)
         {
             base.Hit(gameObject);
+            if (IsDead)
+            {
+                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+            }
         }
 
     }

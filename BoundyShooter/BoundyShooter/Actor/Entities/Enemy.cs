@@ -13,6 +13,8 @@ namespace BoundyShooter.Actor.Entities
     {
         private Vector2 bounceVelocity = new Vector2(0, -5f);//跳ね返りの初速
         private float acceleration = 0.1f;
+        protected int life;
+
         /// <summary>
         /// 敵のY軸方向の最高速度
         /// </summary>
@@ -30,7 +32,7 @@ namespace BoundyShooter.Actor.Entities
             protected set;
         } = 3.0f;
 
-        public Enemy(string name, Vector2 position, Point size)
+        public Enemy(string name, Vector2 position, Point size, int life = 2)
             : base(name, position, size)
         {
         }
@@ -43,11 +45,16 @@ namespace BoundyShooter.Actor.Entities
                 float speed = 10f;
                 var player = GameObjectManager.Instance.Find<Player>().First();
                 var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
-                if(Math.Sqrt(
-                    Math.Pow(player.Velocity.X,2) + Math.Pow(player.Velocity.Y,2)
-                    ) > player.Speed / 2)
+                if(player.Speed > Player.MaxSpeed / 2)
                 {
                     IsDead = true;//プレイヤーの最高速度/2よりも現在の速度が速い場合
+                }else
+                {
+                    life--;
+                    if (life <= 0)
+                    {
+                        IsDead = true;
+                    }
                 }
                 if(rotation < 0)
                 {
