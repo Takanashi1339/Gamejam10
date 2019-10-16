@@ -10,7 +10,7 @@ namespace BoundyShooter.Util
     class Animation
     {
         private Point size;
-        private int frame;
+        private int frame; 
         private int maxFrame;
         private Timer timer;
         private AnimationType animationType;

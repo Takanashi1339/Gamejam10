@@ -33,12 +33,6 @@ namespace BoundyShooter.Actor.Entities
             get;
             private set;
         }
-
-        public const int BladeAmount = 3;
-        public const float Deceleration = 0.05f; //減速度
-        public const float RotaionSpeed = 7f; //減速度
-        public const float MaxSpeed = 15f;
-
         public Vector2 Front
         {
             get
@@ -51,6 +45,19 @@ namespace BoundyShooter.Actor.Entities
                 return vector;
             }
         }
+
+        public bool IsCharging
+        {
+            get;
+            private set;
+        }
+
+        public const int BladeAmount = 3;
+        public const float Deceleration = 0.025f; //減速度
+        public const float RotaionSpeed = 8f; //減速度
+        public const float MaxSpeed = 15f;
+        public const float ChargeSpeed = 0.3f;
+
         public override void Hit(GameObject gameObject)
         {
 
@@ -101,6 +108,7 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
+            IsCharging = false;
             Velocity = Front * Speed;
             Speed -= Deceleration;
             if (Speed < 0)
@@ -108,11 +116,20 @@ namespace BoundyShooter.Actor.Entities
                 Speed = 0;
             }
 
+            if (Input.GetKeyTrigger(Keys.Space))
+            {
+                Speed = 0;
+            }
             if (Input.GetKeyState(Keys.Space))
             {
                 Velocity = Vector2.Zero;
                 Rotation += RotaionSpeed;
-                Speed = MaxSpeed;
+                Speed += ChargeSpeed;
+                if (Speed > MaxSpeed)
+                {
+                    Speed = MaxSpeed;
+                }
+                IsCharging = true;
             }
             BladeRotation -= (Speed - MaxSpeed / 2) * 2;
             new TailParticle(Position + new Vector2(16, 16));
@@ -123,6 +140,10 @@ namespace BoundyShooter.Actor.Entities
         {
             DrawBlade();
             DrawGun();
+            if (IsCharging)
+            {
+                DrawGage();
+            }
             var drawer = Drawer.Default;
             drawer.Rotation = MathHelper.ToRadians(Rotation);
             drawer.Origin = Size.ToVector2() / 2;
@@ -164,6 +185,18 @@ namespace BoundyShooter.Actor.Entities
             }
             var gunPosition = Position + new Vector2(0, gunSpeed * gunSign * 6);
             Renderer.Instance.DrawTexture("gun", gunPosition, gun);
+        }
+
+        private void DrawGage()
+        {
+            var gagePosition = Position + new Vector2(-16, Size.Y);
+            var empty = Drawer.Default;
+            empty.DisplayModify = true;
+            Renderer.Instance.DrawTexture("test_gage_empty", gagePosition, empty);
+            var gage = Drawer.Default;
+            gage.DisplayModify = true;
+            gage.Rectangle = new Rectangle(0, 0, (int) (96 * (Speed / MaxSpeed)), 32);
+            Renderer.Instance.DrawTexture("test_gage", gagePosition, gage);
         }
     }
 }

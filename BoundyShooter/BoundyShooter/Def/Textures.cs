@@ -24,6 +24,8 @@ namespace BoundyShooter.Def
                 { "test_block", Path },
                 { "test_boss", Path },
                 { "test_enemy", Path },
+                { "test_gage", Path },
+                { "test_gage_empty", Path },
 
                 //必要に応じて自分で追加
             };
