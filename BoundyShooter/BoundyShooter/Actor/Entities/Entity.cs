@@ -71,7 +71,6 @@ namespace BoundyShooter.Actor.Entities
         public override void Update(GameTime gameTime)
         {
             var velocity = Velocity;
-            //velocity.Y += Gravity;
             if (velocity.Y > MaxFallSpeed)
             {
                 velocity.Y = MaxFallSpeed;

@@ -5,38 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using BoundyShooter.Util;
+using BoundyShooter.Manager;
 
 namespace BoundyShooter.Actor.Entities
 {
-    class Boss : Entity
+    abstract class Boss : Entity
     {
-        private Timer sumonTimer;
-        private int hitCount;
-        public Boss(Vector2 position) 
-            : base("test_boss", position, new Point(256,256))
+        private Timer summonTimer;
+        static Random rand = new Random();
+        private Vector2 knockBack = new Vector2(0, -8);
+        //プレイヤーに当たった数、プレイヤーに何回当たったら死ぬか、召喚するエネミーの位置
+        protected int hitCount,maxCount,summonPos,enemySize;
+
+        public Boss(string name,Vector2 position,Point size,float timer,int deathCount) 
+            : base(name,position,size)
         {
-            sumonTimer = new Timer(10f,true);
+            //エネミー召喚する間隔の設定
+            summonTimer = new Timer(timer,true);
             hitCount = 0;
-        }
-
-        public Boss(Boss other)
-            :this(other.Position)
-        {
-        }
-
-        public override object Clone()
-        {
-            return new Boss(this);
+            maxCount = deathCount;
+            enemySize = 64;
         }
 
         public override void Update(GameTime gameTime)
         {
-            sumonTimer.Update(gameTime);
-            if(sumonTimer.IsTime)
+            Console.WriteLine(hitCount);
+            if (!IsInScreen()) return;
+            summonTimer.Update(gameTime);
+            if (summonTimer.IsTime)
             {
-
+                //bosssize / blocksize
+                summonPos = rand.Next(Size.Y / enemySize);
+                GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
+            }
+            if(maxCount <= hitCount)
+            {
+                IsDead = true;
             }
             base.Update(gameTime);
+            Velocity = Vector2.Zero;
         }
 
         public override void Hit(GameObject gameObject)
@@ -46,8 +53,8 @@ namespace BoundyShooter.Actor.Entities
             {
                 if (dir == Direction.Top)
                 {
-                    Velocity = new Vector2(0, -8);
-                    hitCount += 1;
+                    Velocity = knockBack;
+                    hitCount++;
                 }
             }
             base.Hit(gameObject);
