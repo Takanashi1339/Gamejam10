@@ -44,7 +44,7 @@ namespace BoundyShooter.Actor.Entities
                 var player = GameObjectManager.Instance.Find<Player>().First();
                 var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
                 if(Math.Sqrt(
-                    Math.Pow(player.Velocity.X,2) + Math.Pow(player.Velocity.Y,2)//2乗した平方根をとる
+                    Math.Pow(player.Velocity.X,2) + Math.Pow(player.Velocity.Y,2)
                     ) > player.Speed / 2)
                 {
                     IsDead = true;//プレイヤーの最高速度/2よりも現在の速度が速い場合
@@ -57,6 +57,10 @@ namespace BoundyShooter.Actor.Entities
                 {
                     Velocity = new Vector2((float)Math.Cos(rotation), -(float)Math.Sin(rotation)) * speed;
                 }
+            }
+            if(gameObject is LifeWall)
+            {
+                IsDead = true;
             }
             base.Hit(gameObject);
         }

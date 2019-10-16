@@ -44,11 +44,12 @@ namespace BoundyShooter.Scene
         {
             isEndFlag = false;
             next = Scene.Ending;
-
             gameObjectManager.Initialize();
-            
+            LifeWall.Initialze();
+            var lifeWalls = LifeWall.GenerateWall(3);
+            gameObjectManager.AddWall(lifeWalls);
             // csvからマップを読み込む場合
-            
+
             var reader = GameDevice.Instance().GetCSVReader();
             reader.Read("map01.csv");
             var map = new Map(reader.GetData());

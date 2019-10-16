@@ -20,6 +20,13 @@ namespace BoundyShooter.Manager
             private set;
         }
 
+        public List<LifeWall> LifeWalls
+        {
+            get;
+            private set;
+        }
+
+
         public static IGameObjectMediator Instance
         {
             get;
@@ -53,6 +60,10 @@ namespace BoundyShooter.Manager
             {
                 instance.addGameObjects.Clear();
             }
+            if(LifeWalls == null)
+            {
+                LifeWalls = new List<LifeWall>();
+            }
         }
 
         public void Add(GameObject obj)
@@ -71,12 +82,17 @@ namespace BoundyShooter.Manager
                 nextMap = map;
             }
         }
+        public void AddWall(List<LifeWall> lifeWalls)
+        {
+                LifeWalls = lifeWalls;
+        }
 
         public void Update(GameTime gameTime)
         {
             gameObjects.AddRange(addGameObjects);
             addGameObjects.Clear();
             Map.Update(gameTime);
+            LifeWalls.ForEach(l => l.Update(gameTime));
             gameObjects.ForEach(obj => obj.Update(gameTime));
             HitToMap();
             HitToGameObject();
@@ -93,6 +109,7 @@ namespace BoundyShooter.Manager
         {
             Map.Draw();
             gameObjects.ForEach(obj => obj.Draw());
+            LifeWalls.ForEach(l => l.Draw());
         }
 
         /// <summary>
