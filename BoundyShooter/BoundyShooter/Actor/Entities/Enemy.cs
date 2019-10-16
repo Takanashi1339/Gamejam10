@@ -65,6 +65,10 @@ namespace BoundyShooter.Actor.Entities
                     Velocity = new Vector2((float)Math.Cos(rotation), -(float)Math.Sin(rotation)) * speed;
                 }
             }
+            if(gameObject is LifeWall)
+            {
+                IsDead = true;
+            }
             base.Hit(gameObject);
         }
 
