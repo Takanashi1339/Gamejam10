@@ -82,6 +82,10 @@ namespace BoundyShooter.Manager
                 nextMap = map;
             }
         }
+        public void AddWall(List<LifeWall> lifeWalls)
+        {
+            LifeWalls = lifeWalls;
+        }
 
         public void Update(GameTime gameTime)
         {
