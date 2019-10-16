@@ -60,7 +60,6 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Hit(GameObject gameObject)
         {
-
             if (gameObject is Block block && block.IsSolid)
             {
                 Direction dir = CheckDirection(block);
@@ -80,6 +79,39 @@ namespace BoundyShooter.Actor.Entities
                     }
 
                 }else if (dir == Direction.Top || dir == Direction.Bottom)
+                {
+                    var rotation = Rotation;
+                    Rotation = 180 - rotation;
+                    if (dir == Direction.Top)
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                    }
+                    else
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
+                    }
+                }
+            }
+            if (gameObject is EasyBoss)
+            {
+                Direction dir = CheckDirection(gameObject);
+                CorrectPosition(gameObject);
+
+                if (dir == Direction.Left || dir == Direction.Right)
+                {
+                    var rotation = Rotation;
+                    Rotation = 360 - rotation;
+                    if (dir == Direction.Left)
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
+                    }
+                    else
+                    {
+                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
+                    }
+
+                }
+                else if (dir == Direction.Top || dir == Direction.Bottom)
                 {
                     var rotation = Rotation;
                     Rotation = 180 - rotation;
