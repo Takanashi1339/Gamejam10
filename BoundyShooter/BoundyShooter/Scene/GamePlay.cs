@@ -35,8 +35,8 @@ namespace BoundyShooter.Scene
             GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
 
             Renderer.Instance.Begin();
-            gameObjectManager.Draw();
             particleManager.Draw();
+            gameObjectManager.Draw();
             Renderer.Instance.End();
         }
 
@@ -45,6 +45,7 @@ namespace BoundyShooter.Scene
             isEndFlag = false;
             next = Scene.Ending;
             gameObjectManager.Initialize();
+            particleManager.Initialize();
             LifeWall.Initialze();
             var lifeWalls = LifeWall.GenerateWall(3);
             gameObjectManager.AddWall(lifeWalls);
@@ -88,6 +89,10 @@ namespace BoundyShooter.Scene
             }
 
             scroll--;
+            if (scroll < Screen.Height)
+            {
+                scroll = Screen.Height;
+            }
             GameDevice.Instance().DisplayModify = new Vector2(0, -scroll + Screen.Height);
             gameObjectManager.Update(gameTime);
             particleManager.Update(gameTime);
