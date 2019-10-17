@@ -7,6 +7,7 @@ using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Particles;
 using BoundyShooter.Def;
 using BoundyShooter.Device;
+using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -52,11 +53,14 @@ namespace BoundyShooter.Actor.Entities
             private set;
         }
 
+        public Timer gunTimer;
+
         public const int BladeAmount = 3;
         public const float Deceleration = 0.025f; //減速度
         public const float RotaionSpeed = 8f; //減速度
         public const float MaxSpeed = 15f;
         public const float ChargeSpeed = 0.3f;
+        public const float BulletRate = 0.15f;
 
         public override void Hit(GameObject gameObject)
         {
@@ -137,6 +141,7 @@ namespace BoundyShooter.Actor.Entities
             : base("player", position, new Point(64, 64))
         {
             Rotation = GameDevice.Instance().GetRandom().Next(360);
+            gunTimer = new Timer(1f, false); //発射時に手動でリセット
         }
 
         public override object Clone()
@@ -146,6 +151,7 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
+            gunTimer.Update(gameTime);
             if (!IsCharging && Position.Y < -GameDevice.Instance().DisplayModify.Y)
             {
                 var rotation = Rotation;
@@ -176,6 +182,11 @@ namespace BoundyShooter.Actor.Entities
                 IsCharging = true;
             }
             BladeRotation -= (Speed - MaxSpeed / 2) * 2;
+            if (Speed <= MaxSpeed / 2 && gunTimer.Location >= (BulletRate + Speed / (MaxSpeed / 2) / (1 + BulletRate)))
+            {
+                gunTimer.Reset();
+                GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8), -Math.Sign(Front.Y)));
+            }
             new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
         }
