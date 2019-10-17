@@ -38,7 +38,6 @@ namespace BoundyShooter.Actor
         {
             lifeWalls = null;
         }
-
         public static List<LifeWall> GenerateWall(int wallCount)
         {
             if(lifeWalls == null)

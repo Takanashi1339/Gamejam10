@@ -7,6 +7,7 @@ using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Particles;
 using BoundyShooter.Def;
 using BoundyShooter.Device;
+using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -62,8 +63,12 @@ namespace BoundyShooter.Actor.Entities
         {
             if(gameObject is LifeWall wall&& !wall.IsDead)
             {
-                var rotation = Rotation;
-                Rotation = 180 - rotation;
+                if(Velocity.Y != 0)
+                {
+                    var rotation = Rotation;
+                    Rotation = 180 - rotation;
+                }
+                CorrectPosition(wall);
             }
             if (gameObject is Block block && block.IsSolid)
             {
