@@ -59,6 +59,8 @@ namespace BoundyShooter.Actor.Entities
         public const float MaxSpeed = 15f;
         public const float ChargeSpeed = 0.3f;
 
+        private bool mapBottomHit = false;
+
         public override void Hit(GameObject gameObject)
         {
             if(gameObject is LifeWall wall&& !wall.IsDead)
@@ -68,6 +70,10 @@ namespace BoundyShooter.Actor.Entities
                     var rotation = Rotation;
                     Rotation = 180 - rotation;
                     new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                }
+                if(mapBottomHit)
+                {
+                    wall.BreakWall();
                 }
                 CorrectPosition(wall);
             }
@@ -99,6 +105,7 @@ namespace BoundyShooter.Actor.Entities
                     }
                     else
                     {
+                        mapBottomHit = true;
                         new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
                     }
                 }
@@ -151,6 +158,7 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
+            mapBottomHit = false;
             if (!IsCharging && Position.Y < -GameDevice.Instance().DisplayModify.Y)
             {
                 var rotation = Rotation;

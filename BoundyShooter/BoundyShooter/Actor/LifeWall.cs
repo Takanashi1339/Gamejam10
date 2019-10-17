@@ -83,9 +83,14 @@ namespace BoundyShooter.Actor
             if (IsDead) return;
             if (gameObject is Enemy enemy)
             {
-                IsDead = true;
-                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+                BreakWall();
             }
+        }
+
+        public void BreakWall()
+        {
+            IsDead = true;
+            new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
         }
     }
 }
