@@ -62,13 +62,23 @@ namespace BoundyShooter.Actor.Entities
         public const float ChargeSpeed = 0.3f;
         public const float BulletRate = 0.15f;
 
+        private bool mapBottomHit = false;
+
         public override void Hit(GameObject gameObject)
         {
             if(gameObject is LifeWall wall&& !wall.IsDead)
             {
-                var rotation = Rotation;
-                Rotation = 180 - rotation;
-                new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                if(Velocity.Y != 0)
+                {
+                    var rotation = Rotation;
+                    Rotation = 180 - rotation;
+                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                }
+                if(mapBottomHit)
+                {
+                    wall.BreakWall();
+                }
+                CorrectPosition(wall);
             }
             if (gameObject is Block block && block.IsSolid)
             {
@@ -98,6 +108,7 @@ namespace BoundyShooter.Actor.Entities
                     }
                     else
                     {
+                        mapBottomHit = true;
                         new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
                     }
                 }
@@ -151,6 +162,7 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
+            mapBottomHit = false;
             gunTimer.Update(gameTime);
             if (!IsCharging && Position.Y < -GameDevice.Instance().DisplayModify.Y)
             {
