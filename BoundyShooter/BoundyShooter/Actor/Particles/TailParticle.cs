@@ -11,7 +11,7 @@ namespace BoundyShooter.Actor.Particles
     class TailParticle : Particle
     {
         public TailParticle(Vector2 position) 
-            : base("pink_tail", position, new Point(32, 32), 8, 0.075f)
+            : base("blue_tail", position, new Point(32, 32), 8, 0.075f)
         {
         }
 
