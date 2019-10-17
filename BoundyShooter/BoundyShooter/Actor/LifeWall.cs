@@ -19,14 +19,14 @@ namespace BoundyShooter.Actor
 
         private static List<LifeWall> lifeWalls = null;
         private static int space = 30;
-        private static int nowCount = 0;
+        public static int nowCount = 0;
         private static Point size = new Point(448, 16);
 
         public static readonly int Count = 4;
 
-        private static string[] wallnames = new string[]
+        private static string[] wallNames = new string[]
         {
-            "life_wall",
+            "life_wall_1",
             "life_wall_2",
             "life_wall_3",
             "life_wall_4",
@@ -34,7 +34,7 @@ namespace BoundyShooter.Actor
 
 
         public LifeWall(Vector2 position)
-            : base("life_wall",position, size)
+            : base("life_wall_1",position, size)
         {
             displayPos = position;
             Position = -GameDevice.Instance().DisplayModify + displayPos;
@@ -75,11 +75,7 @@ namespace BoundyShooter.Actor
 
         public override void Update(GameTime gameTime)
         {
-            if(nowCount >= lifeWalls.Count)
-            {
-                nowCount = lifeWalls.Count - 1;
-            }
-            Name = wallnames[nowCount];
+            Name = wallNames[nowCount];
             Position = -GameDevice.Instance().DisplayModify + displayPos;
             base.Update(gameTime);
         }
@@ -104,6 +100,10 @@ namespace BoundyShooter.Actor
         {
             IsDead = true;
             new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+            if(nowCount >= wallNames.Length - 1)
+            {
+                return;
+            }
             nowCount++;
         }
     }

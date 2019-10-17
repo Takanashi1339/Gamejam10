@@ -10,6 +10,7 @@ using BoundyShooter.Device;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using BoundyShooter.Def;
+using BoundyShooter.Actor.Entities;
 
 namespace BoundyShooter.Scene
 {
@@ -88,6 +89,7 @@ namespace BoundyShooter.Scene
                 next = Scene.GameOver;
             }
 
+
             scroll--;
             if (scroll < Screen.Height)
             {
@@ -96,6 +98,12 @@ namespace BoundyShooter.Scene
             GameDevice.Instance().DisplayModify = new Vector2(0, -scroll + Screen.Height);
             gameObjectManager.Update(gameTime);
             particleManager.Update(gameTime);
+        
+            if(gameObjectManager.Find<Boss>().Count == 0)
+            {
+                isEndFlag = true;
+                next = Scene.Ending;
+            }
         }
     }
 }

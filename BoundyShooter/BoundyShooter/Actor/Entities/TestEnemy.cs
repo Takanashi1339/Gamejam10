@@ -37,6 +37,5 @@ namespace BoundyShooter.Actor.Entities
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }
         }
-
     }
 }
