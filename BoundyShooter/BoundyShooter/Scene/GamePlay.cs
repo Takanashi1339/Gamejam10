@@ -81,7 +81,7 @@ namespace BoundyShooter.Scene
                 next = Scene.Ending;
             }
 
-            if (Input.GetKeyTrigger(Keys.RightControl))
+            if (LifeWall.DeathWallIsDead())
             {
                 //シーン移動
                 isEndFlag = true;

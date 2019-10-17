@@ -17,8 +17,8 @@ namespace BoundyShooter.Actor
         private static List<LifeWall> lifeWalls = null;
         private Vector2 displayPos;
 
-        private LifeWall(Vector2 position)
-            : base("life_wall", position, new Point(448,16))
+        private LifeWall(string name,Vector2 position)
+            : base(name,position, new Point(448,16))
         {
             displayPos = position;
 
@@ -26,7 +26,7 @@ namespace BoundyShooter.Actor
         }
 
         public LifeWall(LifeWall other)
-            :this(other.Position)
+            :this(other.Name ,other.Position)
         { }
 
         public static void Initialze()
@@ -42,10 +42,17 @@ namespace BoundyShooter.Actor
             }
             for (int i = 0; i < wallCount; i++)
             {
-                lifeWalls.Add(new LifeWall(new Vector2(Block.BlockSize, 640 + 30 * i))
+                lifeWalls.Add(new LifeWall("life_wall", new Vector2(Block.BlockSize, 640 + 30 * i))
                     );
             }
+            lifeWalls.Add(new LifeWall("death_wall", new Vector2(Block.BlockSize, 640 + 30 * lifeWalls.Count)
+                ));
             return lifeWalls;
+        }
+
+        public static bool DeathWallIsDead()
+        {
+            return lifeWalls.Last().IsDead;
         }
         public override object Clone()
         {
@@ -79,6 +86,5 @@ namespace BoundyShooter.Actor
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }
         }
-
     }
 }

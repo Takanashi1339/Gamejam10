@@ -27,6 +27,7 @@ namespace BoundyShooter.Def
                 { "test_gage", Path },
                 { "test_gage_empty", Path },
                 { "life_wall" , Path},
+                { "death_wall" , Path },
 
                 //必要に応じて自分で追加
             };

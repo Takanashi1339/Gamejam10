@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Particles;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -68,6 +69,10 @@ namespace BoundyShooter.Actor.Entities
             if(gameObject is LifeWall)
             {
                 IsDead = true;
+            }
+            if(IsDead)
+            {
+                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }
             base.Hit(gameObject);
         }
