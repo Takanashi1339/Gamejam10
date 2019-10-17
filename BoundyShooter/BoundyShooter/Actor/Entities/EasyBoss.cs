@@ -12,9 +12,8 @@ namespace BoundyShooter.Actor.Entities
     class EasyBoss : Boss
     {
         public EasyBoss(Vector2 position) 
-            : base("test_boss", position, new Point(256,256), 1f, 4)
+            : base("test_boss", position, new Point(256,256), 1f, 10,1)
         {
-
         }
 
         public EasyBoss(EasyBoss other)
@@ -34,7 +33,6 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
-            Console.WriteLine(Position);
             base.Update(gameTime);
         }
     }

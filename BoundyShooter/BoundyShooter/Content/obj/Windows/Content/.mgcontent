@@ -4,23 +4,19 @@
   <Platform>Windows</Platform>
   <Config> </Config>
   <SourceFiles>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blade.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/gun.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/life_wall.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/pink_ball.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/pink_tail.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/player.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_block.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_boss.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_bullet.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_enemy.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage.png</File>
-    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage_empty.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blade.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/gun.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/life_wall.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/player.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_block.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_boss.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_bullet.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_enemy.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage.png</File>
+    <File>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage_empty.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
