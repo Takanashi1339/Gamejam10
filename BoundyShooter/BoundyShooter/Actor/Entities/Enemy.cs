@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Particles;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -32,9 +33,10 @@ namespace BoundyShooter.Actor.Entities
             protected set;
         } = 3.0f;
 
-        public Enemy(string name, Vector2 position, Point size, int life = 2)
+        public Enemy(string name, Vector2 position, Point size, int life = 3)
             : base(name, position, size)
         {
+            this.life = life;
         }
 
 
@@ -65,9 +67,22 @@ namespace BoundyShooter.Actor.Entities
                     Velocity = new Vector2((float)Math.Cos(rotation), -(float)Math.Sin(rotation)) * speed;
                 }
             }
+            if (gameObject is PlayerBullet)
+            {
+                life--;
+                if (life <= 0)
+                {
+                    IsDead = true;
+                }
+            }
+
             if(gameObject is LifeWall)
             {
                 IsDead = true;
+            }
+            if(IsDead)
+            {
+                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }
             base.Hit(gameObject);
         }

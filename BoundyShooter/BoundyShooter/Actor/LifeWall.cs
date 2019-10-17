@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Entities;
 using BoundyShooter.Actor.Particles;
+using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -14,14 +15,28 @@ namespace BoundyShooter.Actor
 {
     class LifeWall : GameObject
     {
-        private static List<LifeWall> lifeWalls = null;
         private Vector2 displayPos;
 
-        private LifeWall(Vector2 position)
-            : base("life_wall", position, new Point(448,16))
+        private static List<LifeWall> lifeWalls = null;
+        private static int space = 30;
+        private static int nowCount = 0;
+        private static Point size = new Point(448, 16);
+
+        public static readonly int Count = 4;
+
+        private static string[] wallnames = new string[]
+        {
+            "life_wall",
+            "life_wall_2",
+            "life_wall_3",
+            "life_wall_4",
+        };
+
+
+        public LifeWall(Vector2 position)
+            : base("life_wall",position, size)
         {
             displayPos = position;
-
             Position = -GameDevice.Instance().DisplayModify + displayPos;
         }
 
@@ -32,8 +47,8 @@ namespace BoundyShooter.Actor
         public static void Initialze()
         {
             lifeWalls = null;
+            nowCount = 0;
         }
-
         public static List<LifeWall> GenerateWall(int wallCount)
         {
             if(lifeWalls == null)
@@ -42,10 +57,16 @@ namespace BoundyShooter.Actor
             }
             for (int i = 0; i < wallCount; i++)
             {
-                lifeWalls.Add(new LifeWall(new Vector2(Block.BlockSize, 640 + 30 * i))
+                lifeWalls.Add(new LifeWall(new Vector2(Block.BlockSize, (Screen.Height - size.Y) - space * i)
+                    )
                     );
             }
             return lifeWalls;
+        }
+
+        public static bool DeathWallIsDead()
+        {
+            return lifeWalls.First().IsDead;
         }
         public override object Clone()
         {
@@ -54,12 +75,12 @@ namespace BoundyShooter.Actor
 
         public override void Update(GameTime gameTime)
         {
-            Console.WriteLine(Position);
-            Position = -GameDevice.Instance().DisplayModify + displayPos;
-            if(lifeWalls.Count <= 0)
+            if(nowCount >= lifeWalls.Count)
             {
-                //ゲームオーバの処理をかく
+                nowCount = lifeWalls.Count - 1;
             }
+            Name = wallnames[nowCount];
+            Position = -GameDevice.Instance().DisplayModify + displayPos;
             base.Update(gameTime);
         }
         public override void Draw()
@@ -75,10 +96,15 @@ namespace BoundyShooter.Actor
             if (IsDead) return;
             if (gameObject is Enemy enemy)
             {
-                IsDead = true;
-                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+                BreakWall();
             }
         }
 
+        public void BreakWall()
+        {
+            IsDead = true;
+            new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+            nowCount++;
+        }
     }
 }
