@@ -69,6 +69,7 @@ namespace BoundyShooter.Actor.Entities
                     Rotation = 180 - rotation;
                 }
                 CorrectPosition(wall);
+                new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
             }
             if (gameObject is Block block && block.IsSolid)
             {
@@ -154,6 +155,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
+                new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
             }
             IsCharging = false;
             Velocity = Front * Speed;
