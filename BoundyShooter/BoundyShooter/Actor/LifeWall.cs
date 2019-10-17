@@ -17,7 +17,7 @@ namespace BoundyShooter.Actor
     {
         private static List<LifeWall> lifeWalls = null;
         private Vector2 displayPos;
-        public static readonly int Count = 4;//この枚数＋deathWall一枚生成
+        public static readonly int Count = 4;
         private static int space = 30;
         private static Point size = new Point(448, 16);
 
