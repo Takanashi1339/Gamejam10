@@ -26,10 +26,14 @@ namespace BoundyShooter.Def
                 { "test_enemy", Path },
                 { "test_gage", Path },
                 { "test_gage_empty", Path },
-                { "life_wall" , Path},
+                { "life_wall_1" , Path},
                 { "life_wall_2" ,Path },
                 { "life_wall_3" ,Path },
                 { "life_wall_4" ,Path },
+                { "block_1" ,Path },
+                { "block_2" ,Path },
+                { "block_3" ,Path },
+                { "block_4" ,Path },
 
                 //必要に応じて自分で追加
             };
