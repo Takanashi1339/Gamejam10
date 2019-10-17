@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blade.png</SourceFile>
-  <SourceTime>2019-10-10T14:10:27.5311529+09:00</SourceTime>
+  <SourceTime>2019-10-17T15:50:12.0895648+09:00</SourceTime>
   <DestFile>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Texture/blade.xnb</DestFile>
-  <DestTime>2019-10-17T15:34:14.7266405+09:00</DestTime>
+  <DestTime>2019-10-17T15:51:02.9735573+09:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-09T01:35:54+09:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
