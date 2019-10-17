@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Entities;
 using BoundyShooter.Actor.Particles;
+using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -16,12 +17,16 @@ namespace BoundyShooter.Actor
     {
         private static List<LifeWall> lifeWalls = null;
         private Vector2 displayPos;
+        public static readonly int Count = 4;//この枚数＋deathWall一枚生成
+        private static int space = 30;
+        private static Point size = new Point(448, 16);
 
-        private LifeWall(string name,Vector2 position)
-            : base(name,position, new Point(448,16))
+
+
+        public LifeWall(string name,Vector2 position)
+            : base(name,position, size)
         {
             displayPos = position;
-
             Position = -GameDevice.Instance().DisplayModify + displayPos;
         }
 
@@ -40,12 +45,14 @@ namespace BoundyShooter.Actor
             {
                 lifeWalls = new List<LifeWall>();
             }
-            for (int i = 0; i < wallCount; i++)
+            for (int i = 1; i < wallCount; i++)
             {
-                lifeWalls.Add(new LifeWall("life_wall", new Vector2(Block.BlockSize, 640 + 30 * i))
+                lifeWalls.Add(new LifeWall("life_wall", 
+                    new Vector2(Block.BlockSize, (Screen.Height - size.Y) - space * i
+                    ))
                     );
             }
-            lifeWalls.Add(new LifeWall("death_wall", new Vector2(Block.BlockSize, 640 + 30 * lifeWalls.Count)
+            lifeWalls.Add(new LifeWall("death_wall", new Vector2(Block.BlockSize, Screen.Height - size.Y)
                 ));
             return lifeWalls;
         }
@@ -61,12 +68,7 @@ namespace BoundyShooter.Actor
 
         public override void Update(GameTime gameTime)
         {
-            Console.WriteLine(Position);
             Position = -GameDevice.Instance().DisplayModify + displayPos;
-            if(lifeWalls.Count <= 0)
-            {
-                //ゲームオーバの処理をかく
-            }
             base.Update(gameTime);
         }
         public override void Draw()

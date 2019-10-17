@@ -34,7 +34,6 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
-            Console.WriteLine(Position);
             base.Update(gameTime);
         }
     }

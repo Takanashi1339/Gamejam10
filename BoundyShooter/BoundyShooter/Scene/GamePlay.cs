@@ -47,7 +47,7 @@ namespace BoundyShooter.Scene
             gameObjectManager.Initialize();
             particleManager.Initialize();
             LifeWall.Initialze();
-            var lifeWalls = LifeWall.GenerateWall(3);
+            var lifeWalls = LifeWall.GenerateWall(LifeWall.Count);
             gameObjectManager.AddWall(lifeWalls);
             // csvからマップを読み込む場合
 
