@@ -145,6 +145,11 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
+            if (!IsCharging && Position.Y < -GameDevice.Instance().DisplayModify.Y)
+            {
+                var rotation = Rotation;
+                Rotation = 180 - rotation;
+            }
             IsCharging = false;
             Velocity = Front * Speed;
             Speed -= Deceleration;
