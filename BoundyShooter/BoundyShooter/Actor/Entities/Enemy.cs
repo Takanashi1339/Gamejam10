@@ -99,15 +99,15 @@ namespace BoundyShooter.Actor.Entities
             {
                 velocity.Y = MaxSpeedY;
             }
-            if(Velocity.X > 0)
+            if (Velocity.X > 0)
             {
                 velocity.X -= acceleration;
             }
-            if(velocity.X <0)
+            if (velocity.X < 0)
             {
                 velocity.X += acceleration;
             }
-            if(Velocity.X > MaxSpeedX)
+            if (Velocity.X > MaxSpeedX)
             {
                 velocity.X = MaxSpeedX;
             }
