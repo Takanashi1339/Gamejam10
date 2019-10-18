@@ -113,7 +113,7 @@ namespace BoundyShooter.Actor.Entities
                     }
                 }
             }
-            if (gameObject is EasyBoss)
+            if (gameObject is Boss)
             {
                 Direction dir = CheckDirection(gameObject);
                 CorrectPosition(gameObject);
@@ -245,7 +245,7 @@ namespace BoundyShooter.Actor.Entities
             Renderer.Instance.DrawTexture("test_gage_empty", gagePosition, empty);
             var gage = Drawer.Default;
             gage.DisplayModify = true;
-            gage.Rectangle = new Rectangle(0, 0, (int) (96 * (Speed / MaxSpeed)), 32);
+            gage.Rectangle = new Rectangle(0, 0, (int) (96 * (Speed / MaxSpeed)), 16);
             Renderer.Instance.DrawTexture("test_gage", gagePosition, gage);
         }
     }
