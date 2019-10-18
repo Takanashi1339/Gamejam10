@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using BoundyShooter.Util;
 using BoundyShooter.Manager;
+using BoundyShooter.Device;
 
 namespace BoundyShooter.Actor.Entities
 {
@@ -78,6 +79,7 @@ namespace BoundyShooter.Actor.Entities
                     {
                         Velocity = knockBack;
                         hitCount++;
+                        GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
                     }
                 }
 

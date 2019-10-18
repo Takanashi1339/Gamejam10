@@ -58,28 +58,28 @@ namespace BoundyShooter.Actor.Particles
                     {
                         case DestroyOption.Center:
                             Renderer.Instance.DrawTexture(Name, Position + new Vector2(
-                                (Size.X / 2 - x) * location + Size.X / 2, 
-                                (Size.Y / 2 - y) * location), drawer);
+                                ((Size.X - pixSize / 2) / 2 - x) * location + Size.X / 2, 
+                                ((Size.Y - pixSize / 2) / 2 - y) * location), drawer);
                             break;
                         case DestroyOption.Up:
                             Renderer.Instance.DrawTexture(Name, Position + new Vector2(
-                                (Size.X / 2 - x) * location + Size.X * 2, 
-                                Size.Y * pixSize * 2 - (y * location) - Size.Y), drawer);
+                                ((Size.X - pixSize / 2) / 2 - x) * location + Size.X * 2,
+                                ((Size.Y - pixSize / 2) - pixSize / 2) * pixSize * 2 - (y * location) - Size.Y), drawer);
                             break;
                         case DestroyOption.Down:
                             Renderer.Instance.DrawTexture(Name, Position + new Vector2(
-                                (Size.X / 2 - x) * location + Size.X * 2,
+                                ((Size.X - pixSize / 2) / 2 - x) * location + Size.X * 2,
                                 y * location), drawer);
                             break;
                         case DestroyOption.Left:
                             Renderer.Instance.DrawTexture(Name, Position + new Vector2(
-                                Size.X * pixSize * 2 - (x * location),
-                                (Size.Y / 2 - y) * location), drawer);
+                                (Size.X - pixSize / 2) * pixSize * 2 - (x * location),
+                                ((Size.Y - pixSize / 2) / 2 - y) * location), drawer);
                             break;
                         case DestroyOption.Right:
                             Renderer.Instance.DrawTexture(Name, Position + new Vector2(
                                 x * location,
-                                (Size.Y / 2 - y) * location), drawer);
+                                ((Size.Y - pixSize / 2) / 2 - y) * location), drawer);
                             break;
                     }
                 }

@@ -15,7 +15,7 @@ namespace BoundyShooter.Actor.Entities
         private float velocityY;
 
         public PlayerBullet(Vector2 position, float velocityY)
-            : base("pink_ball", position, new Point(16, 16))
+            : base("blue_ball", position, new Point(16, 16))
         {
             this.velocityY = velocityY;
         }
