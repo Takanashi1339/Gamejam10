@@ -105,6 +105,7 @@ namespace BoundyShooter.Actor
                 return;
             }
             nowCount++;
+            GameDevice.Instance().DisplayQuake = new Vector2(0, 1.5f);
         }
     }
 }
