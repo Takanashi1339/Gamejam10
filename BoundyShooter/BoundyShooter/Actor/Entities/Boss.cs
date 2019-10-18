@@ -17,18 +17,18 @@ namespace BoundyShooter.Actor.Entities
         private Vector2 knockBack = new Vector2(0, -8);
         //プレイヤーに当たった数、プレイヤーに何回当たったら死ぬか、召喚するエネミーの位置
         private int maxCount,summonPos,enemySize,enemynum;
-        private float hitCount;
+        protected float hitCount;
         public bool IsDeadFlag
         {
             get;
             private set;
         } = false;
 
-        public Boss(string name,Vector2 position,Point size,float timer,int deathCount,int enemynum) 
+        public Boss(string name,Vector2 position,Point size,float summon,int deathCount,int enemynum) 
             : base(name,position,size)
         {
             //エネミー召喚する間隔の設定
-            summonTimer = new Timer(timer,true);
+            summonTimer = new Timer(summon,true);
             hitCount = 0;
             maxCount = deathCount;
             enemySize = 64;
@@ -50,6 +50,11 @@ namespace BoundyShooter.Actor.Entities
                 }
                 else if (enemynum == 1)
                 {
+                    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
+                }
+                else if(enemynum == 2)
+                {
+                    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
                     GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
                 }
             }
@@ -79,14 +84,14 @@ namespace BoundyShooter.Actor.Entities
                 }
 
             }
-            //if(gameObject is )
-            //{
-            //    if(dir == Direction.Top)
-            //    {
-            //        Velocity = knockBack / 10;
-            //        hitCount += 0.1f;
-            //    }
-            //}
+            if (gameObject is PlayerBullet)
+            {
+                if (dir == Direction.Top)
+                {
+                    Velocity = knockBack / 10;
+                    hitCount += 0.1f;
+                }
+            }
             base.Hit(gameObject);
         }
 
