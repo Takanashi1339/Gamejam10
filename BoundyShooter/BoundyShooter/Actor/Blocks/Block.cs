@@ -11,6 +11,11 @@ namespace BoundyShooter.Actor.Blocks
     abstract class Block : GameObject
     {
         public const int BlockSize = 32;
+        public Map Map
+        {
+            get;
+            private set;
+        }
 
         //当たり判定を持つかどうか
         public bool IsSolid
@@ -28,6 +33,7 @@ namespace BoundyShooter.Actor.Blocks
         public virtual Block Set(Map map, Vector2 position)
         {
             Position = position;
+            Map = map;
             return this;
         }
 

@@ -19,6 +19,7 @@ namespace BoundyShooter.Def
                 { "player", Path },
                 { "blade", Path },
                 { "gun", Path },
+                { "blue_particle",Path },
                 { "pink_ball",Path },
                 { "blue_ball",Path },
                 { "pink_tail",Path },
@@ -36,6 +37,7 @@ namespace BoundyShooter.Def
                 { "block_2" ,Path },
                 { "block_3" ,Path },
                 { "block_4" ,Path },
+                { "white_block" ,Path },
 
                 //必要に応じて自分で追加
             };

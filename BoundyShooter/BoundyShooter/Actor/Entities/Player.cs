@@ -61,6 +61,7 @@ namespace BoundyShooter.Actor.Entities
         public const float MaxSpeed = 15f;          //最高移動速度
         public const float ChargeSpeed = 0.3f;      //ゲージのチャージ速度
         public const float BulletRate = 0.15f;      //弾の最高発射レート
+        public const string HitParticle = "blue_particle";
 
         private bool mapBottomHit = false;
 
@@ -98,7 +99,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
-                new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
             }
             if (mapBottomHit)
             {
@@ -118,11 +119,11 @@ namespace BoundyShooter.Actor.Entities
                 Rotation = 360 - rotation;
                 if (dir == Direction.Left)
                 {
-                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
+                    new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
                 }
                 else
                 {
-                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
+                    new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
                 }
 
             }
@@ -132,12 +133,12 @@ namespace BoundyShooter.Actor.Entities
                 Rotation = 180 - rotation;
                 if (dir == Direction.Top)
                 {
-                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                    new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
                 }
                 else
                 {
                     mapBottomHit = true;
-                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
+                    new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
                 }
             }
         }
@@ -163,7 +164,7 @@ namespace BoundyShooter.Actor.Entities
                 Position = new Vector2(Position.X, -GameDevice.Instance().DisplayModify.Y + 1);
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
-                new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
+                new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
             }
             IsCharging = false;
             Velocity = Front * Speed;
@@ -189,10 +190,12 @@ namespace BoundyShooter.Actor.Entities
                 IsCharging = true;
             }
             BladeRotation -= (Speed - MaxSpeed / 2) * 2;
-            if (Speed <= MaxSpeed / 2 && gunTimer.Location >= (BulletRate + Speed / (MaxSpeed / 2) / (1 + BulletRate)))
+            //if (Speed <= MaxSpeed / 2 && gunTimer.Location >= (BulletRate + Speed / (MaxSpeed / 2) / (1 + BulletRate)))
+            if (!Velocity.Equals(Vector2.Zero) && Speed <= MaxSpeed / 2 && gunTimer.Location >= BulletRate)
             {
                 gunTimer.Reset();
-                GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
+                //GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
+                GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Size.Y / 2), -1));
             }
             new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
@@ -233,7 +236,8 @@ namespace BoundyShooter.Actor.Entities
 
         private void DrawGun()
         {
-            var gunSign = Math.Sign(Front.Y); //上なら-1, 下なら1
+            //var gunSign = Math.Sign(Front.Y); //下向き-1, 上向きなら1
+            var gunSign = 1;
             var gun = Drawer.Default;
             if (gunSign == -1)
             {

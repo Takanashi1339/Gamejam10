@@ -19,6 +19,7 @@ namespace BoundyShooter.Def
             Data = new Dictionary<string, GameObject>();
             Data.Add("0", new Space());
             Data.Add("1", new TestBlock());
+            Data.Add("w", new WhiteBlock());
             Data.Add("P", new Player(Vector2.Zero));
             Data.Add("EB", new EasyBoss(Vector2.Zero));
             Data.Add("E", new TestEnemy(Vector2.Zero));
