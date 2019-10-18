@@ -56,11 +56,11 @@ namespace BoundyShooter.Actor.Entities
         public Timer gunTimer;
 
         public const int BladeAmount = 3;
-        public const float Deceleration = 0.025f; //減速度
-        public const float RotaionSpeed = 8f; //減速度
-        public const float MaxSpeed = 15f;
-        public const float ChargeSpeed = 0.3f;
-        public const float BulletRate = 0.15f;
+        public const float Deceleration = 0.025f;    //減速度
+        public const float RotaionSpeed = 8f;       //回転速度
+        public const float MaxSpeed = 15f;          //最高移動速度
+        public const float ChargeSpeed = 0.3f;      //ゲージのチャージ速度
+        public const float BulletRate = 0.15f;      //弾の最高発射レート
 
         private bool mapBottomHit = false;
 
@@ -68,50 +68,11 @@ namespace BoundyShooter.Actor.Entities
         {
             if(gameObject is LifeWall wall&& !wall.IsDead)
             {
-                if(Velocity.Y != 0)
-                {
-                    var rotation = Rotation;
-                    Rotation = 180 - rotation;
-                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
-                }
-                if(mapBottomHit)
-                {
-                    wall.BreakWall();
-                }
-                CorrectPosition(wall);
+                HitLifeWall(wall);
             }
             if (gameObject is Block block && block.IsSolid)
             {
-                Direction dir = CheckDirection(block);
-                CorrectPosition(block);
-                
-                if (dir == Direction.Left || dir == Direction.Right)
-                {
-                    var rotation = Rotation;
-                    Rotation = 360 - rotation;
-                    if (dir == Direction.Left)
-                    {
-                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
-                    }
-                    else
-                    {
-                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
-                    }
-
-                }else if (dir == Direction.Top || dir == Direction.Bottom)
-                {
-                    var rotation = Rotation;
-                    Rotation = 180 - rotation;
-                    if (dir == Direction.Top)
-                    {
-                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
-                    }
-                    else
-                    {
-                        mapBottomHit = true;
-                        new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
-                    }
-                }
+                HitBlock(block);
             }
             if (gameObject is EasyBoss)
             {
@@ -127,6 +88,56 @@ namespace BoundyShooter.Actor.Entities
                 {
                     var rotation = Rotation;
                     Rotation = 180 - rotation;
+                }
+            }
+        }
+
+        public void HitLifeWall(LifeWall wall)
+        {
+            if (Velocity.Y != 0)
+            {
+                var rotation = Rotation;
+                Rotation = 180 - rotation;
+                new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+            }
+            if (mapBottomHit)
+            {
+                wall.BreakWall();
+            }
+            CorrectPosition(wall);
+        }
+
+        public void HitBlock(Block block)
+        {
+            Direction dir = CheckDirection(block);
+            CorrectPosition(block);
+
+            if (dir == Direction.Left || dir == Direction.Right)
+            {
+                var rotation = Rotation;
+                Rotation = 360 - rotation;
+                if (dir == Direction.Left)
+                {
+                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
+                }
+                else
+                {
+                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
+                }
+
+            }
+            else if (dir == Direction.Top || dir == Direction.Bottom)
+            {
+                var rotation = Rotation;
+                Rotation = 180 - rotation;
+                if (dir == Direction.Top)
+                {
+                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                }
+                else
+                {
+                    mapBottomHit = true;
+                    new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
                 }
             }
         }
@@ -149,6 +160,7 @@ namespace BoundyShooter.Actor.Entities
             gunTimer.Update(gameTime);
             if (!IsCharging && Position.Y < -GameDevice.Instance().DisplayModify.Y)
             {
+                Position = new Vector2(Position.X, -GameDevice.Instance().DisplayModify.Y + 1);
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
                 new DestroyParticle("pink_ball", Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
@@ -180,7 +192,7 @@ namespace BoundyShooter.Actor.Entities
             if (Speed <= MaxSpeed / 2 && gunTimer.Location >= (BulletRate + Speed / (MaxSpeed / 2) / (1 + BulletRate)))
             {
                 gunTimer.Reset();
-                GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8), -Math.Sign(Front.Y)));
+                GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
             }
             new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
