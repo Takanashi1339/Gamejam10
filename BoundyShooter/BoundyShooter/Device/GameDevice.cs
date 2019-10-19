@@ -15,17 +15,35 @@ namespace BoundyShooter.Device
     /// </summary>
     sealed class GameDevice
     {
+        private const int QwakeTime = 6;
+
         private Sound sound;
         private static Random random;
         private ContentManager content;
         private GraphicsDevice graphics;
         private GameTime gameTime;
         private CSVReader reader;
+        private Vector2 qwake;
+        private int qwakeCount = 0;
 
         public Vector2 DisplayModify
         {
             get;
             set;
+        }
+
+        public Vector2 DisplayQuake
+        {
+            get
+            {
+                var location = (float) qwakeCount * QwakeTime;
+                return qwake * location * (int) Math.Pow(-1, qwakeCount);
+            }
+            set
+            {
+                qwakeCount = QwakeTime;
+                qwake = value;
+            }
         }
 
         private Vector2 displayModify;
@@ -34,12 +52,9 @@ namespace BoundyShooter.Device
 
         private GameDevice(ContentManager content, GraphicsDevice graphics)
         {
-            sound = new Sound(content);
-            random = new Random();
             this.content = content;
             this.graphics = graphics;
-            displayModify = Vector2.Zero;
-            reader = new CSVReader();
+            Initialize();
         }
 
         public static GameDevice Instance(ContentManager content, GraphicsDevice graphics)
@@ -58,7 +73,12 @@ namespace BoundyShooter.Device
 
         public void Initialize()
         {
-
+            sound = new Sound(content);
+            random = new Random();
+            displayModify = Vector2.Zero;
+            reader = new CSVReader();
+            qwake = Vector2.Zero;
+            qwakeCount = 0;
         }
 
         /// <summary>
@@ -70,6 +90,10 @@ namespace BoundyShooter.Device
             //デバイスで絶対に１回のみ更新が必要なモノ
             Input.Update();
             this.gameTime = gameTime;
+            if (qwakeCount > 0)
+            {
+                qwakeCount--;
+            }
         }
 
         /// <summary>

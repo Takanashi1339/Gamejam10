@@ -9,20 +9,23 @@ using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Entities
 {
-    class EasyBoss : Boss
+    class HardBoss : Boss
     {
-        public EasyBoss(Vector2 position) 
-            : base("test_boss", position, new Point(256,256), 4f, 10,0)
+        private Vector2 forword = new Vector2(0, 8);
+        private Timer forwordTimer;
+        public HardBoss(Vector2 position)
+            : base("test_boss", position, new Point(256, 256), 2f, 10, 2)
         {
+            forwordTimer = new Timer(5, true);
         }
 
-        public EasyBoss(EasyBoss other)
+        public HardBoss(HardBoss other)
             :this(other.Position)
         { }
 
         public override object Clone()
         {
-            return new EasyBoss(this);
+            return new HardBoss(this);
         }
 
         public override Entity Spawn(Map map, Vector2 position)
@@ -33,6 +36,12 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
+            forwordTimer.Update(gameTime);
+            if(forwordTimer.IsTime)
+            {
+                Velocity = forword;
+                hitCount--;
+            }
             base.Update(gameTime);
         }
     }

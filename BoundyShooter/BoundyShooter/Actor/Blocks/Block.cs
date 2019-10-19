@@ -19,6 +19,11 @@ namespace BoundyShooter.Actor.Blocks
         private int maxRandom = 5 + 1;
         private int fallAccelerate = 1;
         private Timer fallTimer;
+        public Map Map
+        {
+            get;
+            private set;
+        }
 
         //当たり判定を持つかどうか
         public bool IsSolid
@@ -37,6 +42,7 @@ namespace BoundyShooter.Actor.Blocks
         public virtual Block Set(Map map, Vector2 position)
         {
             Position = position;
+            Map = map;
             return this;
         }
 

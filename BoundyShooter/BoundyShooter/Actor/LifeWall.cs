@@ -101,6 +101,7 @@ namespace BoundyShooter.Actor
         {
             IsDead = true;
             new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+            GameDevice.Instance().DisplayQuake = new Vector2(0, 1.5f);
         }
     }
 }
