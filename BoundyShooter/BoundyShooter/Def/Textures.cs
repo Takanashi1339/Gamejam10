@@ -29,6 +29,7 @@ namespace BoundyShooter.Def
                 { "test_enemy", Path },
                 { "test_gage", Path },
                 { "test_gage_empty", Path },
+                { "enemy1", Path },
                 { "life_wall_1" , Path},
                 { "life_wall_2" ,Path },
                 { "life_wall_3" ,Path },

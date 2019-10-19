@@ -11,7 +11,7 @@ namespace BoundyShooter.Actor.Entities
     class TestEnemy : Enemy
     {
         public TestEnemy(Vector2 position)
-            : base("test_enemy", position, new Point(64, 64))
+            : base("enemy1", position, new Point(64, 64))
         {
         }
 
