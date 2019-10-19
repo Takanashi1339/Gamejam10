@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Def;
 
 namespace BoundyShooter.Actor
 {
@@ -157,6 +158,15 @@ namespace BoundyShooter.Actor
                 position.Y = other.Rectangle.Bottom;
             }
             Position = position;
+        }
+
+        public bool IsInScreen()
+        {
+            var modify = GameDevice.Instance().DisplayModify;
+            return Position.X + modify.X + Size.X >= 0
+                && Position.X + modify.X <= Screen.Width
+                && Position.Y + modify.Y + Size.Y >= 0
+                && Position.Y + modify.Y <= Screen.Height;
         }
     }
 }

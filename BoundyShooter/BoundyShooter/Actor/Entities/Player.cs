@@ -103,7 +103,7 @@ namespace BoundyShooter.Actor.Entities
             }
             if (mapBottomHit)
             {
-                wall.BreakWall();
+                wall.Break();
             }
             CorrectPosition(wall);
         }
@@ -196,6 +196,11 @@ namespace BoundyShooter.Actor.Entities
                 gunTimer.Reset();
                 //GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
                 GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Size.Y / 2), -1));
+            }
+            if(LifeWall.AllIsDead())
+            {
+                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+                IsDead = true;
             }
             new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);

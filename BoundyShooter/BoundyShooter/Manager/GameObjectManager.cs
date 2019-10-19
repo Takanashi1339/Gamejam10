@@ -98,6 +98,7 @@ namespace BoundyShooter.Manager
             HitToGameObject();
             HitToLifeWall();
 
+            LifeWalls.RemoveAll(l => l.IsDead);
             gameObjects.RemoveAll(obj => obj.IsDead);
             if (nextMap != null)
             {
@@ -177,6 +178,5 @@ namespace BoundyShooter.Manager
                 }
             }
         }
-
     }
 }

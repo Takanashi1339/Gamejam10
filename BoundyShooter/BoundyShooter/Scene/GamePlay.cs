@@ -82,15 +82,17 @@ namespace BoundyShooter.Scene
                 next = Scene.Ending;
             }
 
-            if (LifeWall.DeathWallIsDead())
+            if (Input.GetKeyTrigger(Keys.P))
             {
                 //シーン移動
                 isEndFlag = true;
                 next = Scene.GameOver;
             }
 
-
-            scroll--;
+            if(!LifeWall.AllIsDead())
+            {
+                scroll--;
+            }
             if (scroll < Screen.Height)
             {
                 scroll = Screen.Height;
