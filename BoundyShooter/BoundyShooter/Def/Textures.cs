@@ -36,6 +36,7 @@ namespace BoundyShooter.Def
                 { "block_2" ,Path },
                 { "block_3" ,Path },
                 { "block_4" ,Path },
+                { "fade" ,Path },
 
                 //必要に応じて自分で追加
             };

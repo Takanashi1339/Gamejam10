@@ -64,9 +64,9 @@ namespace BoundyShooter.Actor
             return lifeWalls;
         }
 
-        public static bool DeathWallIsDead()
+        public static bool AllIsDead()
         {
-            return lifeWalls.First().IsDead;
+            return lifeWalls.Count <= 0;
         }
         public override object Clone()
         {
@@ -75,6 +75,7 @@ namespace BoundyShooter.Actor
 
         public override void Update(GameTime gameTime)
         {
+            nowCount = wallNames.Length - lifeWalls.Count;
             Name = wallNames[nowCount];
             Position = -GameDevice.Instance().DisplayModify + displayPos;
             base.Update(gameTime);
@@ -91,20 +92,15 @@ namespace BoundyShooter.Actor
         {
             if (IsDead) return;
             if (gameObject is Enemy enemy)
-            {
-                BreakWall();
+            {  
+                Break();
             }
         }
 
-        public void BreakWall()
+        public void Break()
         {
             IsDead = true;
             new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
-            if(nowCount >= wallNames.Length - 1)
-            {
-                return;
-            }
-            nowCount++;
         }
     }
 }
