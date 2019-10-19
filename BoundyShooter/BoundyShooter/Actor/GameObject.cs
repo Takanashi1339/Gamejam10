@@ -168,5 +168,10 @@ namespace BoundyShooter.Actor
                 && Position.Y + modify.Y + Size.Y >= 0
                 && Position.Y + modify.Y <= Screen.Height;
         }
+
+        public Vector2 GetScreenPosition()
+        {
+            return Position + GameDevice.Instance().DisplayModify;
+        }
     }
 }

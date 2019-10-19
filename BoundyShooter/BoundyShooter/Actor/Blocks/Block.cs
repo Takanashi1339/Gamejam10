@@ -85,6 +85,10 @@ namespace BoundyShooter.Actor.Blocks
                 velocity.X = -velocity.X;
             }
             Velocity = velocity;
+            if (GetScreenPosition().Y + Velocity.Y > Screen.Height)
+            {
+                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+            }
         }
     }
 }
