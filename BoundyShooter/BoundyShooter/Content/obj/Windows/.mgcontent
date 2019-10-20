@@ -14,6 +14,7 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blue_tail.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/enemy1.png</File>
+    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/fade.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/gun.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/life_wall_1.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/life_wall_2.png</File>
@@ -31,6 +32,7 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/white_block.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
