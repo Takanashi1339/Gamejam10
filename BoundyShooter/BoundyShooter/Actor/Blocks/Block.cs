@@ -14,11 +14,15 @@ namespace BoundyShooter.Actor.Blocks
     abstract class Block : GameObject
     {
         public const int BlockSize = 32;
+        public const int MinLifeTime = 15;
+        public const int MaxLifeTime = 45;
+
         private float fallHeight = Screen.Height - BlockSize;
         private float fallVelocityY = 0.1f;
         private int maxRandom = 5 + 1;
         private int fallAccelerate = 1;
         private Timer fallTimer;
+        private int randomLifeTime = -1;
         public Map Map
         {
             get;
@@ -64,6 +68,11 @@ namespace BoundyShooter.Actor.Blocks
         }
         public void GameOverEffect()
         {
+            //初期値なら初期化
+            if (randomLifeTime == -1)
+            {
+                randomLifeTime = GameDevice.Instance().GetRandom().Next(MaxLifeTime - MinLifeTime) + MinLifeTime;
+            }
             var modify = GameDevice.Instance().DisplayModify;
             var screenPos = Position + modify + new Vector2(BlockSize, 0);
             var velocity = Velocity;
@@ -85,7 +94,8 @@ namespace BoundyShooter.Actor.Blocks
                 velocity.X = -velocity.X;
             }
             Velocity = velocity;
-            if (GetScreenPosition().Y + Velocity.Y > Screen.Height)
+            randomLifeTime--;
+            if (randomLifeTime == 0)
             {
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }

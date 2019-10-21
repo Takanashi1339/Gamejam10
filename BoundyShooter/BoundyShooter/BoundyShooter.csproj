@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actor\Blocks\Block.cs" />
+    <Compile Include="Actor\Blocks\WallBlock.cs" />
     <Compile Include="Actor\Blocks\WhiteBlock.cs" />
     <Compile Include="Actor\Entities\Boss.cs" />
     <Compile Include="Actor\Entities\EasyBoss.cs" />
