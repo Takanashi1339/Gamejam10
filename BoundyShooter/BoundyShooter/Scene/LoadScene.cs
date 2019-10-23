@@ -21,6 +21,8 @@ namespace BoundyShooter.Scene
         private int totalResouceNum;//全リソース数
         private bool isEndFlag;//終了フラグ
         private Timer timer;//演出用タイマー
+        private int loadnum = 0;
+        private float rotate;
 
 
         #region テクスチャ用
@@ -80,7 +82,7 @@ namespace BoundyShooter.Scene
             seLoader = new SELoader(SEMatrix());
             isEndFlag = false;
 
-            timer = new Timer(1 / 60f, true);
+            timer = new Timer(10 / 60f, true);
         }
 
         /// <summary>
@@ -92,8 +94,6 @@ namespace BoundyShooter.Scene
             //描画開始
             renderer.Begin();
 
-            renderer.DrawTexture("load", new Vector2(20, 20), Drawer.Default);
-
             //現在読み込んでいる数を取得
             int currentCount =
                 textureLoader.CurrentCount() +
@@ -103,9 +103,28 @@ namespace BoundyShooter.Scene
             //読み込むモノがあれば描画
             if (totalResouceNum != 0)
             {
+                GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
                 //読み込んだ割合
                 float rate = (float)currentCount / totalResouceNum;
 
+                if (rate >= 0.33f)
+                {
+                    loadnum = 1;
+                }
+                if (rate >= 0.66f)
+                {
+                    loadnum = 2;
+                }
+
+                var loadDrawer = new Drawer();
+                loadDrawer.Rectangle = new Rectangle(0, 80 * loadnum, 417, 80);
+
+                renderer.DrawTexture("load", new Vector2(30, 256), loadDrawer);
+
+                var playerDrawer = new Drawer();
+                playerDrawer.Rotation = rotate;
+                playerDrawer.Origin = new Vector2(64 / 2, 64 / 2);
+                renderer.DrawTexture("player", new Vector2(Screen.Width / 2 - 32, 330),playerDrawer);
                 /*
                 //数字で描画
                 renderer.DrawNumber(
@@ -115,13 +134,13 @@ namespace BoundyShooter.Scene
                 */
 
                 //バーで描画
-                var drawer = new Drawer();
-                drawer.Scale = new Vector2(rate * Screen.Width, 20);
+                //var drawer = new Drawer();
+                //drawer.Scale = new Vector2(rate * Screen.Width, 20);
 
-                renderer.DrawTexture(
-                    "white",
-                    new Vector2(0, 500),
-                    drawer);
+                //renderer.DrawTexture(
+                //    "white",
+                //    new Vector2(0, 500),
+                //    drawer);
             }
 
             //終了
@@ -208,6 +227,8 @@ namespace BoundyShooter.Scene
             {
                 seLoader.Update(gameTime);
             }
+
+            rotate += 5f;
         }
     }
 }

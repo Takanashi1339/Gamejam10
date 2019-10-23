@@ -8,6 +8,7 @@ using BoundyShooter.Actor.Particles;
 using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Manager;
+using BoundyShooter.Scene;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -53,6 +54,7 @@ namespace BoundyShooter.Actor.Entities
             private set;
         }
 
+        private bool isTitle;
         public Timer gunTimer;
 
         public const int BladeAmount = 3;
@@ -119,7 +121,7 @@ namespace BoundyShooter.Actor.Entities
 
         public void HitLifeWall(LifeWall wall)
         {
-            if (Velocity.Y != 0)
+            if (Speed > MaxSpeed / 2 && Velocity.Y != 0)
             {
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
@@ -172,6 +174,7 @@ namespace BoundyShooter.Actor.Entities
         {
             Rotation = GameDevice.Instance().GetRandom().Next(360);
             gunTimer = new Timer(1f, false); //発射時に手動でリセット
+            isTitle = false;
         }
 
         public override object Clone()
@@ -221,10 +224,13 @@ namespace BoundyShooter.Actor.Entities
                 //GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
                 GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Size.Y / 2), -1));
             }
-            if(LifeWall.AllIsDead())
+            if (!isTitle)
             {
-                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
-                IsDead = true;
+                if (LifeWall.AllIsDead())
+                {
+                    new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+                    IsDead = true;
+                }
             }
             new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
@@ -266,7 +272,6 @@ namespace BoundyShooter.Actor.Entities
                     var bladePosition = Position + new Vector2(Size.X / 4, Size.Y / 4 - Size.Y * spin);
                     Renderer.Instance.DrawTexture("blade", bladePosition, blade);
                 }
-
             }
         }
 
@@ -299,6 +304,26 @@ namespace BoundyShooter.Actor.Entities
             gage.DisplayModify = true;
             gage.Rectangle = new Rectangle(0, 0, (int) (96 * (Speed / MaxSpeed)), 16);
             Renderer.Instance.DrawTexture("test_gage", gagePosition, gage);
+        }
+
+        public void ModeTitle()
+        {
+            Speed = 13f;
+            isTitle = true;
+            if(Title.titleBottom > Position.Y)
+            {
+                var rotation = Rotation;
+                Rotation = 180 - rotation;
+                new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
+                Position = new Vector2(Position.X, Title.titleBottom);
+            }
+            if(Screen.Height - Size.Y < Position.Y)
+            {
+                var rotation = Rotation;
+                Rotation = 180 - rotation;
+                new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
+                Position = new Vector2(Position.X, Screen.Height - Size.Y);
+            }
         }
     }
 }

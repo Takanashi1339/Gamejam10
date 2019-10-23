@@ -72,7 +72,8 @@ namespace BoundyShooter
 
             // この下にロジックを記述
 
-
+            Renderer.Instance.LoadContent("load","./Texture/");
+            Renderer.Instance.LoadContent("player", "./Texture/");
             // この上にロジックを記述
         }
 

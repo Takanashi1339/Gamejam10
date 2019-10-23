@@ -42,6 +42,8 @@ namespace BoundyShooter.Def
                 { "block_3" ,Path },
                 { "block_4" ,Path },
                 { "white_block" ,Path },
+                { "testgameover", Path },
+                { "title" ,Path },
 
                 //必要に応じて自分で追加
             };

@@ -204,7 +204,21 @@ namespace BoundyShooter.Actor
                         obj.Hit(gameObject);
                     }
                 }
+            }       
+        }
+        public bool CheckAllBlockDead()
+        {
+            foreach (var list in mapList)
+            {
+                foreach (var obj in list)
+                {
+                    if(obj.IsInScreen() && !(obj is Space))
+                    {
+                        return false;
+                    }
+                }
             }
+            return true;
         }
     }
 }

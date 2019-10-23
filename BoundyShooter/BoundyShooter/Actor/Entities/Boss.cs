@@ -73,8 +73,7 @@ namespace BoundyShooter.Actor.Entities
         public override void Hit(GameObject gameObject)
         {
             Direction dir = CheckDirection(gameObject);
-            var player = GameObjectManager.Instance.Find<Player>().First();
-            if (gameObject is Player)
+            if (gameObject is Player player)
             {
                 if (player.Speed > Player.MaxSpeed / 2)
                 {

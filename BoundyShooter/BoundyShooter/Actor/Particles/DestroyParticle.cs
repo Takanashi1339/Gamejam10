@@ -23,8 +23,8 @@ namespace BoundyShooter.Actor.Particles
         private int location = 0;
         private DestroyOption option;
 
-        public DestroyParticle(string name, Vector2 position, Point size, DestroyOption option) 
-            : base(name, position, size, 10, 0.05f)
+        public DestroyParticle(string name, Vector2 position, Point size, DestroyOption option, int particleSize = 10) 
+            : base(name, position, size, particleSize, 0.05f)
         {
             this.option = option;
         }
