@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png</SourceFile>
-  <SourceTime>2019-10-10T14:59:45.154518+09:00</SourceTime>
-  <DestFile>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/death.xnb</DestFile>
-  <DestTime>2019-10-23T12:20:32.6082513+09:00</DestTime>
+  <SourceFile>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death.png</SourceFile>
+  <SourceTime>2019-10-10T16:02:48.4692625+09:00</SourceTime>
+  <DestFile>C:/K019G1239/1学年/GameJum/2019_10_GameJam/Gamejam10/BoundyShooter/BoundyShooter/Content/bin/Windows/Content/Texture/death.xnb</DestFile>
+  <DestTime>2019-10-23T15:37:06.2290827+09:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-09T01:35:54+09:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
