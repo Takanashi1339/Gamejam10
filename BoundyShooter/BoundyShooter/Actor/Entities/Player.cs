@@ -119,7 +119,7 @@ namespace BoundyShooter.Actor.Entities
 
         public void HitLifeWall(LifeWall wall)
         {
-            if (Velocity.Y != 0)
+            if (Speed > MaxSpeed / 2 && Velocity.Y != 0)
             {
                 var rotation = Rotation;
                 Rotation = 180 - rotation;

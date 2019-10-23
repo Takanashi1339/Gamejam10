@@ -13,20 +13,34 @@ namespace BoundyShooter.Scene
     class GameOver : IScene
     {
         private bool isEndFlag;
+        private float alpha;
+        private float maxAlpha;
+        private float alphaRate;
 
         public GameOver()
         {
             isEndFlag = false;
+            alpha = 0f;
+            maxAlpha = 1.0f;
+            alphaRate = 0.005f;
         }
 
         public void Draw()
         {
-            GameDevice.Instance().GetGraphicsDevice().Clear(Color.Red);
+            GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
+
+            var drawer = Drawer.Default;
+            drawer.Alpha = alpha;
+
+            Renderer.Instance.Begin();
+            Renderer.Instance.DrawTexture("testgameover", Vector2.Zero, drawer);
+            Renderer.Instance.End();
         }
 
         public void Initialize()
         {
             isEndFlag = false;
+            alpha = 0f;
         }
 
         public bool IsEnd()
@@ -46,7 +60,12 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
-            if (Input.GetKeyTrigger(Keys.Enter))
+            alpha += alphaRate;
+            if(alpha > maxAlpha)
+            {
+                alpha = maxAlpha;
+            }
+            if (alpha >= maxAlpha &&Input.GetKeyTrigger(Keys.Space))
             {
                 //シーン移動
                 isEndFlag = true;

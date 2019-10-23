@@ -18,7 +18,7 @@ namespace BoundyShooter.Actor.Blocks
         public const int MaxLifeTime = 45;
 
         private float fallHeight = Screen.Height - BlockSize;
-        private float fallVelocityY = 0.1f;
+        private float fallVelocityY = 0.2f;
         private int maxRandom = 5 + 1;
         private int fallAccelerate = 1;
         private Timer fallTimer;
@@ -97,7 +97,7 @@ namespace BoundyShooter.Actor.Blocks
             randomLifeTime--;
             if (randomLifeTime == 0)
             {
-                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+                new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center, 2);
             }
         }
     }

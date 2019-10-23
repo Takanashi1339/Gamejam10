@@ -82,7 +82,7 @@ namespace BoundyShooter.Scene
                 next = Scene.Ending;
             }
 
-            if (Input.GetKeyTrigger(Keys.P))
+            if (gameObjectManager.Map.CheckAllBlockDead())
             {
                 //シーン移動
                 isEndFlag = true;

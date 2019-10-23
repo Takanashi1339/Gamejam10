@@ -111,6 +111,11 @@ namespace BoundyShooter.Actor.Entities
             {
                 velocity.X = MaxSpeedX;
             }
+            var players = GameObjectManager.Instance.Find<Player>();
+            if (players.Count == 0)
+            {
+                IsDead = true;
+            }
             base.Update(gameTime);
         }
 
