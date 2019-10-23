@@ -64,6 +64,7 @@ namespace BoundyShooter.Manager
             {
                 LifeWalls = new List<LifeWall>();
             }
+            Map = null;
         }
 
         public void Add(GameObject obj)

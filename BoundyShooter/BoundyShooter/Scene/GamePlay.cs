@@ -53,7 +53,7 @@ namespace BoundyShooter.Scene
             // csvからマップを読み込む場合
 
             var reader = GameDevice.Instance().GetCSVReader();
-            reader.Read("map01.csv");
+            reader.Read("map02.csv");
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
             scroll = map.Height;
@@ -82,7 +82,7 @@ namespace BoundyShooter.Scene
                 next = Scene.Ending;
             }
 
-            if (Input.GetKeyTrigger(Keys.P))
+            if (gameObjectManager.Map.CheckAllBlockDead())
             {
                 //シーン移動
                 isEndFlag = true;

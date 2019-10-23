@@ -29,6 +29,7 @@ namespace BoundyShooter.Def
                 { "test_enemy", Path },
                 { "test_gage", Path },
                 { "test_gage_empty", Path },
+                { "enemy1", Path },
                 { "life_wall_1" , Path},
                 { "life_wall_2" ,Path },
                 { "life_wall_3" ,Path },
@@ -38,6 +39,7 @@ namespace BoundyShooter.Def
                 { "block_3" ,Path },
                 { "block_4" ,Path },
                 { "white_block" ,Path },
+                { "testgameover", Path },
                 { "title" ,Path },
 
                 //必要に応じて自分で追加

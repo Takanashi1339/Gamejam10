@@ -75,6 +75,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 HitBlock(block);
             }
+
             if (gameObject is Boss)
             {
                 Direction dir = CheckDirection(gameObject);
@@ -93,9 +94,32 @@ namespace BoundyShooter.Actor.Entities
             }
         }
 
+        public void HitWall(bool isLeft)
+        {
+            var rotation = Rotation;
+            Rotation = 360 - rotation;
+            if (isLeft)
+            {
+                Position = new Vector2(Block.BlockSize, Position.Y);
+            }
+            else
+            {
+                Position = new Vector2(Screen.Width - Block.BlockSize - Size.X, Position.Y);
+            }
+
+            if (isLeft)
+            {
+                new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Right);
+            }
+            else
+            {
+                new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Left);
+            }
+        }
+
         public void HitLifeWall(LifeWall wall)
         {
-            if (Velocity.Y != 0)
+            if (Speed > MaxSpeed / 2 && Velocity.Y != 0)
             {
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
@@ -204,6 +228,13 @@ namespace BoundyShooter.Actor.Entities
             }
             new TailParticle(Position + new Vector2(16, 16));
             base.Update(gameTime);
+            if (Position.X < Block.BlockSize)
+            {
+                HitWall(true);
+            }else if (Position.X > Screen.Width - Block.BlockSize - Size.X)
+            {
+                HitWall(false);
+            }
         }
 
         public override void Draw()

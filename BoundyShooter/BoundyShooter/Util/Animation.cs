@@ -10,7 +10,7 @@ namespace BoundyShooter.Util
     class Animation
     {
         private Point size;
-        private int frame; 
+        private int frame;
         private int maxFrame;
         private Timer timer;
         private AnimationType animationType;
@@ -36,7 +36,7 @@ namespace BoundyShooter.Util
         /// <summary>
         /// アニメーションを管理する
         /// </summary>
-        /// <param name="size">サイズ</param>
+        /// <param name="size">1フレームあたりのサイズ</param>
         /// <param name="frame">アニメーションのフレーム数</param>
         /// <param name="time">1フレーム当たりの時間(秒)</param>
         /// <param name="animationType">アニメーション方向</param>
@@ -52,7 +52,7 @@ namespace BoundyShooter.Util
         /// <summary>
         /// アニメーションを管理する
         /// </summary>
-        /// <param name="size">サイズ</param>
+        /// <param name="size">1フレームあたりのサイズ</param>
         /// <param name="frame">アニメーションのフレーム数</param>
         /// <param name="time">1フレーム当たりの時間(秒)</param>
         /// <param name="startPoint">アニメーションの開始地点</param>
@@ -66,7 +66,7 @@ namespace BoundyShooter.Util
         /// <summary>
         /// アニメーションを管理する
         /// </summary>
-        /// <param name="size">サイズ</param>
+        /// <param name="size">1フレームあたりのサイズ</param>
         /// <param name="frame">アニメーションのフレーム数</param>
         /// <param name="time">1フレーム当たりの時間(秒)</param>
         /// <param name="loop">アニメーションをループさせるかどうか</param>
@@ -118,11 +118,11 @@ namespace BoundyShooter.Util
 
             if (animationType == AnimationType.Horizontal)
             {
-                location.X *= frame;
+                location.X += frame * size.X;
             }
             else
             {
-                location.Y *= frame;
+                location.Y += frame * size.Y;
             }
 
             return new Rectangle(location, size);
