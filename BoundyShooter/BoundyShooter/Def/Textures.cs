@@ -30,6 +30,7 @@ namespace BoundyShooter.Def
                 { "test_gage", Path },
                 { "test_gage_empty", Path },
                 { "enemy1", Path },
+                { "jelly_enemy", Path },
                 { "kraken_body", Path },
                 { "kraken_arm", Path },
                 { "kraken_hand", Path },
