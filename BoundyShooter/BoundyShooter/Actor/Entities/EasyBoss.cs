@@ -15,7 +15,7 @@ namespace BoundyShooter.Actor.Entities
         float tentacleCount = 0;
 
         public EasyBoss(Vector2 position) 
-            : base("kraken_body", position, new Point(256,256), 4f, 10,0)
+            : base("kraken_body", position, new Point(256,256), 4f, 6, 0)
         {
         }
 
@@ -40,19 +40,19 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
-            tentacles[0].Rotation = -(float)Math.Sin(tentacleCount / 60) * 60;
-            tentacles[1].Rotation = -(float)Math.Sin(tentacleCount / 60) * 30;
-            tentacles[2].Rotation = (float)Math.Sin(tentacleCount / 60) * 30;
-            tentacles[3].Rotation = (float)Math.Sin(tentacleCount / 60) * 60;
+            tentacles[0].Rotation = -(float)Math.Sin(tentacleCount / 60) * 30;
+            tentacles[1].Rotation = -(float)Math.Sin(tentacleCount / 60) * 15;
+            tentacles[2].Rotation = (float)Math.Sin(tentacleCount / 60) * 15;
+            tentacles[3].Rotation = (float)Math.Sin(tentacleCount / 60) * 30;
             tentacleCount++;
             base.Update(gameTime);
         }
 
         protected override void Attack()
         {
-            tentacles.ForEach(tentacle => tentacle.Speed = 1f);
+            tentacles.ForEach(tentacle => tentacle.Speed = 0.5f);
             var index = GameDevice.Instance().GetRandom().Next(3);
-            tentacles[index].Speed = 2f;
+            tentacles[index].Speed = 1f;
         }
     }
 }

@@ -45,11 +45,12 @@ namespace BoundyShooter.Def
                 { "white_block" ,Path },
                 { "testgameover", Path },
                 { "title" , Path },
-                { "testeasy",Path },
-                { "testnormal",Path },
-                { "testhard",Path },
+                { "easy",Path },
+                { "normal",Path },
+                { "hard",Path },
                 { "title" ,Path },
                 { "push_to_space", Path },
+                { "menu_explanation" ,Path},
 
                 //必要に応じて自分で追加
             };
