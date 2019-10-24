@@ -16,6 +16,7 @@ namespace BoundyShooter.Scene
         private int checkValue;
         private int MaxValue;
         private Vector2 defaultDrawPos;
+        private bool checkMoveScene;
         private static int difficultyNumber;
         private string[] difficultyName = {
             "easy",
@@ -32,6 +33,10 @@ namespace BoundyShooter.Scene
         public Menu()
         {
             isEndFlag = false;
+            checkMoveScene = true;
+            checkValue = 0;
+            defaultDrawPos = new Vector2(0, 500);
+            MaxValue = 100;
         }
         public void Draw()
         {
@@ -48,9 +53,9 @@ namespace BoundyShooter.Scene
 
         public void Initialize()
         {
+            isEndFlag = false;
+            checkMoveScene = true;
             checkValue = 0;
-            defaultDrawPos = new Vector2(0, 500);
-            MaxValue = 100;
         }
 
         public bool IsEnd()
@@ -74,7 +79,7 @@ namespace BoundyShooter.Scene
             {
                 checkValue = 0;
             }
-            if (Input.GetKeyRelease(Keys.Space))
+            if (Input.GetKeyRelease(Keys.Space) && !checkMoveScene)
             {
                 difficultyNumber++;
             }
@@ -89,6 +94,10 @@ namespace BoundyShooter.Scene
             if(checkValue > MaxValue)
             {
                 isEndFlag = true;
+            }
+            if (Input.GetKeyRelease(Keys.Space))
+            {
+                checkMoveScene = false;
             }
         }
 
