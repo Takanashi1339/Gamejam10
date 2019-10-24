@@ -60,6 +60,13 @@ namespace BoundyShooter.Actor.Entities
             private set;
         } = false;
 
+        public bool IsMenu
+        {
+            get;
+            private set;
+        } = false;
+
+
         public Timer gunTimer;
 
         public const int BladeAmount = 3;
@@ -222,13 +229,13 @@ namespace BoundyShooter.Actor.Entities
             }
             BladeRotation -= (Speed - MaxSpeed / 2) * 2;
             //if (Speed <= MaxSpeed / 2 && gunTimer.Location >= (BulletRate + Speed / (MaxSpeed / 2) / (1 + BulletRate)))
-            if (!Velocity.Equals(Vector2.Zero) && Speed <= MaxSpeed / 2 && gunTimer.Location >= BulletRate)
+            if (!Velocity.Equals(Vector2.Zero) && Speed <= MaxSpeed / 2 && gunTimer.Location >= BulletRate && !IsMenu)
             {
                 gunTimer.Reset();
                 //GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
                 GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Size.Y / 2), -1));
             }
-            if (!IsTitle)
+            if (!IsTitle && !IsMenu)
             {
                 if (LifeWall.AllIsDead())
                 {
@@ -250,14 +257,17 @@ namespace BoundyShooter.Actor.Entities
         public override void Draw()
         {
             DrawBlade();
-            DrawGun();
+            var drawer = Drawer.Default;
+            if (!IsMenu)
+            {
+                DrawGun();
+                drawer.Rotation = MathHelper.ToRadians(Rotation);
+                drawer.Origin = Size.ToVector2() / 2;
+            }
             if (IsCharging)
             {
                 DrawGage();
             }
-            var drawer = Drawer.Default;
-            drawer.Rotation = MathHelper.ToRadians(Rotation);
-            drawer.Origin = Size.ToVector2() / 2;
             base.Draw(drawer);
         }
 
@@ -306,7 +316,14 @@ namespace BoundyShooter.Actor.Entities
             Renderer.Instance.DrawTexture("test_gage_empty", gagePosition, empty);
             var gage = Drawer.Default;
             gage.DisplayModify = true;
-            gage.Rectangle = new Rectangle(0, 0, (int) (96 * (Speed / MaxSpeed)), 16);
+            if(IsMenu)
+            {
+                gage.Rectangle = new Rectangle(0, 0, (int)(96 * Menu.SelectValueRate()), 16);
+            }
+            else
+            {
+                gage.Rectangle = new Rectangle(0, 0, (int)(96 * (Speed / MaxSpeed)), 16);
+            }
             Renderer.Instance.DrawTexture("test_gage", gagePosition, gage);
         }
 
@@ -329,6 +346,12 @@ namespace BoundyShooter.Actor.Entities
                 new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
                 Position = new Vector2(Position.X, Screen.Height - Size.Y);
             }
+        }
+
+        public void ModeMenu(Vector2 position)
+        {
+            IsMenu = true;
+            Position = position;
         }
     }
 }
