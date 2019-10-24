@@ -49,6 +49,7 @@
     <Compile Include="Actor\Entities\Enemy.cs" />
     <Compile Include="Actor\Entities\Entity.cs" />
     <Compile Include="Actor\Entities\HardBoss.cs" />
+    <Compile Include="Actor\Entities\JellyEnemy.cs" />
     <Compile Include="Actor\Entities\KrakenTentacle.cs" />
     <Compile Include="Actor\Entities\NormalBoss.cs" />
     <Compile Include="Actor\Entities\PlayerBullet.cs" />

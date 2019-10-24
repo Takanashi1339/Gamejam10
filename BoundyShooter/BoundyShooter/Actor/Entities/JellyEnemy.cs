@@ -9,30 +9,38 @@ using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Entities
 {
-    class FishEnemy : Enemy
+    class JellyEnemy : Enemy
     {
         private Animation animation;
-
-        public FishEnemy(Vector2 position)
-            : base("enemy1", position, new Point(64, 64))
+        public float Rotation
         {
-            animation = new Animation(Size, 8, 0.1f);
-            MaxSpeedY = 2f;
+            get;
+            private set;
         }
+        private float animationCount = 0;
+        private float animationSpeed = 0.025f;
+        private const float MaxAnimationAngle = 30;
 
-        public FishEnemy(FishEnemy other)
-            :this(other.Position)
-        { }
+        public JellyEnemy(Vector2 position) 
+            : base("jelly_enemy", position, new Point(64, 64), 2)
+        {
+            animation = new Animation(Size, 4, 0.3f);
+            MaxSpeedX = 0.0f;
+            MaxSpeedY = 0.0f;
+        }
 
         public override object Clone()
         {
-            return new FishEnemy(this);
+            return new JellyEnemy(Position);
         }
+
 
         public override void Update(GameTime gameTime)
         {
             if (!IsInScreen()) return;
             animation.Update(gameTime);
+            animationCount += animationSpeed;
+            Rotation = (float)Math.Sin(animationCount) * MaxAnimationAngle;
             base.Update(gameTime);
         }
 
@@ -49,6 +57,8 @@ namespace BoundyShooter.Actor.Entities
         {
             var drawer = Drawer.Default;
             drawer.DisplayModify = true;
+            drawer.Origin = new Vector2(Size.X / 2, 0);
+            drawer.Rotation = MathHelper.ToRadians(Rotation);
             drawer.Rectangle = animation.GetRectangle();
             base.Draw(drawer);
         }

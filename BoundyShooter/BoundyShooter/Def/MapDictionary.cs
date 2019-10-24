@@ -26,6 +26,7 @@ namespace BoundyShooter.Def
             Data.Add("NB", new NormalBoss(Vector2.Zero));
             Data.Add("HB", new HardBoss(Vector2.Zero));
             Data.Add("E", new FishEnemy(Vector2.Zero));
+            Data.Add("Ej", new JellyEnemy(Vector2.Zero));
             Data.Add("E2", new TestEnemy2(Vector2.Zero));
 
             //ここにEntity/Blockを追加
