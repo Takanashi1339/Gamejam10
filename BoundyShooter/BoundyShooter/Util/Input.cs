@@ -110,6 +110,15 @@ namespace BoundyShooter.Util
             return currentKey.IsKeyDown(key);
         }
 
+        /// <summary>
+        /// キーが離された瞬間か？
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static bool GetKeyRelease(Keys key)
+        {
+            return !currentKey.IsKeyDown(key) && previousKey.IsKeyDown(key);
+        }
         //マウス関連
         /// <summary>
         /// マウスの左ボンタンが押された瞬間か？

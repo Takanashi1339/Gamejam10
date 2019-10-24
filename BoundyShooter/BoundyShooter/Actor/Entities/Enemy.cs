@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Particles;
+using BoundyShooter.Def;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -15,6 +17,7 @@ namespace BoundyShooter.Actor.Entities
         private Vector2 bounceVelocity = new Vector2(0, -5f);//跳ね返りの初速
         private float acceleration = 0.1f;
         protected int life;
+        protected bool istitle;
 
         /// <summary>
         /// 敵のY軸方向の最高速度
@@ -37,6 +40,7 @@ namespace BoundyShooter.Actor.Entities
             : base(name, position, size)
         {
             this.life = life;
+            istitle = false;
         }
 
 
@@ -111,12 +115,35 @@ namespace BoundyShooter.Actor.Entities
             {
                 velocity.X = MaxSpeedX;
             }
-            var players = GameObjectManager.Instance.Find<Player>();
-            if (players.Count == 0)
+            if (!istitle)
             {
-                IsDead = true;
+                var players = GameObjectManager.Instance.Find<Player>();
+                if (players.Count == 0)
+                {
+                    IsDead = true;
+                }
             }
             base.Update(gameTime);
+            if (Position.X < Block.BlockSize)
+            {
+                HitWall(true);
+            }
+            else if (Position.X > Screen.Width - Block.BlockSize - Size.X)
+            {
+                HitWall(false);
+            }
+        }
+
+        public void HitWall(bool isLeft)
+        {
+            if (isLeft)
+            {
+                Position = new Vector2(Block.BlockSize, Position.Y);
+            }
+            else
+            {
+                Position = new Vector2(Screen.Width - Block.BlockSize - Size.X, Position.Y);
+            }
         }
 
         public override void Draw()

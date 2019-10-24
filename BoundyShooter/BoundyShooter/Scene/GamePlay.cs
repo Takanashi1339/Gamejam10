@@ -23,6 +23,13 @@ namespace BoundyShooter.Scene
         private ParticleManager particleManager;
 
         private float scroll = 0;
+        private string nowMap;
+        private string[] mapName =
+        {
+            "easy.csv",
+            "normal.csv",
+            "hard.csv",
+        };
 
         public GamePlay()
         {
@@ -50,10 +57,12 @@ namespace BoundyShooter.Scene
             LifeWall.Initialze();
             var lifeWalls = LifeWall.GenerateWall(LifeWall.Count);
             gameObjectManager.AddWall(lifeWalls);
+            nowMap = mapName[(int)Menu.GetDifficulty()];
             // csvからマップを読み込む場合
 
             var reader = GameDevice.Instance().GetCSVReader();
-            reader.Read("hard.csv");
+            //reader.Read("normal.csv");
+            reader.Read(nowMap);
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
             scroll = map.Height;

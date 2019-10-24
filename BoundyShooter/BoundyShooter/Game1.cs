@@ -54,6 +54,7 @@ namespace BoundyShooter
             sceneManager.Add(Scene.Scene.Loading, new LoadScene());
             sceneManager.Add(Scene.Scene.Title, new Title());
             sceneManager.Add(Scene.Scene.GamePlay, new GamePlay());
+            sceneManager.Add(Scene.Scene.Menu, new Menu());
             sceneManager.Add(Scene.Scene.GameOver, new GameOver());
             sceneManager.Add(Scene.Scene.Ending, new Ending());
             sceneManager.Change(Scene.Scene.Loading);

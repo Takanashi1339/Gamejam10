@@ -54,7 +54,12 @@ namespace BoundyShooter.Actor.Entities
             private set;
         }
 
-        private bool isTitle;
+        public bool IsTitle
+        {
+            get;
+            private set;
+        } = false;
+
         public Timer gunTimer;
 
         public const int BladeAmount = 3;
@@ -174,7 +179,6 @@ namespace BoundyShooter.Actor.Entities
         {
             Rotation = GameDevice.Instance().GetRandom().Next(360);
             gunTimer = new Timer(1f, false); //発射時に手動でリセット
-            isTitle = false;
         }
 
         public override object Clone()
@@ -224,7 +228,7 @@ namespace BoundyShooter.Actor.Entities
                 //GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
                 GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Size.Y / 2), -1));
             }
-            if (!isTitle)
+            if (!IsTitle)
             {
                 if (LifeWall.AllIsDead())
                 {
@@ -309,7 +313,7 @@ namespace BoundyShooter.Actor.Entities
         public void ModeTitle()
         {
             Speed = 13f;
-            isTitle = true;
+            IsTitle = true;
             if (Title.titleBottom > Position.Y)
             {
                 
