@@ -45,6 +45,7 @@ namespace BoundyShooter.Def
                 { "testgameover", Path },
                 { "title" ,Path },
                 { "push_to_space", Path },
+                { "clear", Path },
 
                 //必要に応じて自分で追加
             };
