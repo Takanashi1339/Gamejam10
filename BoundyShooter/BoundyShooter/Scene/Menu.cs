@@ -15,11 +15,12 @@ namespace BoundyShooter.Scene
         private bool isEndFlag;
         private int checkValue;
         private int MaxValue;
+        private Vector2 defaultDrawPos;
         private static int difficultyNumber;
         private string[] difficultyName = {
-            "testeasy",
-            "testnormal",
-            "testhard",
+            "easy",
+            "normal",
+            "hard",
         };
 
         public enum Difficulty
@@ -32,14 +33,18 @@ namespace BoundyShooter.Scene
         {
             isEndFlag = false;
             checkValue = 0;
+            defaultDrawPos = new Vector2(0, 500);
             MaxValue = 100;
         }
         public void Draw()
         {
+            GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
             var drawer = Drawer.Default;
-            Renderer.Instance.Begin();
+            var renderer = Renderer.Instance;
 
-            Renderer.Instance.DrawTexture(difficultyName[difficultyNumber], Vector2.Zero, drawer);
+            Renderer.Instance.Begin();
+            renderer.DrawTexture("menu_explanation", Vector2.Zero, drawer);
+            renderer.DrawTexture(difficultyName[difficultyNumber], defaultDrawPos, drawer);
 
             Renderer.Instance.End();
         }
@@ -70,7 +75,7 @@ namespace BoundyShooter.Scene
             {
                 checkValue = 0;
             }
-            if (Input.GetKeyTrigger(Keys.Space))
+            if (Input.GetKeyRelease(Keys.Space))
             {
                 difficultyNumber++;
             }
