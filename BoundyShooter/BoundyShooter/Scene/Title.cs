@@ -18,14 +18,15 @@ namespace BoundyShooter.Scene
 {
     class Title : IScene
     {
-        private bool isEndFlag,reverce;
+        private bool isEndFlag,reverse;
         public static readonly int titleBottom = 235;
-        private float alph;
+        private float alpha, maxAlhpa,minAlhpa,plusAlhpa;
         private Renderer renderer;
         private ParticleManager particleManager;
         private Animation animation;
 
         private Player titlePlayer;
+        private List<FishEnemy> fishEnemies;
 
 
         public Title()
@@ -45,11 +46,15 @@ namespace BoundyShooter.Scene
             renderer.DrawTexture("title", new Vector2(20, 0), titledrawer);
 
             var pushdrawer = new Drawer();
-            pushdrawer.Alpha = alph;
+            pushdrawer.Alpha = alpha;
             renderer.DrawTexture("push_to_space", new Vector2(39, 700), pushdrawer);
 
-            titlePlayer.Draw();
             particleManager.Draw();
+            titlePlayer.Draw();
+            foreach (var e in fishEnemies)
+            {
+                e.Draw();
+            }
 
             renderer.End();
         }
@@ -57,13 +62,20 @@ namespace BoundyShooter.Scene
         public void Initialize()
         {
             isEndFlag = false;
+            reverse = false;
             particleManager = new ParticleManager();
             particleManager.Initialize();
             GameDevice.Instance().DisplayModify = Vector2.Zero;
             titlePlayer = new Player(new Vector2(Screen.Width / 2 - 32, Screen.Height / 2 - 32));
             animation = new Animation(new Point(467, 235), 4, 0.15f, Animation.AnimationType.Vertical);
-            reverce = false;
-            alph = 0;
+            alpha = 0;
+            maxAlhpa = 1;
+            fishEnemies = new List<FishEnemy>();
+            for(int i = 0; i < 4;i++)
+            {
+                fishEnemies.Add(new FishEnemy(new Vector2((GameDevice.Instance().GetRandom().Next(7) + 1) * 64,
+                    (GameDevice.Instance().GetRandom().Next(6) + 1) * 64 + 235)));
+            }
         }
 
         public bool IsEnd()
@@ -87,24 +99,28 @@ namespace BoundyShooter.Scene
                 //シーン移動
                 isEndFlag = true;
             }
-            if(alph <= 0 ||
-                alph >= 1)
+            if(alpha <= minAlhpa ||
+                alpha >= maxAlhpa)
             {
-                reverce = !reverce;
+                reverse = !reverse;
             }
-            if(reverce)
+            if(reverse)
             {
-                alph += 0.05f;
+                alpha += plusAlhpa;
             }
-            else if (!reverce)
+            else if (!reverse)
             {
-                alph -= 0.05f;
+                alpha -= plusAlhpa;
             }
-            animation.Update(gameTime);
             particleManager.Update(gameTime);
+            animation.Update(gameTime);            
             titlePlayer.ModeTitle();
             titlePlayer.Update(gameTime);
-            Console.WriteLine(titlePlayer.Position);
+            foreach (var e in fishEnemies)
+            {
+                e.ModeTitle();
+                e.Update(gameTime);
+            }
         }
     }
 }

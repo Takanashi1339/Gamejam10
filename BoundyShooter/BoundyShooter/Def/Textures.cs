@@ -50,6 +50,7 @@ namespace BoundyShooter.Def
                 { "hard",Path },
                 { "title" ,Path },
                 { "push_to_space", Path },
+                { "clear", Path },
                 { "menu_explanation" ,Path},
 
                 //必要に応じて自分で追加

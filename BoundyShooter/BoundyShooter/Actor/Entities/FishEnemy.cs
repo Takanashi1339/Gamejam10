@@ -17,6 +17,7 @@ namespace BoundyShooter.Actor.Entities
             : base("enemy1", position, new Point(64, 64))
         {
             animation = new Animation(Size, 8, 0.1f);
+            istitle = false;
             MaxSpeedY = 2f;
         }
 
@@ -51,6 +52,11 @@ namespace BoundyShooter.Actor.Entities
             drawer.DisplayModify = true;
             drawer.Rectangle = animation.GetRectangle();
             base.Draw(drawer);
+        }
+
+        public void ModeTitle()
+        {
+            istitle = true;
         }
     }
 }
