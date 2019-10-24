@@ -44,6 +44,10 @@ namespace BoundyShooter.Def
                 { "block_4" ,Path },
                 { "white_block" ,Path },
                 { "testgameover", Path },
+                { "title" , Path },
+                { "testeasy",Path },
+                { "testnormal",Path },
+                { "testhard",Path },
                 { "title" ,Path },
                 { "push_to_space", Path },
 

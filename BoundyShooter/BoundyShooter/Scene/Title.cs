@@ -73,7 +73,7 @@ namespace BoundyShooter.Scene
 
         public Scene Next()
         {
-            return Scene.GamePlay;
+            return Scene.Menu;
         }
 
         public void Shutdown()
