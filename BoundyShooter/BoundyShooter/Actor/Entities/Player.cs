@@ -261,7 +261,7 @@ namespace BoundyShooter.Actor.Entities
         {
             if (Speed > MaxSpeed / 2)
             {
-                var spin = (Speed - MaxSpeed / 2) / MaxSpeed * (3f/2f);
+                var spin = (float) Math.Sqrt((Speed - MaxSpeed / 2) / MaxSpeed / 2) * 1.5f;
                 var blade = Drawer.Default;
                 for (int i = 0; i < BladeAmount; i++)
                 {

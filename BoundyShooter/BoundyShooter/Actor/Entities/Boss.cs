@@ -16,13 +16,23 @@ namespace BoundyShooter.Actor.Entities
         static Random rand = new Random();
         private Vector2 knockBack = new Vector2(0, -8);
         //プレイヤーに当たった数、プレイヤーに何回当たったら死ぬか、召喚するエネミーの位置
-        private int maxCount,summonPos,enemySize,enemynum;
+        private int maxCount, enemynum;
         protected float hitCount;
+        protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
+
         public bool IsDeadFlag
         {
             get;
             private set;
         } = false;
+
+        protected static readonly List<Vector2> TentaclePositions = new List<Vector2>()
+        {
+            new Vector2(16, 96),
+            new Vector2(48, 176),
+            new Vector2(144, 176),
+            new Vector2(176, 96)
+        };
 
         abstract protected void Attack();
 
@@ -33,7 +43,6 @@ namespace BoundyShooter.Actor.Entities
             attackTimer = new Timer(summon,true);
             hitCount = 0;
             maxCount = deathCount;
-            enemySize = 64;
             this.enemynum = enemynum;
         }
 
@@ -45,6 +54,7 @@ namespace BoundyShooter.Actor.Entities
             if (attackTimer.IsTime)
             {
                 Attack();
+
                 ////bosssize / blocksize
                 //summonPos = rand.Next(Size.Y / enemySize);
                 //if (enemynum == 0)
@@ -80,6 +90,7 @@ namespace BoundyShooter.Actor.Entities
                     if (dir == Direction.Top)
                     {
                         Velocity = knockBack;
+                        tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
                         hitCount++;
                         GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
                     }
@@ -91,6 +102,7 @@ namespace BoundyShooter.Actor.Entities
                 if (dir == Direction.Top)
                 {
                     Velocity = knockBack / 10;
+                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack / 10);
                     hitCount += 0.1f;
                 }
             }

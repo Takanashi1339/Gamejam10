@@ -44,5 +44,8 @@ namespace BoundyShooter.Actor.Entities
             }
             base.Update(gameTime);
         }
+        protected override void Attack()
+        {
+        }
     }
 }

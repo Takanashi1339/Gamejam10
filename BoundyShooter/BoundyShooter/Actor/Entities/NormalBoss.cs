@@ -29,5 +29,8 @@ namespace BoundyShooter.Actor.Entities
             position = new Vector2(Screen.Width / 2 - Size.X / 2, position.Y);
             return base.Spawn(map, position);
         }
+        protected override void Attack()
+        {
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace BoundyShooter.Scene
             // csvからマップを読み込む場合
 
             var reader = GameDevice.Instance().GetCSVReader();
-            reader.Read("map02.csv");
+            reader.Read("map01.csv");
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
             scroll = map.Height;

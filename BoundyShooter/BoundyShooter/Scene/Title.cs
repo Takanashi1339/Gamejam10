@@ -80,7 +80,7 @@ namespace BoundyShooter.Scene
             }
             animation.Update(gameTime);
             particleManager.Update(gameTime);
-            titleTimer.Update(gameTime);
+            //titleTimer.Update(gameTime);
             player.ModeTitle();
             player.Update(gameTime);
         }
