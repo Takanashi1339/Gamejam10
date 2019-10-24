@@ -51,7 +51,8 @@ namespace BoundyShooter.Scene
 
         public void Initialize()
         {
-
+            isEndFlag = false;
+            checkValue = 0;
         }
 
         public bool IsEnd()
