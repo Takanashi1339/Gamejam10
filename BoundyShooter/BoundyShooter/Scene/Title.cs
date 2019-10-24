@@ -26,7 +26,7 @@ namespace BoundyShooter.Scene
         private Animation animation;
 
         private Player titlePlayer;
-        private List<FishEnemy> fishEnemies;
+        private List<JellyEnemy> jellyEnemies;
 
 
         public Title()
@@ -51,7 +51,7 @@ namespace BoundyShooter.Scene
 
             particleManager.Draw();
             titlePlayer.Draw();
-            foreach (var e in fishEnemies)
+            foreach (var e in jellyEnemies)
             {
                 e.Draw();
             }
@@ -70,10 +70,12 @@ namespace BoundyShooter.Scene
             animation = new Animation(new Point(467, 235), 4, 0.15f, Animation.AnimationType.Vertical);
             alpha = 0;
             maxAlhpa = 1;
-            fishEnemies = new List<FishEnemy>();
+            minAlhpa = 0;
+            plusAlhpa = 0.05f;
+            jellyEnemies = new List<JellyEnemy>();
             for(int i = 0; i < 4;i++)
             {
-                fishEnemies.Add(new FishEnemy(new Vector2((GameDevice.Instance().GetRandom().Next(7) + 1) * 64,
+                jellyEnemies.Add(new JellyEnemy(new Vector2((GameDevice.Instance().GetRandom().Next(7) + 1) * 64,
                     (GameDevice.Instance().GetRandom().Next(6) + 1) * 64 + 235)));
             }
         }
@@ -116,7 +118,7 @@ namespace BoundyShooter.Scene
             animation.Update(gameTime);            
             titlePlayer.ModeTitle();
             titlePlayer.Update(gameTime);
-            foreach (var e in fishEnemies)
+            foreach (var e in jellyEnemies)
             {
                 e.ModeTitle();
                 e.Update(gameTime);

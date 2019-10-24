@@ -32,9 +32,6 @@ namespace BoundyShooter.Scene
         public Menu()
         {
             isEndFlag = false;
-            checkValue = 0;
-            defaultDrawPos = new Vector2(0, 500);
-            MaxValue = 100;
         }
         public void Draw()
         {
@@ -51,7 +48,9 @@ namespace BoundyShooter.Scene
 
         public void Initialize()
         {
-
+            checkValue = 0;
+            defaultDrawPos = new Vector2(0, 500);
+            MaxValue = 100;
         }
 
         public bool IsEnd()

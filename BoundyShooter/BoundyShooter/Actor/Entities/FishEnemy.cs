@@ -53,10 +53,5 @@ namespace BoundyShooter.Actor.Entities
             drawer.Rectangle = animation.GetRectangle();
             base.Draw(drawer);
         }
-
-        public void ModeTitle()
-        {
-            istitle = true;
-        }
     }
 }
