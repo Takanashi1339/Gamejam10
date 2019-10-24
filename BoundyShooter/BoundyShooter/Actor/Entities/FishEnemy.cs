@@ -9,23 +9,23 @@ using Microsoft.Xna.Framework;
 
 namespace BoundyShooter.Actor.Entities
 {
-    class TestEnemy : Enemy
+    class FishEnemy : Enemy
     {
         private Animation animation;
 
-        public TestEnemy(Vector2 position)
+        public FishEnemy(Vector2 position)
             : base("enemy1", position, new Point(64, 64))
         {
             animation = new Animation(Size, 8, 0.1f);
         }
 
-        public TestEnemy(TestEnemy other)
+        public FishEnemy(FishEnemy other)
             :this(other.Position)
         { }
 
         public override object Clone()
         {
-            return new TestEnemy(this);
+            return new FishEnemy(this);
         }
 
         public override void Update(GameTime gameTime)

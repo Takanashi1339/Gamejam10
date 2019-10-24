@@ -12,26 +12,37 @@ namespace BoundyShooter.Actor.Entities
 {
     abstract class Boss : Entity
     {
-        private Timer summonTimer;
+        private Timer attackTimer;
         static Random rand = new Random();
         private Vector2 knockBack = new Vector2(0, -8);
         //プレイヤーに当たった数、プレイヤーに何回当たったら死ぬか、召喚するエネミーの位置
-        private int maxCount,summonPos,enemySize,enemynum;
+        private int maxCount, enemynum;
         protected float hitCount;
+        protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
+
         public bool IsDeadFlag
         {
             get;
             private set;
         } = false;
 
+        protected static readonly List<Vector2> TentaclePositions = new List<Vector2>()
+        {
+            new Vector2(16, 96),
+            new Vector2(48, 176),
+            new Vector2(144, 176),
+            new Vector2(176, 96)
+        };
+
+        abstract protected void Attack();
+
         public Boss(string name,Vector2 position,Point size,float summon,int deathCount,int enemynum) 
             : base(name,position,size)
         {
             //エネミー召喚する間隔の設定
-            summonTimer = new Timer(summon,true);
+            attackTimer = new Timer(summon,true);
             hitCount = 0;
             maxCount = deathCount;
-            enemySize = 64;
             this.enemynum = enemynum;
         }
 
@@ -39,24 +50,26 @@ namespace BoundyShooter.Actor.Entities
         {
             //Console.WriteLine(hitCount);
             if (!IsInScreen()) return;
-            summonTimer.Update(gameTime);
-            if (summonTimer.IsTime)
+            attackTimer.Update(gameTime);
+            if (attackTimer.IsTime)
             {
-                //bosssize / blocksize
-                summonPos = rand.Next(Size.Y / enemySize);
-                if (enemynum == 0)
-                {
-                    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                }
-                else if (enemynum == 1)
-                {
-                    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                }
-                else if(enemynum == 2)
-                {
-                    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                }
+                Attack();
+
+                ////bosssize / blocksize
+                //summonPos = rand.Next(Size.Y / enemySize);
+                //if (enemynum == 0)
+                //{
+                //    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
+                //}
+                //else if (enemynum == 1)
+                //{
+                //    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
+                //}
+                //else if (enemynum == 2)
+                //{
+                //    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
+                //    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
+                //}
             }
             if(maxCount <= hitCount)
             {
@@ -77,6 +90,7 @@ namespace BoundyShooter.Actor.Entities
                     if (dir == Direction.Top)
                     {
                         Velocity = knockBack;
+                        tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
                         hitCount++;
                         GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
                     }
@@ -88,6 +102,7 @@ namespace BoundyShooter.Actor.Entities
                 if (dir == Direction.Top)
                 {
                     Velocity = knockBack / 10;
+                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack / 10);
                     hitCount += 0.1f;
                 }
             }
@@ -96,6 +111,11 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Draw()
         {
+            var players = GameObjectManager.Instance.Find<Player>();
+            if (players.Count == 0)
+            {
+                return;
+            }
             var drawer = Drawer.Default;
             drawer.DisplayModify = true;
             base.Draw(drawer);
