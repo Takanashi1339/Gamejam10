@@ -111,6 +111,11 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Draw()
         {
+            var players = GameObjectManager.Instance.Find<Player>();
+            if (players.Count == 0)
+            {
+                return;
+            }
             var drawer = Drawer.Default;
             drawer.DisplayModify = true;
             base.Draw(drawer);
