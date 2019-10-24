@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Particles;
+using BoundyShooter.Def;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -122,6 +124,26 @@ namespace BoundyShooter.Actor.Entities
                 }
             }
             base.Update(gameTime);
+            if (Position.X < Block.BlockSize)
+            {
+                HitWall(true);
+            }
+            else if (Position.X > Screen.Width - Block.BlockSize - Size.X)
+            {
+                HitWall(false);
+            }
+        }
+
+        public void HitWall(bool isLeft)
+        {
+            if (isLeft)
+            {
+                Position = new Vector2(Block.BlockSize, Position.Y);
+            }
+            else
+            {
+                Position = new Vector2(Screen.Width - Block.BlockSize - Size.X, Position.Y);
+            }
         }
 
         public override void Draw()

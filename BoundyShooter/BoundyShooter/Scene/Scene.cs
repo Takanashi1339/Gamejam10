@@ -10,6 +10,7 @@ namespace BoundyShooter.Scene
     {
         Loading,
         Title,
+        Menu,
         GamePlay,
         Ending,
         GameOver
