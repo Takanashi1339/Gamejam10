@@ -310,15 +310,16 @@ namespace BoundyShooter.Actor.Entities
         {
             Speed = 13f;
             isTitle = true;
-            if(Title.titleBottom > Position.Y)
+            if (Title.titleBottom > Position.Y)
             {
+                
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
                 new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Down);
                 Position = new Vector2(Position.X, Title.titleBottom);
             }
-            if(Screen.Height - Size.Y < Position.Y)
-            {
+            if (Screen.Height - Size.Y < Position.Y)
+            {  
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
                 new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
