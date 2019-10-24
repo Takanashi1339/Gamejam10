@@ -27,8 +27,6 @@ namespace BoundyShooter.Scene
         public GamePlay()
         {
             isEndFlag = false;
-            gameObjectManager = new GameObjectManager();
-            particleManager = new ParticleManager();
         }
 
         public void Draw()
@@ -45,6 +43,8 @@ namespace BoundyShooter.Scene
         {
             isEndFlag = false;
             next = Scene.Ending;
+            gameObjectManager = new GameObjectManager();
+            particleManager = new ParticleManager();
             gameObjectManager.Initialize();
             particleManager.Initialize();
             LifeWall.Initialze();

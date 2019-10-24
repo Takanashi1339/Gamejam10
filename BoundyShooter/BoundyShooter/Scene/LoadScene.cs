@@ -228,7 +228,7 @@ namespace BoundyShooter.Scene
                 seLoader.Update(gameTime);
             }
 
-            rotate += 5f;
+            rotate -= 5f;
         }
     }
 }
