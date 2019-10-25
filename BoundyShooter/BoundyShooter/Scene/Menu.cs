@@ -148,7 +148,7 @@ namespace BoundyShooter.Scene
             if (Input.GetKeyRelease(Keys.Space) && !checkMoveScene)
             {
                 difficultyNumber++;
-                selectAlpha = 1.0f;
+                selectAlpha = maxSelectAlpha;
             }
             if(difficultyNumber > (int) Difficulty.hard)
             {
