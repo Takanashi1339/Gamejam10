@@ -120,7 +120,7 @@ namespace BoundyShooter.Scene
             titlePlayer.Update(gameTime);
             foreach (var e in jellyEnemies)
             {
-                e.ModeTitle();
+                e.DisplayMode();
                 e.Update(gameTime);
             }
         }

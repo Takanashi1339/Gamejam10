@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoundyShooter.Actor.Entities;
+using BoundyShooter.Def;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -15,6 +16,7 @@ namespace BoundyShooter.Scene
     {
         private bool isEndFlag;
         private bool checkMoveScene;
+        private int maxFishEnemy;
         private float notSelectAlpha;
         private float selectAlpha;
         private float maxSelectAlpha;
@@ -33,6 +35,7 @@ namespace BoundyShooter.Scene
         };
 
         private Player player;
+        private List<FishEnemy> fishEnemies;
 
         public enum Difficulty
         {
@@ -44,6 +47,7 @@ namespace BoundyShooter.Scene
         {
             isEndFlag = false;
             checkMoveScene = true;
+            maxFishEnemy = 5;
             checkSelectvalue = 0;
             maxSelectValue = 100;
             notSelectAlpha = 0.2f;
@@ -86,6 +90,7 @@ namespace BoundyShooter.Scene
             }
 
             Renderer.Instance.Begin();
+            fishEnemies.ForEach(f => f.Draw());
             renderer.DrawTexture("menu_explanation", Vector2.Zero, drawer);
             renderer.DrawTexture(difficultyName[(int)Difficulty.easy], defaultDrawPos, easyDrawer);
             renderer.DrawTexture(difficultyName[(int)Difficulty.normal], defaultDrawPos + difficultySpace, normalDrawer);
@@ -99,6 +104,7 @@ namespace BoundyShooter.Scene
             isEndFlag = false;
             checkMoveScene = true;
             checkSelectvalue = 0;
+            fishEnemies = new List<FishEnemy>();
         }
 
         public bool IsEnd()
@@ -118,6 +124,21 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
+            if(fishEnemies.Count < maxFishEnemy)
+            {
+                for(int i = fishEnemies.Count; i < maxFishEnemy; i++)
+                {
+                    fishEnemies.Add(
+                        new FishEnemy(new Vector2(
+                        GameDevice.Instance().GetRandom().Next(Screen.Width),
+                        GameDevice.Instance().GetRandom().Next(0, Screen.Height / 2))
+                        )
+                        );
+                }
+            }
+            fishEnemies.ForEach(f => f.DisplayMode());
+            fishEnemies.ForEach(f => f.Update(gameTime));
+            fishEnemies.RemoveAll(f => !f.IsInScreen());
             player.ModeMenu(nowPos);
             player.Update(gameTime);
             if (!(Input.GetKeyState(Keys.Space)))

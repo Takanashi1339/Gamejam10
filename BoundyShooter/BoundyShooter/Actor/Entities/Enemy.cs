@@ -17,7 +17,7 @@ namespace BoundyShooter.Actor.Entities
         private Vector2 bounceVelocity = new Vector2(0, -5f);//跳ね返りの初速
         private float acceleration = 0.1f;
         protected int life;
-        protected bool istitle;
+        protected bool displayMode;
 
         /// <summary>
         /// 敵のY軸方向の最高速度
@@ -40,7 +40,7 @@ namespace BoundyShooter.Actor.Entities
             : base(name, position, size)
         {
             this.life = life;
-            istitle = false;
+            displayMode = false;
         }
 
 
@@ -115,7 +115,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 velocity.X = MaxSpeedX;
             }
-            if (!istitle)
+            if (!displayMode)
             {
                 var players = GameObjectManager.Instance.Find<Player>();
                 if (players.Count == 0)
@@ -151,6 +151,10 @@ namespace BoundyShooter.Actor.Entities
             var drawer = Drawer.Default;
             drawer.DisplayModify = true;
             base.Draw(drawer);
+        }
+        public void DisplayMode()
+        {
+            displayMode = true;
         }
     }
 }
