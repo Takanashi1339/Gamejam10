@@ -7,40 +7,44 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
+using BoundyShooter.Def;
 
 namespace BoundyShooter.Scene
 {
     class GameOver : IScene
     {
         private bool isEndFlag;
-        private float alpha;
-        private float maxAlpha;
-        private float alphaRate;
 
+        private Flashing flashing;
+        private Flashing gameOverFlash;
         public GameOver()
         {
             isEndFlag = false;
-            alpha = 0f;
-            maxAlpha = 1.0f;
-            alphaRate = 0.005f;
+            flashing = new Flashing(1.0f, 0.2f, 1f);
+            gameOverFlash = new Flashing(1.0f, 0f, 2.5f, false);
         }
 
         public void Draw()
         {
             GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
 
-            var drawer = Drawer.Default;
-            drawer.Alpha = alpha;
+            var gameOverdrawer = Drawer.Default;
+            var backDrawer = Drawer.Default;
+            gameOverdrawer.Alpha = gameOverFlash.GetAlpha();
+            backDrawer.Alpha = flashing.GetAlpha();
 
             Renderer.Instance.Begin();
-            Renderer.Instance.DrawTexture("testgameover", Vector2.Zero, drawer);
+            Renderer.Instance.DrawTexture("testgameover", Vector2.Zero, gameOverdrawer);
+            if(gameOverFlash.EndFlashing())
+            {
+                Renderer.Instance.DrawTexture("back_to_title", new Vector2(0, Screen.Height * 3 / 4), backDrawer);
+            }
             Renderer.Instance.End();
         }
 
         public void Initialize()
         {
             isEndFlag = false;
-            alpha = 0f;
         }
 
         public bool IsEnd()
@@ -60,12 +64,9 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
-            alpha += alphaRate;
-            if(alpha > maxAlpha)
-            {
-                alpha = maxAlpha;
-            }
-            if (alpha >= maxAlpha &&Input.GetKeyTrigger(Keys.Space))
+            flashing.Update(gameTime);
+            gameOverFlash.Update(gameTime);
+            if (gameOverFlash.EndFlashing() &&Input.GetKeyTrigger(Keys.Space))
             {
                 //シーン移動
                 isEndFlag = true;
