@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Actor.Entities;
+using BoundyShooter.Util;
 
 namespace BoundyShooter.Manager
 {
@@ -178,6 +180,24 @@ namespace BoundyShooter.Manager
                     }
                 }
             }
+        }
+
+        public bool CheckEnemyDead()
+        {
+            foreach(var enemy in Find<Enemy>())
+            {
+                Console.WriteLine(enemy);
+                if (enemy.IsDead)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void HitStop()
+        {
+
         }
     }
 }

@@ -21,6 +21,7 @@ namespace BoundyShooter.Scene
 
         private GameObjectManager gameObjectManager;
         private ParticleManager particleManager;
+        private HitStop hitStop;
 
         private float scroll = 0;
         private string nowMap;
@@ -66,6 +67,7 @@ namespace BoundyShooter.Scene
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
             scroll = map.Height;
+            hitStop = new HitStop();
         }
 
         public bool IsEnd()
@@ -84,20 +86,23 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
+            hitStop.Update(gameTime);
+            if(hitStop.isHitStop)
+            {
+                return;
+            }
             if (Input.GetKeyTrigger(Keys.Enter))
             {
                 //シーン移動
                 isEndFlag = true;
                 next = Scene.Ending;
             }
-
             if (gameObjectManager.Map.CheckAllBlockDead())
             {
                 //シーン移動
                 isEndFlag = true;
                 next = Scene.GameOver;
             }
-
             if(!LifeWall.AllIsDead())
             {
                 scroll--;
