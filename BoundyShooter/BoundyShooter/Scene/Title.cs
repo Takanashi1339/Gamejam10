@@ -52,10 +52,7 @@ namespace BoundyShooter.Scene
 
             particleManager.Draw();
             titlePlayer.Draw();
-            foreach (var e in jellyEnemies)
-            {
-                e.Draw();
-            }
+            jellyEnemies.ForEach(e => e.Draw());
 
             renderer.End();
         }
@@ -102,11 +99,8 @@ namespace BoundyShooter.Scene
             animation.Update(gameTime);            
             titlePlayer.ModeTitle();
             titlePlayer.Update(gameTime);
-            foreach (var e in jellyEnemies)
-            {
-                e.DisplayMode();
-                e.Update(gameTime);
-            }
+            jellyEnemies.ForEach(e => e.DisplayMode());
+            jellyEnemies.ForEach(e => e.Update(gameTime));
         }
     }
 }

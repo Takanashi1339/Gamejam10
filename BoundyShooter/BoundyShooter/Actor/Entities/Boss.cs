@@ -7,20 +7,22 @@ using Microsoft.Xna.Framework;
 using BoundyShooter.Util;
 using BoundyShooter.Manager;
 using BoundyShooter.Device;
+using BoundyShooter.Actor.Particles;
 
 namespace BoundyShooter.Actor.Entities
 {
     abstract class Boss : Entity
     {
-        private Timer attackTimer;
+        private Timer attackTimer,deathTimer,endTimer,particleTimer;
         static Random rand = new Random();
         private Vector2 knockBack = new Vector2(0, -8);
-        //プレイヤーに当たった数、プレイヤーに何回当たったら死ぬか、召喚するエネミーの位置
+        private Vector2 deathVelocity = new Vector2(0, 2);
+        //プレイヤーに何回当たったら死ぬか、召喚するエネミーの種類
         private int maxCount, enemynum;
         protected float hitCount;
         protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
 
-        public bool IsDeadFlag
+        public static bool IsDeadFlag
         {
             get;
             private set;
@@ -41,6 +43,9 @@ namespace BoundyShooter.Actor.Entities
         {
             //エネミー召喚する間隔の設定
             attackTimer = new Timer(summon,true);
+            deathTimer = new Timer(0.02f, true);
+            particleTimer = new Timer(0.5f, true);
+            endTimer = new Timer(3f, false);
             hitCount = 0;
             maxCount = deathCount;
             this.enemynum = enemynum;
@@ -73,8 +78,23 @@ namespace BoundyShooter.Actor.Entities
             }
             if(maxCount <= hitCount)
             {
-                IsDead = true;
                 IsDeadFlag = true;
+                deathTimer.Update(gameTime);
+                endTimer.Update(gameTime);
+                particleTimer.Update(gameTime);
+                if(deathTimer.IsTime)
+                {
+                    deathVelocity = -deathVelocity;
+                }
+                Velocity = deathVelocity;
+                if(particleTimer.IsTime)
+                {
+                    new DestroyParticle("death_boss", new Vector2(Position.X + Size.X / 2 - 32 , Position.Y + Size.Y / 2- 32), new Point(64,64), DestroyParticle.DestroyOption.Center);
+                }
+                if (endTimer.IsTime)
+                {
+                    IsDead = true;
+                }
             }
             base.Update(gameTime);
             Velocity = Vector2.Zero;
@@ -85,7 +105,8 @@ namespace BoundyShooter.Actor.Entities
             Direction dir = CheckDirection(gameObject);
             if (gameObject is Player player)
             {
-                if (player.Speed > Player.MaxSpeed / 2)
+                if (player.Speed > Player.MaxSpeed / 2 &&
+                    !IsDeadFlag)
                 {
                     if (dir == Direction.Top)
                     {
