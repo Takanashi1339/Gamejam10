@@ -15,6 +15,7 @@ namespace BoundyShooter.Util
         private float range;
         private bool loop;
         private bool finish;
+        private bool reverse;
         /// <summary>
         /// 点滅させる
         /// </summary>
@@ -43,6 +44,7 @@ namespace BoundyShooter.Util
             this.maxAlpha = maxAlpha;
             this.minAlpha = minAlpha;
             this.loop = loop;
+            this.reverse = reverse;
             nowAlpha = minAlpha;
             if(loop)
             {
@@ -89,7 +91,19 @@ namespace BoundyShooter.Util
 
         public void Reset()
         {
-            nowAlpha = maxAlpha;
+            finish = false;
+            if(reverse)
+            {
+                nowAlpha = maxAlpha;
+                if(range > 0)
+                {
+                    range *= -1;
+                }
+            }
+            else
+            {
+                nowAlpha = minAlpha;
+            }
         }
 
     }

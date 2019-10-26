@@ -45,6 +45,7 @@ namespace BoundyShooter.Scene
         public void Initialize()
         {
             isEndFlag = false;
+            gameOverFlash.Reset();
         }
 
         public bool IsEnd()

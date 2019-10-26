@@ -212,11 +212,11 @@ namespace BoundyShooter.Actor.Entities
                 Speed = 0;
             }
 
-            if (Input.GetKeyTrigger(Keys.Space))
+            if (Input.GetKeyTrigger(Keys.Space) && !IsTitle)
             {
                 Speed = 0;
             }
-            if (Input.GetKeyState(Keys.Space))
+            if (Input.GetKeyState(Keys.Space) && !IsTitle)
             {
                 Velocity = Vector2.Zero;
                 Rotation += RotaionSpeed;
