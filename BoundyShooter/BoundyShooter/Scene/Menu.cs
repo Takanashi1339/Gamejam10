@@ -25,7 +25,7 @@ namespace BoundyShooter.Scene
         private static int maxSelectValue;
         private static int difficultyNumber;
         private string[] difficultyName = {
-            "easy",
+            "tutorial",
             "easy",
             "normal",
             "hard",

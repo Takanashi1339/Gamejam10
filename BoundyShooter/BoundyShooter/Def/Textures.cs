@@ -42,6 +42,7 @@ namespace BoundyShooter.Def
                 { "white_block" ,Path },
                 { "testgameover", Path },
                 { "title" , Path },
+                { "tutorial" , Path },
                 { "easy",Path },
                 { "normal",Path },
                 { "hard",Path },
