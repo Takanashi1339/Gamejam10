@@ -18,21 +18,22 @@ namespace BoundyShooter.Scene
 {
     class Title : IScene
     {
-        private bool isEndFlag,reverse;
+        private bool isEndFlag;
         public static readonly int titleBottom = 235;
-        private float alpha, maxAlhpa,minAlhpa,plusAlhpa;
         private Renderer renderer;
         private ParticleManager particleManager;
         private Animation animation;
 
         private Player titlePlayer;
         private List<JellyEnemy> jellyEnemies;
+        private Flashing flashing;
 
 
         public Title()
         {
             isEndFlag = false;
             renderer = Renderer.Instance;
+            flashing = new Flashing(1.0f, 0f,0.66f);
         }
 
         public void Draw()
@@ -46,7 +47,7 @@ namespace BoundyShooter.Scene
             renderer.DrawTexture("title", new Vector2(20, 0), titledrawer);
 
             var pushdrawer = new Drawer();
-            pushdrawer.Alpha = alpha;
+            pushdrawer.Alpha = flashing.GetAlpha();
             renderer.DrawTexture("push_to_space", new Vector2(39, 700), pushdrawer);
 
             particleManager.Draw();
@@ -62,16 +63,11 @@ namespace BoundyShooter.Scene
         public void Initialize()
         {
             isEndFlag = false;
-            reverse = false;
             particleManager = new ParticleManager();
             particleManager.Initialize();
             GameDevice.Instance().DisplayModify = Vector2.Zero;
             titlePlayer = new Player(new Vector2(Screen.Width / 2 - 32, Screen.Height / 2 - 32));
             animation = new Animation(new Point(467, 235), 4, 0.15f, Animation.AnimationType.Vertical);
-            alpha = 0;
-            maxAlhpa = 1;
-            minAlhpa = 0;
-            plusAlhpa = 0.05f;
             jellyEnemies = new List<JellyEnemy>();
             for(int i = 0; i < 4;i++)
             {
@@ -101,19 +97,7 @@ namespace BoundyShooter.Scene
                 //シーン移動
                 isEndFlag = true;
             }
-            if(alpha <= minAlhpa ||
-                alpha >= maxAlhpa)
-            {
-                reverse = !reverse;
-            }
-            if(reverse)
-            {
-                alpha += plusAlhpa;
-            }
-            else if (!reverse)
-            {
-                alpha -= plusAlhpa;
-            }
+            flashing.Update(gameTime);
             particleManager.Update(gameTime);
             animation.Update(gameTime);            
             titlePlayer.ModeTitle();

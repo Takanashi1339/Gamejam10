@@ -15,6 +15,7 @@ namespace BoundyShooter.Scene
     {
         private bool isEndFlag;
         private Renderer renderer;
+        private Flashing flashing;
 
         private float alpha,maxAlpha,plusAlpha;
 
@@ -22,6 +23,7 @@ namespace BoundyShooter.Scene
         {
             isEndFlag = false;
             renderer = Renderer.Instance;
+            flashing = new Flashing(1.0f, 0f, 1f);
         }
 
         public void Draw()
@@ -30,8 +32,11 @@ namespace BoundyShooter.Scene
             renderer.Begin();
 
             var cleardrawer = new Drawer();
+            var backDrawer = new Drawer();
             cleardrawer.Alpha = alpha;
+            backDrawer.Alpha = flashing.GetAlpha();
             renderer.DrawTexture("clear", new Vector2(Screen.Width / 2 - 342 / 2, Screen.Height / 2 - 234 / 2), cleardrawer);
+            renderer.DrawTexture("back_to_title", new Vector2(0, Screen.Height * 7 / 8), backDrawer);
 
             renderer.End();
         }
@@ -60,6 +65,7 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
+            flashing.Update(gameTime);
             if (Input.GetKeyTrigger(Keys.Enter))
             {
                 //シーン移動

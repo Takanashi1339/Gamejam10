@@ -48,6 +48,7 @@ namespace BoundyShooter.Def
                 { "push_to_space", Path },
                 { "clear", Path },
                 { "menu_explanation" ,Path},
+                { "back_to_title", Path },
 
                 //必要に応じて自分で追加
             };

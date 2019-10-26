@@ -18,10 +18,6 @@ namespace BoundyShooter.Scene
         private bool checkMoveScene;
         private int maxFishEnemy;
         private float notSelectAlpha;
-        private float selectAlpha;
-        private float maxSelectAlpha;
-        private float minSelectAlpha;
-        private float alphaIncrease;
         private Vector2 defaultDrawPos;
         private Vector2 difficultySpace;
         private Vector2 nowPos;
@@ -36,6 +32,7 @@ namespace BoundyShooter.Scene
 
         private Player player;
         private List<FishEnemy> fishEnemies;
+        private Flashing flashing;
 
         public enum Difficulty
         {
@@ -51,13 +48,10 @@ namespace BoundyShooter.Scene
             checkSelectvalue = 0;
             maxSelectValue = 100;
             notSelectAlpha = 0.2f;
-            selectAlpha = 1.0f;
-            maxSelectAlpha = 1.0f;
-            minSelectAlpha = 0.4f;
-            alphaIncrease = 0.03f;
             defaultDrawPos = new Vector2(0, 400);
             difficultySpace = new Vector2(0, 100);
             player = new Player(defaultDrawPos);
+            flashing = new Flashing(1.0f, 0.4f, 1f);
         }
         public void Draw()
         {
@@ -69,7 +63,7 @@ namespace BoundyShooter.Scene
             var renderer = Renderer.Instance;
             if(difficultyNumber == (int)Difficulty.easy)
             {
-                easyDrawer.Alpha = selectAlpha;
+                easyDrawer.Alpha = flashing.GetAlpha();
                 normalDrawer.Alpha = notSelectAlpha;
                 hardDrawer.Alpha = notSelectAlpha;
                 nowPos = defaultDrawPos;
@@ -77,7 +71,7 @@ namespace BoundyShooter.Scene
             if(difficultyNumber == (int)Difficulty.normal)
             {
                 easyDrawer.Alpha = notSelectAlpha;
-                normalDrawer.Alpha = selectAlpha;
+                normalDrawer.Alpha = flashing.GetAlpha();
                 hardDrawer.Alpha = notSelectAlpha;
                 nowPos = defaultDrawPos + difficultySpace;
             }
@@ -85,7 +79,7 @@ namespace BoundyShooter.Scene
             {
                 easyDrawer.Alpha = notSelectAlpha;
                 normalDrawer.Alpha = notSelectAlpha;
-                hardDrawer.Alpha = selectAlpha;
+                hardDrawer.Alpha = flashing.GetAlpha();
                 nowPos = defaultDrawPos + difficultySpace * 2;
             }
 
@@ -148,7 +142,7 @@ namespace BoundyShooter.Scene
             if (Input.GetKeyRelease(Keys.Space) && !checkMoveScene)
             {
                 difficultyNumber++;
-                selectAlpha = maxSelectAlpha;
+                flashing.Reset();
             }
             if(difficultyNumber > (int) Difficulty.hard)
             {
@@ -166,11 +160,7 @@ namespace BoundyShooter.Scene
             {
                 checkMoveScene = false;
             }
-            if(selectAlpha > maxSelectAlpha || selectAlpha < minSelectAlpha)
-            {
-                alphaIncrease *= -1;
-            }
-            selectAlpha += alphaIncrease;
+            flashing.Update(gameTime);
         }
 
         public static Difficulty GetDifficulty()
