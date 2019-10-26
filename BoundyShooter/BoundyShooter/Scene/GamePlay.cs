@@ -16,6 +16,8 @@ namespace BoundyShooter.Scene
 {
     class GamePlay : IScene
     {
+        public static bool ScrollStop = false;
+
         private bool isEndFlag;
         private Scene next;
 
@@ -26,9 +28,18 @@ namespace BoundyShooter.Scene
         private string nowMap;
         private string[] mapName =
         {
+            "tutorial.csv",
             "easy.csv",
             "normal.csv",
             "hard.csv",
+        };
+
+        //チュートリアルでスクロールが止まる高さ
+        private int[] stopHeights =
+        {
+            137 * 32,
+            115 * 32,
+            91 * 32
         };
 
         public GamePlay()
@@ -66,6 +77,7 @@ namespace BoundyShooter.Scene
             var map = new Map(reader.GetData());
             gameObjectManager.Add(map);
             scroll = map.Height;
+            ScrollStop = false;
         }
 
         public bool IsEnd()
@@ -84,12 +96,15 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
+
+#if DEBUG
             if (Input.GetKeyTrigger(Keys.Enter))
             {
                 //シーン移動
                 isEndFlag = true;
                 next = Scene.Ending;
             }
+#endif
 
             if (gameObjectManager.Map.CheckAllBlockDead())
             {
@@ -98,7 +113,7 @@ namespace BoundyShooter.Scene
                 next = Scene.GameOver;
             }
 
-            if(!LifeWall.AllIsDead())
+            if(!LifeWall.AllIsDead() && !ScrollStop)
             {
                 scroll--;
             }
@@ -106,6 +121,24 @@ namespace BoundyShooter.Scene
             {
                 scroll = Screen.Height;
             }
+
+            if (Menu.GetDifficulty() == Menu.Difficulty.tutorial && !ScrollStop)
+            {
+                foreach (var height in stopHeights)
+                {
+                    if (scroll == height)
+                    {
+                        ScrollStop = true;
+                    }
+                }
+            }else if (ScrollStop)
+            {
+                if (gameObjectManager.Find<Enemy>().FindIndex(enemy => enemy.IsInScreen()) == -1)
+                {
+                    ScrollStop = false;
+                }
+            }
+
             GameDevice.Instance().DisplayModify = new Vector2(0, -scroll + Screen.Height);
             gameObjectManager.Update(gameTime);
             particleManager.Update(gameTime);

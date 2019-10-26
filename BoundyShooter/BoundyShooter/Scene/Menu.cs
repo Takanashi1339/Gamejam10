@@ -26,6 +26,7 @@ namespace BoundyShooter.Scene
         private static int difficultyNumber;
         private string[] difficultyName = {
             "easy",
+            "easy",
             "normal",
             "hard",
         };
@@ -36,6 +37,7 @@ namespace BoundyShooter.Scene
 
         public enum Difficulty
         {
+            tutorial,
             easy,
             normal,
             hard,
@@ -48,7 +50,7 @@ namespace BoundyShooter.Scene
             checkSelectvalue = 0;
             maxSelectValue = 100;
             notSelectAlpha = 0.2f;
-            defaultDrawPos = new Vector2(0, 400);
+            defaultDrawPos = new Vector2(0, 300);
             difficultySpace = new Vector2(0, 100);
             player = new Player(defaultDrawPos);
             flashing = new Flashing(1.0f, 0.4f, 1f);
@@ -56,39 +58,52 @@ namespace BoundyShooter.Scene
         public void Draw()
         {
             GameDevice.Instance().GetGraphicsDevice().Clear(Color.Black);
+            var tutorialDrawer = Drawer.Default;
             var easyDrawer = Drawer.Default;
             var normalDrawer = Drawer.Default;
             var hardDrawer = Drawer.Default;
             var drawer = Drawer.Default;
             var renderer = Renderer.Instance;
-            if(difficultyNumber == (int)Difficulty.easy)
+            if (difficultyNumber == (int)Difficulty.tutorial)
             {
-                easyDrawer.Alpha = flashing.GetAlpha();
+                tutorialDrawer.Alpha = flashing.GetAlpha();
+                easyDrawer.Alpha = notSelectAlpha;
                 normalDrawer.Alpha = notSelectAlpha;
                 hardDrawer.Alpha = notSelectAlpha;
                 nowPos = defaultDrawPos;
             }
-            if(difficultyNumber == (int)Difficulty.normal)
+            if (difficultyNumber == (int)Difficulty.easy)
             {
-                easyDrawer.Alpha = notSelectAlpha;
-                normalDrawer.Alpha = flashing.GetAlpha();
+                tutorialDrawer.Alpha = notSelectAlpha;
+                easyDrawer.Alpha = flashing.GetAlpha();
+                normalDrawer.Alpha = notSelectAlpha;
                 hardDrawer.Alpha = notSelectAlpha;
                 nowPos = defaultDrawPos + difficultySpace;
             }
+            if(difficultyNumber == (int)Difficulty.normal)
+            {
+                tutorialDrawer.Alpha = notSelectAlpha;
+                easyDrawer.Alpha = notSelectAlpha;
+                normalDrawer.Alpha = flashing.GetAlpha();
+                hardDrawer.Alpha = notSelectAlpha;
+                nowPos = defaultDrawPos + difficultySpace * 2;
+            }
             if(difficultyNumber == (int)Difficulty.hard)
             {
+                tutorialDrawer.Alpha = notSelectAlpha;
                 easyDrawer.Alpha = notSelectAlpha;
                 normalDrawer.Alpha = notSelectAlpha;
                 hardDrawer.Alpha = flashing.GetAlpha();
-                nowPos = defaultDrawPos + difficultySpace * 2;
+                nowPos = defaultDrawPos + difficultySpace * 3;
             }
 
             Renderer.Instance.Begin();
             fishEnemies.ForEach(f => f.Draw());
             renderer.DrawTexture("menu_explanation", Vector2.Zero, drawer);
-            renderer.DrawTexture(difficultyName[(int)Difficulty.easy], defaultDrawPos, easyDrawer);
-            renderer.DrawTexture(difficultyName[(int)Difficulty.normal], defaultDrawPos + difficultySpace, normalDrawer);
-            renderer.DrawTexture(difficultyName[(int)Difficulty.hard], defaultDrawPos + difficultySpace * 2, hardDrawer);
+            renderer.DrawTexture(difficultyName[(int)Difficulty.tutorial], defaultDrawPos, tutorialDrawer);
+            renderer.DrawTexture(difficultyName[(int)Difficulty.easy], defaultDrawPos + difficultySpace, easyDrawer);
+            renderer.DrawTexture(difficultyName[(int)Difficulty.normal], defaultDrawPos + difficultySpace * 2, normalDrawer);
+            renderer.DrawTexture(difficultyName[(int)Difficulty.hard], defaultDrawPos + difficultySpace * 3, hardDrawer);
             player.Draw();
             Renderer.Instance.End();
         }
@@ -147,7 +162,7 @@ namespace BoundyShooter.Scene
             }
             if(difficultyNumber > (int) Difficulty.hard)
             {
-                difficultyNumber = (int)Difficulty.easy;
+                difficultyNumber = (int)Difficulty.tutorial;
             }
             if(Input.GetKeyState(Keys.Space))
             {

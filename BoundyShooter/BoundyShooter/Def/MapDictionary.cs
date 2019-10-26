@@ -28,6 +28,11 @@ namespace BoundyShooter.Def
             Data.Add("E", new FishEnemy(Vector2.Zero));
             Data.Add("Ej", new JellyEnemy(Vector2.Zero));
             Data.Add("E2", new TestEnemy2(Vector2.Zero));
+            Data.Add("t1", new TutorialMessage(1));
+            Data.Add("t2", new TutorialMessage(2));
+            Data.Add("t3", new TutorialMessage(3));
+            Data.Add("t4", new TutorialMessage(4));
+            Data.Add("t5", new TutorialMessage(5));
 
             //ここにEntity/Blockを追加
         }

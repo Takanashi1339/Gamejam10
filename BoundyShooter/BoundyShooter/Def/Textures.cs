@@ -50,6 +50,11 @@ namespace BoundyShooter.Def
                 { "menu_explanation" ,Path},
                 { "back_to_title", Path },
                 { "death_boss", Path },
+                { "tutorial1", Path },
+                { "tutorial2", Path },
+                { "tutorial3", Path },
+                { "tutorial4", Path },
+                { "tutorial5", Path },
 
                 //必要に応じて自分で追加
             };
