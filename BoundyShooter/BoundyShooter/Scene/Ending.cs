@@ -66,7 +66,7 @@ namespace BoundyShooter.Scene
         public void Update(GameTime gameTime)
         {
             flashing.Update(gameTime);
-            if (Input.GetKeyTrigger(Keys.Enter))
+            if (Input.GetKeyTrigger(Keys.Space))
             {
                 //シーン移動
                 isEndFlag = true;

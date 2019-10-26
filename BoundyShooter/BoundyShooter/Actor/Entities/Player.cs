@@ -90,10 +90,6 @@ namespace BoundyShooter.Actor.Entities
                 HitBlock(block);
             }
 
-            if(gameObject is Enemy)
-            {
-                HitStop.DoHitStop();
-            }
             if (gameObject is Boss)
             {
                 Direction dir = CheckDirection(gameObject);

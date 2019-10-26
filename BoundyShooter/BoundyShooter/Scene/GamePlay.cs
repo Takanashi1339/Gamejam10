@@ -89,7 +89,7 @@ namespace BoundyShooter.Scene
 
         public Scene Next()
         {
-            return next; ;
+            return next;
         }
 
         public void Shutdown()

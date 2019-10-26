@@ -1,4 +1,5 @@
 ﻿using BoundyShooter.Actor.Entities;
+using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 using System;
@@ -36,6 +37,7 @@ namespace BoundyShooter.Actor
             if (hitStop)
             {
                 hitStopTimer = new Timer(0.05f);
+                GameDevice.Instance().DisplayQuake = new Vector2(0, 0.5f);
                 isHitStop = true;
                 hitStop = false;
             }
