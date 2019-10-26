@@ -99,6 +99,7 @@ namespace BoundyShooter.Scene
             checkMoveScene = true;
             checkSelectvalue = 0;
             fishEnemies = new List<FishEnemy>();
+            difficultyNumber = 0;
         }
 
         public bool IsEnd()

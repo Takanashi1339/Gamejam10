@@ -57,6 +57,10 @@ namespace BoundyShooter.Actor.Entities
             if (!IsInScreen()) return;
             
             Velocity = GetFront(Rotation) * Speed;
+            if(Boss.IsDeadFlag)
+            {
+                IsDead = true;
+            }
 
             base.Update(gameTime);
         }
