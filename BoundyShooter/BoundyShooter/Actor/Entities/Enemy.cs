@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BoundyShooter.Actor.Blocks;
 using BoundyShooter.Actor.Particles;
 using BoundyShooter.Def;
+using BoundyShooter.Device;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -35,6 +36,8 @@ namespace BoundyShooter.Actor.Entities
             get;
             protected set;
         } = 3.0f;
+
+
 
         public Enemy(string name, Vector2 position, Point size, int life = 3)
             : base(name, position, size)
@@ -156,5 +159,6 @@ namespace BoundyShooter.Actor.Entities
         {
             displayMode = true;
         }
+
     }
 }

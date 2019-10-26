@@ -23,6 +23,7 @@ namespace BoundyShooter.Scene
 
         private GameObjectManager gameObjectManager;
         private ParticleManager particleManager;
+        private HitStop hitStop;
 
         private float scroll = 0;
         private string nowMap;
@@ -78,6 +79,7 @@ namespace BoundyShooter.Scene
             gameObjectManager.Add(map);
             scroll = map.Height;
             ScrollStop = false;
+            hitStop = new HitStop();
         }
 
         public bool IsEnd()
@@ -98,6 +100,11 @@ namespace BoundyShooter.Scene
         {
 
 #if DEBUG
+            hitStop.Update(gameTime);
+            if(hitStop.isHitStop)
+            {
+                return;
+            }
             if (Input.GetKeyTrigger(Keys.Enter))
             {
                 //シーン移動

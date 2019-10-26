@@ -150,6 +150,5 @@ namespace BoundyShooter.Device
             return gameTime;
         }
         
-        
     }
 }
