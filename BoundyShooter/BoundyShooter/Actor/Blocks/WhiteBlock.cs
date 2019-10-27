@@ -1,5 +1,6 @@
 ﻿using BoundyShooter.Actor.Entities;
 using BoundyShooter.Actor.Particles;
+using BoundyShooter.Device;
 using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
@@ -21,11 +22,13 @@ namespace BoundyShooter.Actor.Blocks
 
         private const float DestroyTime = 0.0675f;
 
-        private Timer destroyTimer; 
+        private Timer destroyTimer;
+        private Sound sound;
 
         public WhiteBlock() 
             : base("white_block", true)
         {
+            sound = GameDevice.Instance().GetSound();
         }
 
         public override object Clone()
@@ -74,6 +77,7 @@ namespace BoundyShooter.Actor.Blocks
 
         public void Destroy()
         {
+            sound.PlaySE("block_destroy");
             Destroyed = true;
             destroyTimer = new Timer(DestroyTime);
         }

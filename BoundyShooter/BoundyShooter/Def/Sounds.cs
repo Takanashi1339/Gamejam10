@@ -15,6 +15,9 @@ namespace BoundyShooter.Def
         public static readonly string[,] SEData = new string[,]
         {
             //{ "se_name", Path },
+            { "gun" , Path},
+            { "enemy_hit" , Path},
+            { "block_destroy" , Path},
 
             //必要に応じて自分で追加
         };

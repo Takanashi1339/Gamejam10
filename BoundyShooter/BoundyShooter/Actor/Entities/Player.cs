@@ -68,6 +68,7 @@ namespace BoundyShooter.Actor.Entities
 
 
         public Timer gunTimer;
+        private Sound sound;
 
         public const int BladeAmount = 3;
         public const float Deceleration = 0.025f;    //減速度
@@ -186,6 +187,7 @@ namespace BoundyShooter.Actor.Entities
         {
             Rotation = GameDevice.Instance().GetRandom().Next(360);
             gunTimer = new Timer(1f, false); //発射時に手動でリセット
+            sound = GameDevice.Instance().GetSound();
         }
 
         public override object Clone()
@@ -234,6 +236,7 @@ namespace BoundyShooter.Actor.Entities
                 gunTimer.Reset();
                 //GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Math.Sign(Front.Y) * Size.Y / 2), -Math.Sign(Front.Y)));
                 GameObjectManager.Instance.Add(new PlayerBullet(Position + Size.ToVector2() / 2 - new Vector2(8, 8 + Size.Y / 2), -1));
+                sound.PlaySE("gun");
             }
             if (!IsTitle && !IsMenu)
             {

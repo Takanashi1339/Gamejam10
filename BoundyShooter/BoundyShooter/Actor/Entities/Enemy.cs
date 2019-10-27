@@ -16,6 +16,7 @@ namespace BoundyShooter.Actor.Entities
     abstract class Enemy : Entity
     {
         private Vector2 bounceVelocity = new Vector2(0, -5f);//跳ね返りの初速
+        private Sound sound;
         private float acceleration = 0.1f;
         protected int life;
         protected bool displayMode;
@@ -44,6 +45,7 @@ namespace BoundyShooter.Actor.Entities
         {
             this.life = life;
             displayMode = false;
+            sound = GameDevice.Instance().GetSound();
         }
 
 
@@ -90,6 +92,7 @@ namespace BoundyShooter.Actor.Entities
             }
             if(IsDead)
             {
+                sound.PlaySE("enemy_hit");
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }
             base.Hit(gameObject);
