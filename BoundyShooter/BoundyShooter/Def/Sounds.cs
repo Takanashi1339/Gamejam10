@@ -17,6 +17,7 @@ namespace BoundyShooter.Def
             //{ "se_name", Path },
             { "gun" , Path},
             { "enemy_hit" , Path},
+            { "enemy_hit_gun" , Path},
             { "block_destroy" , Path},
 
             //必要に応じて自分で追加
