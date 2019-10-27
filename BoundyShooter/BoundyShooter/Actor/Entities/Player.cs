@@ -217,8 +217,11 @@ namespace BoundyShooter.Actor.Entities
             if (Input.GetKeyTrigger(Keys.Space) && !IsTitle)
             {
                 Speed = 0;
+                sound.StoppedSE("shoot", 0);
+                sound.RemoveSE("shoot", 0);
                 sound.CreateSEInstance("charge");
                 sound.CreateSEInstance("charging");
+                sound.CreateSEInstance("shoot");
                 sound.PlaySEInstances("charge", 0);
                 haveSound = true;
 
@@ -230,6 +233,10 @@ namespace BoundyShooter.Actor.Entities
                 sound.StoppedSE("charging", 0);
                 sound.RemoveSE("charging", 0);
                 haveSound = false;
+                if(Speed > MaxSpeed / 2)
+                {
+                    sound.PlaySEInstances("shoot", 0);
+                }
             }
             if (Input.GetKeyState(Keys.Space) && !IsTitle)
             {

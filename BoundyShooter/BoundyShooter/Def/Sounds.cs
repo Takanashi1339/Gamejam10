@@ -21,6 +21,7 @@ namespace BoundyShooter.Def
             { "block_destroy" , Path},
             { "charge" , Path},
             { "charging" , Path},
+            { "shoot" , Path},
 
             //必要に応じて自分で追加
         };
