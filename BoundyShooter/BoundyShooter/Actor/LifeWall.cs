@@ -44,7 +44,7 @@ namespace BoundyShooter.Actor
             :this(other.Position)
         { }
 
-        public static void Initialze()
+        public static void Reset()
         {
             lifeWalls = null;
             nowCount = 0;

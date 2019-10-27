@@ -79,7 +79,7 @@ namespace BoundyShooter.Actor.Entities
         public const string HitParticle = "blue_particle";
 
         private bool mapBottomHit = false;
-
+        private bool haveSound = false;
         public override void Hit(GameObject gameObject)
         {
             if(gameObject is LifeWall wall&& !wall.IsDead)
@@ -217,9 +217,29 @@ namespace BoundyShooter.Actor.Entities
             if (Input.GetKeyTrigger(Keys.Space) && !IsTitle)
             {
                 Speed = 0;
+                sound.CreateSEInstance("charge");
+                sound.CreateSEInstance("charging");
+                sound.PlaySEInstances("charge", 0);
+                haveSound = true;
+
+            }
+            if (Input.GetKeyRelease(Keys.Space) && !IsTitle)
+            {
+                sound.StoppedSE("charge", 0);
+                sound.RemoveSE("charge", 0);
+                sound.StoppedSE("charging", 0);
+                sound.RemoveSE("charging", 0);
+                haveSound = false;
             }
             if (Input.GetKeyState(Keys.Space) && !IsTitle)
             {
+                if(haveSound)
+                {
+                    if(sound.IsStoppedSEInstance("charge", 0))
+                    {
+                        sound.PlaySEInstances("charging", 0, true);
+                    }
+                }
                 Velocity = Vector2.Zero;
                 Rotation += RotaionSpeed;
                 Speed += ChargeSpeed;

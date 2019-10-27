@@ -5,6 +5,8 @@
   <Config> </Config>
   <SourceFiles>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/block_destroy.wav</File>
+    <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/charge.wav</File>
+    <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/charging.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/enemy_hit.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/enemy_hit_gun.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/gun.wav</File>
@@ -53,6 +55,8 @@
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/white_block.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

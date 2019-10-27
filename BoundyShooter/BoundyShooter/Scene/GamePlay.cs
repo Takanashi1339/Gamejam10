@@ -66,7 +66,7 @@ namespace BoundyShooter.Scene
             particleManager = new ParticleManager();
             gameObjectManager.Initialize();
             particleManager.Initialize();
-            LifeWall.Initialze();
+            LifeWall.Reset();
             var lifeWalls = LifeWall.GenerateWall(LifeWall.Count);
             gameObjectManager.AddWall(lifeWalls);
             nowMap = mapName[(int)Menu.GetDifficulty()];
