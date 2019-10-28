@@ -46,7 +46,7 @@ namespace BoundyShooter.Def
                 { "easy",Path },
                 { "normal",Path },
                 { "hard",Path },
-                { "push_to_space", Path },
+                { "press_space_key", Path },
                 { "clear", Path },
                 { "menu_explanation" ,Path},
                 { "back_to_title", Path },
