@@ -83,7 +83,7 @@ namespace BoundyShooter.Scene
             hitStop = new HitStop();
 
             GameDevice.Instance().GetSound().PlayBGM(
-                (Menu.GetDifficulty() == Menu.Difficulty.tutorial)
+                (Menu.GetDifficulty() == Menu.Difficulty.tutorial || Menu.GetDifficulty() == Menu.Difficulty.easy)
                 ? "tutorial"
                 : "stage"
                 );
