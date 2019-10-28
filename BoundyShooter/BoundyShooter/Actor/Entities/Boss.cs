@@ -14,13 +14,13 @@ namespace BoundyShooter.Actor.Entities
 {
     abstract class Boss : Entity
     {
-        private Timer attackTimer,deathTimer,endTimer,particleTimer;
+        private Timer attackTimer,deathTimer,endTimer,particleTimer,downTimer;
         private Flashing death;
         static Random rand = new Random();
-        private Vector2 knockBack, deathVelocity;
+        private Vector2 knockBack, vibrationVelocity,deathvelocity;
         //プレイヤーに何回当たったら死ぬか、召喚するエネミーの種類
         private int maxCount, enemynum;
-        protected float hitCount;
+        protected float hitCount,deathVelY;
         protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
         private Sound sound;
 
@@ -28,7 +28,7 @@ namespace BoundyShooter.Actor.Entities
         {
             get;
             private set;
-        } = false;
+        }
 
         protected static readonly List<Vector2> TentaclePositions = new List<Vector2>()
         {
@@ -43,18 +43,22 @@ namespace BoundyShooter.Actor.Entities
         public Boss(string name,Vector2 position,Point size,float summon,int deathCount,int enemynum) 
             : base(name,position,size)
         {
-            //エネミー召喚する間隔の設定
-            attackTimer = new Timer(summon,true);
-            deathTimer = new Timer(0.02f, true);
-            particleTimer = new Timer(0.5f, true);
-            endTimer = new Timer(3f, false);
-            death = new Flashing(1f, 0f, 2.8f, false,true);
-            deathVelocity = new Vector2(2, 2);
-            knockBack = new Vector2(0, -8);
-            hitCount = 0;
             maxCount = deathCount;
             this.enemynum = enemynum;
             sound = GameDevice.Instance().GetSound();
+            attackTimer = new Timer(summon, true);
+            attackTimer = new Timer(summon, true);
+            deathTimer = new Timer(0.02f, true);
+            particleTimer = new Timer(0.5f, true);
+            endTimer = new Timer(5.5f, false);
+            downTimer = new Timer(2.5f, false);
+            death = new Flashing(1f, 0f, 2.8f, false, true);
+            knockBack = new Vector2(0, -8);
+            vibrationVelocity = new Vector2(2,0);
+            deathvelocity = new Vector2(0, 2);
+            hitCount = 0;
+            deathVelY = 2f;
+            IsDeadFlag = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -87,23 +91,30 @@ namespace BoundyShooter.Actor.Entities
                 IsDeadFlag = true;
                 deathTimer.Update(gameTime);
                 endTimer.Update(gameTime);
+                downTimer.Update(gameTime);
                 particleTimer.Update(gameTime);
-                death.Update(gameTime);
+                
                 if(deathTimer.IsTime)
                 {
-                    deathVelocity.X = -deathVelocity.X;
+                    vibrationVelocity.X = -vibrationVelocity.X;
                 }
-                Velocity = deathVelocity;
-                if(particleTimer.IsTime)
+                if(particleTimer.IsTime &&
+                    !downTimer.IsTime)
                 {
                     sound.PlaySE("boss_dead_short");
                     new DestroyParticle("death_boss", new Vector2(Position.X + Size.X / 2 - 32 , Position.Y + Size.Y / 2- 32), new Point(64,64), DestroyParticle.DestroyOption.Center);
                 }
-                if (endTimer.IsTime)
+                if (downTimer.IsTime)
                 {
+                    vibrationVelocity.Y = deathVelY;
+                    death.Update(gameTime);
                     sound.PlaySE("boss_dead_long");
-                    IsDead = true;
+                    if (endTimer.IsTime)
+                    {
+                        IsDead = true;
+                    }
                 }
+                Velocity = vibrationVelocity;
             }
             base.Update(gameTime);
             Velocity = Vector2.Zero;
