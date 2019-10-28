@@ -27,6 +27,7 @@ namespace BoundyShooter.Scene
         private Player titlePlayer;
         private List<JellyEnemy> jellyEnemies;
         private Flashing flashing;
+        private Sound sound;
 
 
         public Title()
@@ -34,6 +35,7 @@ namespace BoundyShooter.Scene
             isEndFlag = false;
             renderer = Renderer.Instance;
             flashing = new Flashing(1.0f, 0f,0.66f);
+            sound = GameDevice.Instance().GetSound();
         }
 
         public void Draw()
@@ -91,6 +93,7 @@ namespace BoundyShooter.Scene
         {
             if (Input.GetKeyTrigger(Keys.Space))
             {
+                sound.PlaySE("decide");
                 //シーン移動
                 isEndFlag = true;
             }

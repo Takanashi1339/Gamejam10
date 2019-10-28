@@ -26,6 +26,10 @@ namespace BoundyShooter.Device
         //現在再生中のMP3のアセット名
         private string currentBGM;
 
+        private const float BGMVolume = 0.3f;
+        private const float SEVolume = 1f;
+
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -152,7 +156,7 @@ namespace BoundyShooter.Device
             }
 
             //ボリューム設定（BGMはSEに比べて音量半分が普通）
-            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.Volume = BGMVolume;
 
             //現在のBGM名を設定
             currentBGM = name;
@@ -212,8 +216,8 @@ namespace BoundyShooter.Device
         {
             //アセット名が登録されているか？
             Debug.Assert(soundEffects.ContainsKey(name), ErrorMessage(name));
-
             //再生
+            SoundEffect.MasterVolume = SEVolume;
             soundEffects[name].Play();
         }
         #endregion //WAV(SE:SoundEffect)関連

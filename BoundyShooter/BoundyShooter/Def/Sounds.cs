@@ -17,11 +17,14 @@ namespace BoundyShooter.Def
             //{ "se_name", Path },
             { "gun" , Path},
             { "enemy_hit" , Path},
-            { "enemy_hit_gun" , Path},
             { "block_destroy" , Path},
             { "charge" , Path},
             { "charging" , Path},
             { "shoot" , Path},
+            { "select", Path },
+            { "decide", Path },
+            { "boss_dead_short", Path },
+            { "boss_dead_long", Path },
 
             //必要に応じて自分で追加
         };
@@ -31,7 +34,8 @@ namespace BoundyShooter.Def
         public static readonly string[,] BGMData = new string[,]
         {
             //{ "bgm_name", Path },
-
+            { "tutorial", Path },
+            { "stage", Path },
             //必要に応じて自分で追加
         };
     }

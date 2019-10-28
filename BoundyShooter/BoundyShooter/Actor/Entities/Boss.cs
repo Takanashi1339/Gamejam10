@@ -22,6 +22,7 @@ namespace BoundyShooter.Actor.Entities
         private int maxCount, enemynum;
         protected float hitCount;
         protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
+        private Sound sound;
 
         public static bool IsDeadFlag
         {
@@ -53,6 +54,7 @@ namespace BoundyShooter.Actor.Entities
             hitCount = 0;
             maxCount = deathCount;
             this.enemynum = enemynum;
+            sound = GameDevice.Instance().GetSound();
         }
 
         public override void Update(GameTime gameTime)
@@ -94,10 +96,12 @@ namespace BoundyShooter.Actor.Entities
                 Velocity = deathVelocity;
                 if(particleTimer.IsTime)
                 {
+                    sound.PlaySE("boss_dead_short");
                     new DestroyParticle("death_boss", new Vector2(Position.X + Size.X / 2 - 32 , Position.Y + Size.Y / 2- 32), new Point(64,64), DestroyParticle.DestroyOption.Center);
                 }
                 if (endTimer.IsTime)
                 {
+                    sound.PlaySE("boss_dead_long");
                     IsDead = true;
                 }
             }

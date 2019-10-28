@@ -82,7 +82,7 @@ namespace BoundyShooter.Scene
             seLoader = new SELoader(SEMatrix());
             isEndFlag = false;
 
-            timer = new Timer(10 / 60f, true);
+            timer = new Timer(4 / 60f, true);
         }
 
         /// <summary>
