@@ -106,9 +106,9 @@ namespace BoundyShooter.Actor.Entities
                 }
                 if (downTimer.IsTime)
                 {
+                    sound.PlaySE("boss_dead_long");
                     vibrationVelocity.Y = deathVelY;
                     death.Update(gameTime);
-                    sound.PlaySE("boss_dead_long");
                     if (endTimer.IsTime)
                     {
                         IsDead = true;

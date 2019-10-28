@@ -106,7 +106,6 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
-
 #if DEBUG
             hitStop.Update(gameTime);
             if(hitStop.isHitStop)
