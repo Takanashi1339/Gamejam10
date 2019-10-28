@@ -58,7 +58,6 @@ namespace BoundyShooter.Actor.Entities
                 var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
                 if(player.Speed > Player.MaxSpeed / 2)
                 {
-                    sound.PlaySE("enemy_hit");
                     HitStop.DoHitStop();
                     IsDead = true;//プレイヤーの最高速度/2よりも現在の速度が速い場合
                 }else
@@ -83,7 +82,6 @@ namespace BoundyShooter.Actor.Entities
                 life--;
                 if (life <= 0)
                 {
-                    sound.PlaySE("enemy_hit_gun");
                     IsDead = true;
                 }
             }
@@ -94,6 +92,7 @@ namespace BoundyShooter.Actor.Entities
             }
             if(IsDead)
             {
+                sound.PlaySE("enemy_hit");
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             }
             base.Hit(gameObject);

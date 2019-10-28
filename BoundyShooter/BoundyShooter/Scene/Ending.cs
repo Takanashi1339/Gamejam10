@@ -16,6 +16,7 @@ namespace BoundyShooter.Scene
         private bool isEndFlag;
         private Renderer renderer;
         private Flashing flashing;
+        private Sound sound;
 
         private float alpha,maxAlpha,plusAlpha;
 
@@ -24,6 +25,7 @@ namespace BoundyShooter.Scene
             isEndFlag = false;
             renderer = Renderer.Instance;
             flashing = new Flashing(1.0f, 0f, 1f);
+            sound = GameDevice.Instance().GetSound();
         }
 
         public void Draw()
@@ -68,6 +70,7 @@ namespace BoundyShooter.Scene
             flashing.Update(gameTime);
             if (Input.GetKeyTrigger(Keys.Space))
             {
+                sound.PlaySE("decide");
                 //シーン移動
                 isEndFlag = true;
             }

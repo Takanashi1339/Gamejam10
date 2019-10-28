@@ -34,6 +34,7 @@ namespace BoundyShooter.Scene
         private Player player;
         private List<FishEnemy> fishEnemies;
         private Flashing flashing;
+        private Sound sound;
 
         public enum Difficulty
         {
@@ -54,6 +55,7 @@ namespace BoundyShooter.Scene
             difficultySpace = new Vector2(0, 100);
             player = new Player(defaultDrawPos);
             flashing = new Flashing(1.0f, 0.4f, 1f);
+            sound = GameDevice.Instance().GetSound();
         }
         public void Draw()
         {
@@ -157,6 +159,7 @@ namespace BoundyShooter.Scene
             }
             if (Input.GetKeyRelease(Keys.Space) && !checkMoveScene)
             {
+                sound.PlaySE("select");
                 difficultyNumber++;
                 flashing.Reset();
             }
@@ -170,6 +173,7 @@ namespace BoundyShooter.Scene
             }
             if(checkSelectvalue > maxSelectValue)
             {
+                sound.PlaySE("decide");
                 isEndFlag = true;
             }
             if (Input.GetKeyRelease(Keys.Space))
