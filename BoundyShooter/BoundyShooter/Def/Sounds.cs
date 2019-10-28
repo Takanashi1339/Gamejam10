@@ -25,6 +25,8 @@ namespace BoundyShooter.Def
             { "decide", Path },
             { "boss_dead_short", Path },
             { "boss_dead_long", Path },
+            { "wall_hit", Path },
+            { "lifewall_break", Path },
 
             //必要に応じて自分で追加
         };
