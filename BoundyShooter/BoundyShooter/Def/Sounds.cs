@@ -23,6 +23,8 @@ namespace BoundyShooter.Def
             { "shoot" , Path},
             { "select", Path },
             { "decide", Path },
+            { "boss_dead_short", Path },
+            { "boss_dead_long", Path },
 
             //必要に応じて自分で追加
         };
