@@ -80,6 +80,12 @@ namespace BoundyShooter.Scene
             scroll = map.Height;
             ScrollStop = false;
             hitStop = new HitStop();
+
+            GameDevice.Instance().GetSound().PlayBGM(
+                (Menu.GetDifficulty() == Menu.Difficulty.tutorial)
+                ? "tutorial"
+                : "stage"
+                );
         }
 
         public bool IsEnd()
@@ -94,6 +100,7 @@ namespace BoundyShooter.Scene
 
         public void Shutdown()
         {
+            GameDevice.Instance().GetSound().StopBGM();
         }
 
         public void Update(GameTime gameTime)

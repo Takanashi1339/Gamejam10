@@ -93,18 +93,21 @@ namespace BoundyShooter.Actor.Entities
 
             if (gameObject is Boss)
             {
-                Direction dir = CheckDirection(gameObject);
-                CorrectPosition(gameObject);
+                if (!Boss.IsDeadFlag)
+                {
+                    Direction dir = CheckDirection(gameObject);
+                    CorrectPosition(gameObject);
 
-                if (dir == Direction.Left || dir == Direction.Right)
-                {
-                    var rotation = Rotation;
-                    Rotation = 360 - rotation;
-                }
-                else if (dir == Direction.Top || dir == Direction.Bottom)
-                {
-                    var rotation = Rotation;
-                    Rotation = 180 - rotation;
+                    if (dir == Direction.Left || dir == Direction.Right)
+                    {
+                        var rotation = Rotation;
+                        Rotation = 360 - rotation;
+                    }
+                    else if (dir == Direction.Top || dir == Direction.Bottom)
+                    {
+                        var rotation = Rotation;
+                        Rotation = 180 - rotation;
+                    }
                 }
             }
         }

@@ -8,15 +8,16 @@ using BoundyShooter.Util;
 using BoundyShooter.Manager;
 using BoundyShooter.Device;
 using BoundyShooter.Actor.Particles;
+using BoundyShooter.Actor.Blocks;
 
 namespace BoundyShooter.Actor.Entities
 {
     abstract class Boss : Entity
     {
         private Timer attackTimer,deathTimer,endTimer,particleTimer;
+        private Flashing death;
         static Random rand = new Random();
-        private Vector2 knockBack = new Vector2(0, -8);
-        private Vector2 deathVelocity = new Vector2(0, 2);
+        private Vector2 knockBack, deathVelocity;
         //プレイヤーに何回当たったら死ぬか、召喚するエネミーの種類
         private int maxCount, enemynum;
         protected float hitCount;
@@ -47,6 +48,9 @@ namespace BoundyShooter.Actor.Entities
             deathTimer = new Timer(0.02f, true);
             particleTimer = new Timer(0.5f, true);
             endTimer = new Timer(3f, false);
+            death = new Flashing(1f, 0f, 2.8f, false,true);
+            deathVelocity = new Vector2(2, 2);
+            knockBack = new Vector2(0, -8);
             hitCount = 0;
             maxCount = deathCount;
             this.enemynum = enemynum;
@@ -84,9 +88,10 @@ namespace BoundyShooter.Actor.Entities
                 deathTimer.Update(gameTime);
                 endTimer.Update(gameTime);
                 particleTimer.Update(gameTime);
+                death.Update(gameTime);
                 if(deathTimer.IsTime)
                 {
-                    deathVelocity = -deathVelocity;
+                    deathVelocity.X = -deathVelocity.X;
                 }
                 Velocity = deathVelocity;
                 if(particleTimer.IsTime)
@@ -124,14 +129,17 @@ namespace BoundyShooter.Actor.Entities
             }
             if (gameObject is PlayerBullet)
             {
-                if (dir == Direction.Top)
+                if (dir == Direction.Top &&
+                    !IsDeadFlag)
                 {
                     Velocity = knockBack / 10;
                     tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack / 10);
                     hitCount += 0.1f;
                 }
             }
-            base.Hit(gameObject);
+            if(gameObject is WhiteBlock)
+            { }
+            //base.Hit(gameObject);
         }
 
         public override void Draw()
@@ -142,6 +150,7 @@ namespace BoundyShooter.Actor.Entities
                 return;
             }
             var drawer = Drawer.Default;
+            drawer.Alpha = death.GetAlpha();
             drawer.DisplayModify = true;
             base.Draw(drawer);
         }
