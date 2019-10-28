@@ -235,7 +235,6 @@ namespace BoundyShooter.Actor.Entities
                     sound.RemoveSE("shoot", 0);
                     sound.CreateSEInstance("charge");
                     sound.CreateSEInstance("charging");
-                    sound.CreateSEInstance("shoot");
                     sound.PlaySEInstances("charge", 0);
                     haveSound = true;
                 }
@@ -250,6 +249,7 @@ namespace BoundyShooter.Actor.Entities
                 haveSound = false;
                 if (Speed > MaxSpeed / 2)
                 {
+                    sound.CreateSEInstance("shoot");
                     sound.PlaySEInstances("shoot", 0);
                 }
             }
