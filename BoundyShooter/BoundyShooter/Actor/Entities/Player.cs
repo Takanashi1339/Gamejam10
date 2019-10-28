@@ -249,7 +249,7 @@ namespace BoundyShooter.Actor.Entities
                 haveSound = false;
                 if (Speed > MaxSpeed / 2)
                 {
-                    sound.CreateSEInstance("shoot");
+                    sound.CreateSEInstance("shoot"); 
                     sound.PlaySEInstances("shoot", 0);
                 }
             }
