@@ -111,6 +111,10 @@ namespace BoundyShooter.Actor.Entities
 
         public void HitWall(bool isLeft)
         {
+            if(!IsMenu && !IsTitle)
+            {
+                sound.PlaySE("wall_hit");
+            }
             var rotation = Rotation;
             Rotation = 360 - rotation;
             if (isLeft)
@@ -136,6 +140,7 @@ namespace BoundyShooter.Actor.Entities
         {
             if (Speed > MaxSpeed / 2 && Velocity.Y != 0)
             {
+                sound.PlaySE("wall_hit");
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
                 new DestroyParticle(HitParticle, Position, new Point(16, 16), DestroyParticle.DestroyOption.Up);
@@ -149,9 +154,9 @@ namespace BoundyShooter.Actor.Entities
 
         public void HitBlock(Block block)
         {
+            sound.PlaySE("wall_hit");
             Direction dir = CheckDirection(block);
             CorrectPosition(block);
-
             if (dir == Direction.Left || dir == Direction.Right)
             {
                 var rotation = Rotation;
@@ -201,6 +206,10 @@ namespace BoundyShooter.Actor.Entities
             gunTimer.Update(gameTime);
             if (!IsCharging && Position.Y < -GameDevice.Instance().DisplayModify.Y)
             {
+                if(!IsMenu)
+                {
+                    sound.PlaySE("wall_hit");
+                }
                 Position = new Vector2(Position.X, -GameDevice.Instance().DisplayModify.Y + 1);
                 var rotation = Rotation;
                 Rotation = 180 - rotation;
