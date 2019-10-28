@@ -229,17 +229,14 @@ namespace BoundyShooter.Actor.Entities
                 }
 
             }
-            if (Input.GetKeyRelease(Keys.Space) && !IsTitle)
+            if (Input.GetKeyRelease(Keys.Space) && !IsTitle && !IsMenu)
             {
-                if(!IsMenu)
-                {
-                    sound.StoppedSE("charge", 0);
-                    sound.RemoveSE("charge", 0);
-                    sound.StoppedSE("charging", 0);
-                    sound.RemoveSE("charging", 0);
-                    haveSound = false;
-                }
-                if(Speed > MaxSpeed / 2)
+                sound.StoppedSE("charge", 0);
+                sound.RemoveSE("charge", 0);
+                sound.StoppedSE("charging", 0);
+                sound.RemoveSE("charging", 0);
+                haveSound = false;
+                if (Speed > MaxSpeed / 2)
                 {
                     sound.PlaySEInstances("shoot", 0);
                 }
