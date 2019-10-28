@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoundyShooter.Def;
+using BoundyShooter.Actor.Blocks;
+using BoundyShooter.Manager;
 
 namespace BoundyShooter.Actor
 {
@@ -123,6 +125,38 @@ namespace BoundyShooter.Actor
         {
             Renderer.Instance.DrawTexture(Name, Position, drawer);
         }
+
+        public Direction CheckDirection(Block otherObj)
+        {
+            var thisRect = Rectangle;
+            var otherRect = otherObj.Rectangle;
+            var map = GameObjectManager.Instance.Map;
+            var dic = new Dictionary<Direction, int>();
+
+            if (!map.GetBlock(otherObj.Position + new Vector2(0, -Block.BlockSize)).IsSolid)
+            {
+                dic.Add(Direction.Top, Math.Abs(thisRect.Bottom - otherRect.Top));
+            }
+
+            if (!map.GetBlock(otherObj.Position + new Vector2(0, Block.BlockSize)).IsSolid)
+            {
+                dic.Add(Direction.Bottom, Math.Abs(thisRect.Top - otherRect.Bottom));
+            }
+
+            if (!map.GetBlock(otherObj.Position + new Vector2(Block.BlockSize, 0)).IsSolid)
+            {
+                dic.Add(Direction.Right, Math.Abs(thisRect.Left - otherRect.Right));
+            }
+
+            if (!map.GetBlock(otherObj.Position + new Vector2(-Block.BlockSize, 0)).IsSolid)
+            {
+                dic.Add(Direction.Left, Math.Abs(thisRect.Right - otherRect.Left));
+            }
+
+            var dir = dic.OrderBy(pair => pair.Value).First().Key;
+            return dir;
+        }
+
         public Direction CheckDirection(GameObject otherObj)
         {
             var thisRect = Rectangle;
@@ -134,6 +168,30 @@ namespace BoundyShooter.Actor
             dic.Add(Direction.Left, Math.Abs(thisRect.Right - otherRect.Left));
             var dir = dic.OrderBy(pair => pair.Value).First().Key;
             return dir;
+        }
+
+        public virtual void CorrectPosition(Block other)
+        {
+            Direction dir = CheckDirection(other);
+            var position = Position;
+
+            if (dir == Direction.Top)
+            {
+                position.Y = other.Rectangle.Top - Size.Y;
+            }
+            else if (dir == Direction.Right)
+            {
+                position.X = other.Rectangle.Right;
+            }
+            else if (dir == Direction.Left)
+            {
+                position.X = other.Rectangle.Left - Size.X;
+            }
+            else if (dir == Direction.Bottom)
+            {
+                position.Y = other.Rectangle.Bottom;
+            }
+            Position = position;
         }
 
         public virtual void CorrectPosition(GameObject other)

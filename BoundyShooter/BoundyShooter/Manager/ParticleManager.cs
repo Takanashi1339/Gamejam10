@@ -59,6 +59,10 @@ namespace BoundyShooter.Manager
             addParticles.Clear();
             particles.ForEach(p => p.Update(gameTime));
             particles.RemoveAll(p => p.IsDead);
+
+#if DEBUG
+            Console.WriteLine(particles.Count);
+#endif
         }
 
         public void Draw()

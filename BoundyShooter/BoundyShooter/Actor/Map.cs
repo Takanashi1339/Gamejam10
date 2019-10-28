@@ -123,7 +123,13 @@ namespace BoundyShooter.Actor
         {
             var x = (int)position.X / Block.BlockSize;
             var y = (int)position.Y / Block.BlockSize;
-            return mapList[y][x];
+            try
+            {
+                return mapList[y][x];
+            } catch (ArgumentOutOfRangeException e)
+            {
+                return new Space();
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -219,6 +225,22 @@ namespace BoundyShooter.Actor
                 }
             }
             return true;
+        }
+
+        public List<Block> GetAllBlockInScreen()
+        {
+            var result = new List<Block>();
+            foreach (var list in mapList)
+            {
+                foreach (var obj in list)
+                {
+                    if (obj.IsInScreen() && !(obj is Space))
+                    {
+                        result.Add(obj);
+                    }
+                }
+            }
+            return result;
         }
     }
 }

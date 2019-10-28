@@ -40,8 +40,8 @@ namespace BoundyShooter.Actor.Entities
             return vector;
         }
 
-        public KrakenTentacle(Vector2 anchorPosition, int chain = 8)
-            : base("kraken_hand", anchorPosition, new Point(64, 64), 80)
+        public KrakenTentacle(Vector2 anchorPosition, int chain = 8, int life = 80)
+            : base("kraken_hand", anchorPosition, new Point(64, 64), life)
         {
             this.chain = chain;
             this.AnchorPosition = anchorPosition;
@@ -75,6 +75,8 @@ namespace BoundyShooter.Actor.Entities
                     life -= 10;
                     new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
                     Position = AnchorPosition;
+                    sound.PlaySE("enemy_hit");
+                    HitStop.DoHitStop();
                 }
                 if (life <= 0)
                 {

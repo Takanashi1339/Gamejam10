@@ -134,6 +134,8 @@ namespace BoundyShooter.Actor.Entities
                         tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
                         hitCount++;
                         GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
+                        sound.PlaySE("enemy_hit");
+                        HitStop.DoHitStop();
                     }
                 }
 

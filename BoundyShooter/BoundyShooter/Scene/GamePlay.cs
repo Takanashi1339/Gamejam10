@@ -11,6 +11,7 @@ using BoundyShooter.Manager;
 using BoundyShooter.Util;
 using BoundyShooter.Def;
 using BoundyShooter.Actor.Entities;
+using BoundyShooter.Actor.Blocks;
 
 namespace BoundyShooter.Scene
 {
@@ -150,6 +151,14 @@ namespace BoundyShooter.Scene
                 if (gameObjectManager.Find<Enemy>().FindIndex(enemy => enemy.IsInScreen()) == -1)
                 {
                     ScrollStop = false;
+                    var blocks = gameObjectManager.Map.GetAllBlockInScreen();
+                    foreach (var block in blocks)
+                    {
+                        if (block.IsSolid)
+                        {
+                            gameObjectManager.Map.ReplaceBlock(block, new Space());
+                        }
+                    }
                 }
             }
 

@@ -16,7 +16,7 @@ namespace BoundyShooter.Actor.Entities
     abstract class Enemy : Entity
     {
         private Vector2 bounceVelocity = new Vector2(0, -5f);//跳ね返りの初速
-        private Sound sound;
+        protected Sound sound;
         private float acceleration = 0.1f;
         protected int life;
         protected bool displayMode;

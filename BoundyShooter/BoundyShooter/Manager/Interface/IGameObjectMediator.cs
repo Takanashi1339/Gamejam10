@@ -9,6 +9,10 @@ namespace BoundyShooter.Manager.Interface
 {
     interface IGameObjectMediator
     {
+        Map Map{
+            get;
+        }
+
         void Add(GameObject gameObject);
 
         List<T> Find<T>() where T : GameObject;

@@ -33,7 +33,7 @@ namespace BoundyShooter.Actor.Entities
             position = new Vector2(Screen.Width / 2 - Size.X / 2, position.Y);
             foreach (var tentaclePos in TentaclePositions)
             {
-                tentacles.Add((KrakenTentacle)new KrakenTentacle(position + tentaclePos).Spawn(map, position + tentaclePos));
+                tentacles.Add((KrakenTentacle)new KrakenTentacle(position + tentaclePos, 8, 120).Spawn(map, position + tentaclePos));
             }
             return base.Spawn(map, position);
         }

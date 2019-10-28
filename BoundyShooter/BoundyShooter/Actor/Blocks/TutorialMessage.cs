@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BoundyShooter.Actor.Blocks;
 using Microsoft.Xna.Framework;
 
-namespace BoundyShooter.Actor
+namespace BoundyShooter.Actor.Blocks
 {
     class TutorialMessage : Block
     {
