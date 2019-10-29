@@ -57,6 +57,7 @@ namespace BoundyShooter.Def
                 { "tutorial3", Path },
                 { "tutorial4", Path },
                 { "tutorial5", Path },
+                { "fireworks", Path },
 
                 //必要に応じて自分で追加
             };

@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Input;
 using BoundyShooter.Device;
 using BoundyShooter.Util;
 using BoundyShooter.Def;
+using BoundyShooter.Manager;
+using BoundyShooter.Actor.Particles;
 
 namespace BoundyShooter.Scene
 {
@@ -17,6 +19,8 @@ namespace BoundyShooter.Scene
         private Renderer renderer;
         private Flashing flashing;
         private Sound sound;
+        private Timer clearParticle;
+        private ParticleManager particleManager;
 
         private float alpha,maxAlpha,plusAlpha;
 
@@ -39,6 +43,7 @@ namespace BoundyShooter.Scene
             backDrawer.Alpha = flashing.GetAlpha();
             renderer.DrawTexture("clear", new Vector2(Screen.Width / 2 - 342 / 2, Screen.Height / 2 - 234 / 2), cleardrawer);
             renderer.DrawTexture("back_to_title", new Vector2(0, Screen.Height * 7 / 8), backDrawer);
+            particleManager.Draw();
 
             renderer.End();
         }
@@ -49,6 +54,10 @@ namespace BoundyShooter.Scene
             alpha = 0;
             plusAlpha = 0.05f;
             maxAlpha = 1;
+            GameDevice.Instance().DisplayModify = Vector2.Zero;
+            clearParticle = new Timer(0.25f, true);
+            particleManager = new ParticleManager();
+            particleManager.Initialize();
         }
 
         public bool IsEnd()
@@ -78,6 +87,12 @@ namespace BoundyShooter.Scene
             if(alpha >= maxAlpha)
             {
                 alpha = maxAlpha;
+            }
+            clearParticle.Update(gameTime);
+            particleManager.Update(gameTime);
+            if(clearParticle.IsTime)
+            {
+                new DestroyParticle("fireworks", new Vector2((GameDevice.Instance().GetRandom().Next(7) + 1) * 64,(GameDevice.Instance().GetRandom().Next(11) + 1) * 64), new Point(16, 16), DestroyParticle.DestroyOption.Center);
             }
         }
     }
