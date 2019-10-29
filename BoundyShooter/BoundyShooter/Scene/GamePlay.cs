@@ -155,6 +155,7 @@ namespace BoundyShooter.Scene
                     {
                         if (block.IsSolid)
                         {
+                            GameDevice.Instance().GetSound().PlaySE("success");
                             gameObjectManager.Map.ReplaceBlock(block, new Space());
                         }
                     }
