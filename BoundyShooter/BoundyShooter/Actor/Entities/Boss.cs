@@ -20,6 +20,7 @@ namespace BoundyShooter.Actor.Entities
         private Vector2 knockBack, vibrationVelocity,deathvelocity;
         //プレイヤーに何回当たったら死ぬか、召喚するエネミーの種類
         private int maxCount, enemynum;
+        private bool isDeadSound;
         protected float hitCount,deathVelY;
         protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
         private Sound sound;
@@ -59,6 +60,7 @@ namespace BoundyShooter.Actor.Entities
             hitCount = 0;
             deathVelY = 2f;
             IsDeadFlag = false;
+            isDeadSound = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -106,7 +108,11 @@ namespace BoundyShooter.Actor.Entities
                 }
                 if (downTimer.IsTime)
                 {
-                    sound.PlaySE("boss_dead_long");
+                    if(!isDeadSound)
+                    {
+                        sound.PlaySE("boss_dead_long");
+                    }
+                    isDeadSound = true;
                     vibrationVelocity.Y = deathVelY;
                     death.Update(gameTime);
                     if (endTimer.IsTime)
