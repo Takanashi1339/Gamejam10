@@ -50,7 +50,7 @@ namespace BoundyShooter.Scene
 
             var pushdrawer = new Drawer();
             pushdrawer.Alpha = flashing.GetAlpha();
-            renderer.DrawTexture("push_to_space", new Vector2(39, 700), pushdrawer);
+            renderer.DrawTexture("press_space_key", new Vector2(4, 690), pushdrawer);
 
             particleManager.Draw();
             titlePlayer.Draw();
