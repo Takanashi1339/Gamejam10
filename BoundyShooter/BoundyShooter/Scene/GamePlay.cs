@@ -25,6 +25,7 @@ namespace BoundyShooter.Scene
         private GameObjectManager gameObjectManager;
         private ParticleManager particleManager;
         private HitStop hitStop;
+        private FadeIn fade;
 
         private float scroll = 0;
         private string nowMap;
@@ -56,6 +57,7 @@ namespace BoundyShooter.Scene
             Renderer.Instance.Begin();
             particleManager.Draw();
             gameObjectManager.Draw();
+            if(!fade.IsEnd) fade.Draw();
             Renderer.Instance.End();
         }
 
@@ -81,6 +83,7 @@ namespace BoundyShooter.Scene
             scroll = map.Height;
             ScrollStop = false;
             hitStop = new HitStop();
+            fade = new FadeIn();
 
             GameDevice.Instance().GetSound().PlayBGM(
                 (Menu.GetDifficulty() == Menu.Difficulty.tutorial || Menu.GetDifficulty() == Menu.Difficulty.easy)
@@ -106,6 +109,10 @@ namespace BoundyShooter.Scene
 
         public void Update(GameTime gameTime)
         {
+            if (!fade.IsEnd)
+            {
+                fade.Update(gameTime);
+            }
             hitStop.Update(gameTime);
             if(hitStop.isHitStop)
             {

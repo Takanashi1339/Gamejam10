@@ -41,7 +41,7 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Hit(GameObject gameObject)
         {
-            if (!(gameObject is Player))
+            if (!(gameObject is Player || (gameObject is Block block && !block.IsSolid)))
             {
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
                 IsDead = true;

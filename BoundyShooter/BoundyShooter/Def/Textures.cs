@@ -16,6 +16,7 @@ namespace BoundyShooter.Def
         public static readonly string[,] Data = new string[,]
             {
                 //{ "texture_name", Path },
+                { "black_effect", Path},
                 { "player", Path },
                 { "blade", Path },
                 { "gun", Path },

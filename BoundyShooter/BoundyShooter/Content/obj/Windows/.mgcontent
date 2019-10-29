@@ -16,10 +16,12 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/select.wav</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/shoot.wav</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/stage.mp3</File>
+    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/success.wav</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/title.mp3</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/tutorial.mp3</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/wall_hit.wav</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/back_to_title.png</File>
+    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/black_effect.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blade.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/block_1.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/block_2.png</File>
@@ -65,6 +67,8 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/white_block.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
