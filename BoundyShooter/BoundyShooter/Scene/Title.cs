@@ -20,6 +20,7 @@ namespace BoundyShooter.Scene
     {
         private bool isEndFlag;
         public static readonly int titleBottom = 235;
+        private int spawnEnemy;
         private Renderer renderer;
         private ParticleManager particleManager;
         private Animation animation;
@@ -36,6 +37,7 @@ namespace BoundyShooter.Scene
             renderer = Renderer.Instance;
             flashing = new Flashing(1.0f, 0f,0.66f);
             sound = GameDevice.Instance().GetSound();
+            spawnEnemy = 4;
         }
 
         public void Draw()
@@ -48,9 +50,9 @@ namespace BoundyShooter.Scene
             titledrawer.Rectangle = animation.GetRectangle();
             renderer.DrawTexture("title", new Vector2(20, 0), titledrawer);
 
-            var pushdrawer = new Drawer();
-            pushdrawer.Alpha = flashing.GetAlpha();
-            renderer.DrawTexture("press_space_key", new Vector2(4, 690), pushdrawer);
+            var pressdrawer = new Drawer();
+            pressdrawer.Alpha = flashing.GetAlpha();
+            renderer.DrawTexture("press_space_key", new Vector2(4, 690), pressdrawer);
 
             particleManager.Draw();
             titlePlayer.Draw();
@@ -68,10 +70,10 @@ namespace BoundyShooter.Scene
             titlePlayer = new Player(new Vector2(Screen.Width / 2 - 32, Screen.Height / 2 - 32));
             animation = new Animation(new Point(467, 235), 4, 0.15f, Animation.AnimationType.Vertical);
             jellyEnemies = new List<JellyEnemy>();
-            for(int i = 0; i < 4;i++)
+            for(int i = 0; i < spawnEnemy;i++)
             {
                 jellyEnemies.Add(new JellyEnemy(new Vector2((GameDevice.Instance().GetRandom().Next(7) + 1) * 64,
-                    (GameDevice.Instance().GetRandom().Next(6) + 1) * 64 + 235)));
+                    (GameDevice.Instance().GetRandom().Next(6) + 1) * 64 + titleBottom)));
             }
             sound.PlayBGM("title");
         }
