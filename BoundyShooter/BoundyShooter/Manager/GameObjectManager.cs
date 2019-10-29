@@ -186,7 +186,6 @@ namespace BoundyShooter.Manager
         {
             foreach(var enemy in Find<Enemy>())
             {
-                Console.WriteLine(enemy);
                 if (enemy.IsDead)
                 {
                     return true;

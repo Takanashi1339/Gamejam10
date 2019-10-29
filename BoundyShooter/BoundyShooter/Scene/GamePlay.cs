@@ -171,6 +171,10 @@ namespace BoundyShooter.Scene
                 isEndFlag = true;
                 next = Scene.Ending;
             }
+            if(Menu.GetDifficulty() == Menu.Difficulty.tutorial)
+            {
+                next = Scene.Title;
+            }
         }
     }
 }
