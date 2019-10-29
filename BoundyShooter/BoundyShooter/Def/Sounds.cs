@@ -27,6 +27,7 @@ namespace BoundyShooter.Def
             { "boss_dead_long", Path },
             { "wall_hit", Path },
             { "lifewall_break", Path },
+            { "success", Path },
 
             //必要に応じて自分で追加
         };
@@ -36,6 +37,7 @@ namespace BoundyShooter.Def
         public static readonly string[,] BGMData = new string[,]
         {
             //{ "bgm_name", Path },
+            { "title", Path },
             { "tutorial", Path },
             { "stage", Path },
             //必要に応じて自分で追加

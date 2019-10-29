@@ -155,6 +155,7 @@ namespace BoundyShooter.Scene
                     {
                         if (block.IsSolid)
                         {
+                            GameDevice.Instance().GetSound().PlaySE("success");
                             gameObjectManager.Map.ReplaceBlock(block, new Space());
                         }
                     }
@@ -169,6 +170,10 @@ namespace BoundyShooter.Scene
             {
                 isEndFlag = true;
                 next = Scene.Ending;
+            }
+            if(Menu.GetDifficulty() == Menu.Difficulty.tutorial)
+            {
+                next = Scene.Title;
             }
         }
     }

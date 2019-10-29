@@ -75,6 +75,7 @@ namespace BoundyShooter.Scene
                 jellyEnemies.Add(new JellyEnemy(new Vector2((GameDevice.Instance().GetRandom().Next(7) + 1) * 64,
                     (GameDevice.Instance().GetRandom().Next(6) + 1) * 64 + titleBottom)));
             }
+            sound.PlayBGM("title");
         }
 
         public bool IsEnd()
