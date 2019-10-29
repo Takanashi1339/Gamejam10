@@ -285,6 +285,8 @@ namespace BoundyShooter.Actor.Entities
                 if (LifeWall.AllIsDead())
                 {
                     new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
+                    sound.StoppedSE("charge", 0);
+                    sound.StoppedSE("charging", 0);
                     IsDead = true;
                 }
             }
