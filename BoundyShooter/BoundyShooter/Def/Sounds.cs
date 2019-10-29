@@ -37,6 +37,7 @@ namespace BoundyShooter.Def
         public static readonly string[,] BGMData = new string[,]
         {
             //{ "bgm_name", Path },
+            { "title", Path },
             { "tutorial", Path },
             { "stage", Path },
             //必要に応じて自分で追加
