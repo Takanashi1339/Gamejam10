@@ -16,10 +16,13 @@ namespace BoundyShooter.Actor.Particles
 
         private int pixSize = 2;
 
-        public HealParticle(string name, Vector2 position, Point size,int particleSize = 10)
+        private bool isDisPlayModify;
+
+        public HealParticle(string name, Vector2 position, Point size,int particleSize = 10, bool disPlayModify = true)
             : base(name, position, size, particleSize, 0.05f)
         {
             location = particleSize * pixSize * 2;
+            isDisPlayModify = disPlayModify;
         }
 
         public override object Clone()
@@ -40,7 +43,10 @@ namespace BoundyShooter.Actor.Particles
         public override void Draw()
         {
             var drawer = Drawer.Default;
-            drawer.DisplayModify = true;
+            if(isDisPlayModify)
+            {
+                drawer.DisplayModify = true;
+            }
             for (int x = 0; x < Size.X; x += pixSize)
             {
                 for (int y = 0; y < Size.Y; y += pixSize)

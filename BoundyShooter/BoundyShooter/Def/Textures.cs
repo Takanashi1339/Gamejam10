@@ -62,6 +62,7 @@ namespace BoundyShooter.Def
                 { "heal_item", Path },
                 { "hp", Path },
                 { "hp_empty", Path },
+                { "boss_alert" ,Path },
 
                 //必要に応じて自分で追加
             };

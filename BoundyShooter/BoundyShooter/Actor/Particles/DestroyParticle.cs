@@ -22,11 +22,13 @@ namespace BoundyShooter.Actor.Particles
 
         private int location = 0;
         private DestroyOption option;
+        private bool isDisPlayModify;
 
-        public DestroyParticle(string name, Vector2 position, Point size, DestroyOption option, int particleSize = 10) 
+        public DestroyParticle(string name, Vector2 position, Point size, DestroyOption option, int particleSize = 10, bool displayModify = true) 
             : base(name, position, size, particleSize, 0.05f)
         {
             this.option = option;
+            isDisPlayModify = displayModify;
         }
 
         public override object Clone()
@@ -47,7 +49,10 @@ namespace BoundyShooter.Actor.Particles
         public override void Draw()
         {
             var drawer = Drawer.Default;
-            drawer.DisplayModify = true;
+            if(isDisPlayModify)
+            {
+                drawer.DisplayModify = true;
+            }
             var pixSize = 2;
             for (int x = 0; x < Size.X; x += pixSize)
             {
