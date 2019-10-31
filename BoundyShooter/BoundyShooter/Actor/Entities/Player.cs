@@ -110,6 +110,10 @@ namespace BoundyShooter.Actor.Entities
                     }
                 }
             }
+            if(gameObject is HealItem)
+            {
+                LifeWall.HealWall();
+            }
         }
 
         public void HitWall(bool isLeft)

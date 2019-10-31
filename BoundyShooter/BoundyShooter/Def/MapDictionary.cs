@@ -33,6 +33,7 @@ namespace BoundyShooter.Def
             Data.Add("t3", new TutorialMessage(3));
             Data.Add("t4", new TutorialMessage(4));
             Data.Add("t5", new TutorialMessage(5));
+            Data.Add("H", new HealItem(Vector2.Zero));
 
             //ここにEntity/Blockを追加
         }
