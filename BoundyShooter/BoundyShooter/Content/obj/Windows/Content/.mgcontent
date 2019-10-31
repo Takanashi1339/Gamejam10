@@ -34,8 +34,10 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death_boss.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/easy.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/enemy1.png</File>
+    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/fireworks.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/gun.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/hard.png</File>
+    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/heal_item.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/hold_to_space.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/jelly_enemy.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/kraken_arm.png</File>
@@ -56,6 +58,7 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_block.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_gage_empty.png</File>
+    <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/test_heal.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/testgameover.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/title.png</File>
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/tutorial.png</File>
@@ -67,6 +70,9 @@
     <File>D:/K019G1339/1年/Gamejam10/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/white_block.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
