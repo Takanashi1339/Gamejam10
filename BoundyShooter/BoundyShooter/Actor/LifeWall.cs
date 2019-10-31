@@ -71,7 +71,8 @@ namespace BoundyShooter.Actor
 
         public static bool AllIsDead()
         {
-            return lifeWalls.Count <= 0;
+            //return lifeWalls.Count <= 0;
+            return lifeWalls.Count(w => !w.IsDead) <= 0;
         }
         public override object Clone()
         {
@@ -80,15 +81,27 @@ namespace BoundyShooter.Actor
 
         public override void Update(GameTime gameTime)
         {
-            nowCount = wallNames.Length - lifeWalls.Count;
+            nowCount = wallNames.Length - lifeWalls.Count(w => !w.IsDead);
+            if (wallNames.Length - 1 < nowCount)
+            {
+                nowCount = wallNames.Length - 1;
+            }
             Name = wallNames[nowCount];
             Position = -GameDevice.Instance().DisplayModify + displayPos;
             foreach(var hp in healParticles)
             {
                 if(hp.IsDead)
                 {
-                    lifeWalls.Add(new LifeWall(new Vector2(Block.BlockSize, (Screen.Height - size.Y) - space * lifeWalls.Count)
-                        ));
+                    //lifeWalls.Add(new LifeWall(new Vector2(Block.BlockSize, (Screen.Height - size.Y) - space * lifeWalls.Count)
+                    //    ));
+                    foreach (var wall in lifeWalls)
+                    {
+                        if (wall.IsDead)
+                        {
+                            wall.IsDead = false;
+                            break;
+                        }
+                    }
                 }
             }
             healParticles.RemoveAll(hp => hp.IsDead);
@@ -121,9 +134,9 @@ namespace BoundyShooter.Actor
 
         public static void HealWall()
         {
-            if(lifeWalls.Count < maxWallCount)
+            if(lifeWalls.Count(w => !w.IsDead) < maxWallCount)
             {
-                healParticles.Add(new HealParticle(wallNames[lifeWalls.Count], lifeWalls.Last().Position, size));
+                healParticles.Add(new HealParticle(wallNames[lifeWalls.Count(w => !w.IsDead)], lifeWalls.Last().Position, size));
             }
         }
     }
