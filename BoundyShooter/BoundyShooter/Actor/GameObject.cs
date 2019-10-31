@@ -153,6 +153,11 @@ namespace BoundyShooter.Actor
                 dic.Add(Direction.Left, Math.Abs(thisRect.Right - otherRect.Left));
             }
 
+            //壁抜け対策
+            if (dic.Count == 0)
+            {
+                return Direction.Bottom;
+            }
             var dir = dic.OrderBy(pair => pair.Value).First().Key;
             return dir;
         }
