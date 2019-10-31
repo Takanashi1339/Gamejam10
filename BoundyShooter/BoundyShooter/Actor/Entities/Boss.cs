@@ -21,9 +21,12 @@ namespace BoundyShooter.Actor.Entities
         //プレイヤーに何回当たったら死ぬか、召喚するエネミーの種類
         private int maxCount, enemynum;
         private bool isDeadSound;
+        private float hitAlpha;
         protected float hitCount,deathVelY;
         protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
         private Sound sound;
+        private int hitFlashCount;
+        private int maxFlashCount;
 
         public static bool IsDeadFlag
         {
@@ -61,32 +64,22 @@ namespace BoundyShooter.Actor.Entities
             deathVelY = 2f;
             IsDeadFlag = false;
             isDeadSound = false;
+            hitAlpha = 1f;
+            hitFlashCount = 3;
+            maxFlashCount = 3;
         }
 
         public override void Update(GameTime gameTime)
         {
-            //Console.WriteLine(hitCount);
+            if(hitAlpha < 1.0f)
+            {
+                hitAlpha += 0.01f;
+            }
             if (!IsInScreen()) return;
             attackTimer.Update(gameTime);
             if (attackTimer.IsTime)
             {
                 Attack();
-
-                ////bosssize / blocksize
-                //summonPos = rand.Next(Size.Y / enemySize);
-                //if (enemynum == 0)
-                //{
-                //    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                //}
-                //else if (enemynum == 1)
-                //{
-                //    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                //}
-                //else if (enemynum == 2)
-                //{
-                //    GameObjectManager.Instance.Add(new TestEnemy(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                //    GameObjectManager.Instance.Add(new TestEnemy2(new Vector2(Position.X + enemySize * summonPos, Position.Y + Size.Y)));
-                //}
             }
             if(maxCount <= hitCount)
             {
@@ -95,7 +88,6 @@ namespace BoundyShooter.Actor.Entities
                 endTimer.Update(gameTime);
                 downTimer.Update(gameTime);
                 particleTimer.Update(gameTime);
-                
                 if(deathTimer.IsTime)
                 {
                     vibrationVelocity.X = -vibrationVelocity.X;
@@ -120,6 +112,15 @@ namespace BoundyShooter.Actor.Entities
                         IsDead = true;
                     }
                 }
+                if(hitAlpha < 1.0f)
+                {
+                    hitAlpha += 0.03f;
+                }
+                if (hitFlashCount < maxFlashCount && hitAlpha >= 1.0f)
+                {
+                    hitAlpha = 0.2f;
+                    hitFlashCount++;
+                }
                 Velocity = vibrationVelocity;
             }
             base.Update(gameTime);
@@ -136,6 +137,7 @@ namespace BoundyShooter.Actor.Entities
                 {
                     if (dir == Direction.Top)
                     {
+                        hitFlashCount = 0;
                         Velocity = knockBack;
                         tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
                         hitCount++;
@@ -158,7 +160,6 @@ namespace BoundyShooter.Actor.Entities
             }
             if(gameObject is WhiteBlock)
             { }
-            //base.Hit(gameObject);
         }
 
         public override void Draw()
@@ -169,9 +170,17 @@ namespace BoundyShooter.Actor.Entities
                 return;
             }
             var drawer = Drawer.Default;
-            drawer.Alpha = death.GetAlpha();
+            if(downTimer.IsTime)
+            {
+                drawer.Alpha = death.GetAlpha();
+            }
+            else
+            {
+                drawer.Alpha = hitAlpha;
+            }
             drawer.DisplayModify = true;
             base.Draw(drawer);
         }
+
     }
 }
