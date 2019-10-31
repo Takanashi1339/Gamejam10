@@ -55,7 +55,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 float speed = 10f;
                 var player = GameObjectManager.Instance.Find<Player>().First();
-                var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
+                //var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
                 if(player.Speed > Player.MaxSpeed / 2)
                 {
                     HitStop.DoHitStop();
@@ -68,14 +68,14 @@ namespace BoundyShooter.Actor.Entities
                         IsDead = true;
                     }
                 }
-                if(rotation < 0)
-                {
-                    Velocity = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)) * speed;
-                }
-                else
-                {
-                    Velocity = new Vector2((float)Math.Cos(rotation), -(float)Math.Sin(rotation)) * speed;
-                }
+                //if(rotation < 0)
+                //{
+                //    Velocity = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)) * speed;
+                //}
+                //else
+                //{
+                //    Velocity = new Vector2((float)Math.Cos(rotation), -(float)Math.Sin(rotation)) * speed;
+                //}
             }
             if (gameObject is PlayerBullet)
             {
