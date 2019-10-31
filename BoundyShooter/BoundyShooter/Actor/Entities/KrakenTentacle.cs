@@ -73,16 +73,15 @@ namespace BoundyShooter.Actor.Entities
                 var rotation = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
                 if (player.Speed > Player.MaxSpeed / 2)
                 {
+                    GameDevice.Instance().GetSound().PlaySE("tentacle_cut");
                     HitStop.DoHitStop();
                     life -= 10;
                     new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
                     Position = AnchorPosition;
-                    sound.PlaySE("enemy_hit");
                     HitStop.DoHitStop();
                 }
                 if (life <= 0)
                 {
-                    GameDevice.Instance().GetSound().PlaySE("enemy_hit");
                     IsDead = true;
                 }
             }
@@ -91,7 +90,7 @@ namespace BoundyShooter.Actor.Entities
                 life--;
                 if (life <= 0)
                 {
-                    GameDevice.Instance().GetSound().PlaySE("enemy_hit");
+                    GameDevice.Instance().GetSound().PlaySE("tentacle_cut");
                     IsDead = true;
                 }
             }
