@@ -96,7 +96,7 @@ namespace BoundyShooter.Actor
                     //    ));
                     foreach (var wall in lifeWalls)
                     {
-                        if (wall.IsDead)
+                        if (wall.IsDead && !AllIsDead())
                         {
                             wall.IsDead = false;
                             break;
