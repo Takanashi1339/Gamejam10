@@ -16,11 +16,13 @@ namespace BoundyShooter.Actor
     class LifeWall : GameObject
     {
         private Vector2 displayPos;
+        private static List<HealParticle> healParticles;
 
         private static List<LifeWall> lifeWalls = null;
         private static int space = 30;
         public static int nowCount = 0;
         private static Point size = new Point(448, 16);
+        private static int maxWallCount;
 
         public static readonly int Count = 4;
 
@@ -38,6 +40,7 @@ namespace BoundyShooter.Actor
         {
             displayPos = position;
             Position = -GameDevice.Instance().DisplayModify + displayPos;
+            healParticles = new List<HealParticle>();
         }
 
         public LifeWall(LifeWall other)
@@ -51,6 +54,7 @@ namespace BoundyShooter.Actor
         }
         public static List<LifeWall> GenerateWall(int wallCount)
         {
+            maxWallCount = wallCount;
             if(lifeWalls == null)
             {
                 lifeWalls = new List<LifeWall>();
@@ -61,7 +65,8 @@ namespace BoundyShooter.Actor
                     )
                     );
             }
-            return lifeWalls;
+            //return lifeWalls;
+            return new List<LifeWall>(lifeWalls);
         }
 
         public static bool AllIsDead()
@@ -78,6 +83,15 @@ namespace BoundyShooter.Actor
             nowCount = wallNames.Length - lifeWalls.Count;
             Name = wallNames[nowCount];
             Position = -GameDevice.Instance().DisplayModify + displayPos;
+            foreach(var hp in healParticles)
+            {
+                if(hp.IsDead)
+                {
+                    lifeWalls.Add(new LifeWall(new Vector2(Block.BlockSize, (Screen.Height - size.Y) - space * lifeWalls.Count)
+                        ));
+                }
+            }
+            healParticles.RemoveAll(hp => hp.IsDead);
             base.Update(gameTime);
         }
         public override void Draw()
@@ -103,6 +117,14 @@ namespace BoundyShooter.Actor
             IsDead = true;
             new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
             GameDevice.Instance().DisplayQuake = new Vector2(0, 1.5f);
+        }
+
+        public static void HealWall()
+        {
+            if(lifeWalls.Count < maxWallCount)
+            {
+                healParticles.Add(new HealParticle(wallNames[lifeWalls.Count], lifeWalls.Last().Position, size));
+            }
         }
     }
 }
