@@ -27,7 +27,9 @@ namespace BoundyShooter.Def
             { "boss_dead_long", Path },
             { "wall_hit", Path },
             { "lifewall_break", Path },
+            { "lifewall_heal", Path },
             { "success", Path },
+            { "hit_heal", Path },
 
             //必要に応じて自分で追加
         };

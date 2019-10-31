@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoundyShooter.Device;
 using BoundyShooter.Util;
 using Microsoft.Xna.Framework;
 
@@ -37,6 +38,7 @@ namespace BoundyShooter.Actor.Entities
         {
             if(gameObject is Player)
             {
+                GameDevice.Instance().GetSound().PlaySE("hit_heal");
                 IsDead = true;
             }
             base.Hit(gameObject);
