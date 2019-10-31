@@ -40,9 +40,10 @@ namespace BoundyShooter.Scene
         //チュートリアルでスクロールが止まる高さ
         private int[] stopHeights =
         {
+            159 * 32,
             137 * 32,
-            115 * 32,
-            91 * 32
+            113 * 32,
+            72 * 32
         };
 
         public GamePlay()

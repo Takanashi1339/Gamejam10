@@ -57,6 +57,7 @@ namespace BoundyShooter.Def
                 { "tutorial3", Path },
                 { "tutorial4", Path },
                 { "tutorial5", Path },
+                { "tutorial6", Path },
                 { "fireworks", Path },
                 { "heal_item", Path },
 
