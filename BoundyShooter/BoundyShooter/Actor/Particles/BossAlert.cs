@@ -39,6 +39,7 @@ namespace BoundyShooter.Actor
             size = new Point(320, 160);
             position = new Vector2(Screen.Width / 2 - size.X / 2, Screen.Height / 2 - size.Y / 2);
             healParticle = new HealParticle(name, position, size, 20, false);
+            destroyParticle = null;
             breakTimer = new Timer(1f);
             Initialized = true;
         }
