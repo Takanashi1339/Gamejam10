@@ -51,7 +51,6 @@ namespace BoundyShooter.Actor.Entities
             this.enemynum = enemynum;
             sound = GameDevice.Instance().GetSound();
             attackTimer = new Timer(summon, true);
-            attackTimer = new Timer(summon, true);
             deathTimer = new Timer(0.02f, true);
             particleTimer = new Timer(0.5f, true);
             endTimer = new Timer(5.5f, false);
@@ -135,27 +134,23 @@ namespace BoundyShooter.Actor.Entities
                 if (player.Speed > Player.MaxSpeed / 2 &&
                     !IsDeadFlag)
                 {
-                    if (dir == Direction.Top)
-                    {
-                        hitFlashCount = 0;
-                        Velocity = knockBack;
-                        tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
-                        hitCount++;
-                        GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
-                        sound.PlaySE("enemy_hit");
-                        HitStop.DoHitStop();
-                    }
+                    hitFlashCount = 0;
+                    Velocity = knockBack;
+                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
+                    hitCount++;
+                    GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
+                    sound.PlaySE("enemy_hit");
+                    HitStop.DoHitStop();
                 }
 
             }
             if (gameObject is PlayerBullet)
             {
-                if (dir == Direction.Top &&
-                    !IsDeadFlag)
+                if (!IsDeadFlag)
                 {
-                    Velocity = knockBack / 10;
-                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack / 10);
-                    hitCount += 0.1f;
+                    Velocity = knockBack / 4;
+                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack / 4);
+                    hitCount += 0.25f;
                 }
             }
             if(gameObject is WhiteBlock)
