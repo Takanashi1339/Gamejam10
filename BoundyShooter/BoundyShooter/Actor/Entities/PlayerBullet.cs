@@ -41,12 +41,11 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Hit(GameObject gameObject)
         {
-            if (!(gameObject is Player || (gameObject is Block block && !block.IsSolid)))
+            if (!(gameObject is Player || (gameObject is Block block && !block.IsSolid)|| gameObject is HealItem))
             {
                 new DestroyParticle(Name, Position, Size, DestroyParticle.DestroyOption.Center);
                 IsDead = true;
             }
-
             base.Hit(gameObject);
         }
     }
