@@ -36,7 +36,7 @@ namespace BoundyShooter.Actor
         {
             if (hitStop)
             {
-                hitStopTimer = new Timer(0.05f);
+                hitStopTimer = new Timer(0.075f);
                 GameDevice.Instance().DisplayQuake = new Vector2(0, 0.5f);
                 isHitStop = true;
                 hitStop = false;
