@@ -17,16 +17,17 @@ namespace BoundyShooter.Actor.Entities
         private Timer attackTimer,deathTimer,endTimer,particleTimer,downTimer;
         private Flashing death;
         static Random rand = new Random();
-        private Vector2 knockBack, vibrationVelocity,deathvelocity;
+        private Vector2 vibrationVelocity,deathvelocity;
         //プレイヤーに何回当たったら死ぬか、召喚するエネミーの種類
         private int maxCount, enemynum;
         private bool isDeadSound;
         private float hitAlpha;
-        protected float hitCount,deathVelY;
+        protected float hitCount;
         protected List<KrakenTentacle> tentacles = new List<KrakenTentacle>();
         private Sound sound;
         private int hitFlashCount;
         private int maxFlashCount;
+        private float hpRate;
 
         public static bool IsDeadFlag
         {
@@ -56,11 +57,9 @@ namespace BoundyShooter.Actor.Entities
             endTimer = new Timer(5.5f, false);
             downTimer = new Timer(2.5f, false);
             death = new Flashing(1f, 0f, 2.8f, false, true);
-            knockBack = new Vector2(0, -8);
             vibrationVelocity = new Vector2(2,0);
             deathvelocity = new Vector2(0, 2);
             hitCount = 0;
-            deathVelY = 2f;
             IsDeadFlag = false;
             isDeadSound = false;
             hitAlpha = 1f;
@@ -100,7 +99,7 @@ namespace BoundyShooter.Actor.Entities
                         sound.PlaySE("boss_dead_long");
                     }
                     isDeadSound = true;
-                    vibrationVelocity.Y = deathVelY;
+                    vibrationVelocity.Y = deathvelocity.Y;
                     death.Update(gameTime);
                     if (endTimer.IsTime)
                     {
@@ -131,8 +130,6 @@ namespace BoundyShooter.Actor.Entities
                     !IsDeadFlag)
                 {
                     hitFlashCount = 0;
-                    Velocity = knockBack;
-                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack);
                     hitCount++;
                     GameDevice.Instance().DisplayQuake = new Vector2(0, 0.25f);
                     sound.PlaySE("enemy_hit");
@@ -144,8 +141,7 @@ namespace BoundyShooter.Actor.Entities
             {
                 if (!IsDeadFlag)
                 {
-                    Velocity = knockBack / 4;
-                    tentacles.ForEach(tentacle => tentacle.AnchorPosition += knockBack / 4);
+
                     hitCount += 0.25f;
                 }
             }
@@ -170,8 +166,21 @@ namespace BoundyShooter.Actor.Entities
                 drawer.Alpha = hitAlpha;
             }
             drawer.DisplayModify = true;
+            if(IsInScreen())
+            {
+                HpBar();
+            }
             base.Draw(drawer);
         }
 
+        public void HpBar()
+        {
+            hpRate = (maxCount - hitCount) / maxCount;
+            var bossHp = Drawer.Default;
+            bossHp.Rectangle = new Rectangle(0, 0, (int)(512 * hpRate), 64);
+            Renderer.Instance.DrawTexture("hp", Vector2.Zero, bossHp);
+            var hpEmpty = Drawer.Default;
+            Renderer.Instance.DrawTexture("hp_empty", Vector2.Zero, hpEmpty);
+        }
     }
 }
