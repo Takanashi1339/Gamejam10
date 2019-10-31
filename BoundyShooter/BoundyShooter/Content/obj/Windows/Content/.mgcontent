@@ -12,7 +12,9 @@
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/decide.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/enemy_hit.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/gun.wav</File>
+    <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/hit_heal.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/lifewall_break.wav</File>
+    <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/lifewall_heal.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/select.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/shoot.wav</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Sound/stage.mp3</File>
@@ -37,6 +39,7 @@
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/fireworks.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/gun.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/hard.png</File>
+    <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/heal_item.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/hold_to_space.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/jelly_enemy.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/kraken_arm.png</File>
@@ -69,6 +72,9 @@
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/white_block.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

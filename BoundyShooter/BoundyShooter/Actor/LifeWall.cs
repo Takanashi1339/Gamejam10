@@ -136,6 +136,7 @@ namespace BoundyShooter.Actor
         {
             if(lifeWalls.Count(w => !w.IsDead) < maxWallCount)
             {
+                GameDevice.Instance().GetSound().PlaySE("lifewall_heal");
                 healParticles.Add(new HealParticle(wallNames[wallNames.Length - lifeWalls.Count(w => !w.IsDead) - 1], lifeWalls.Last().Position, size));
             }
         }
