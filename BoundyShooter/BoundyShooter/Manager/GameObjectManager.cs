@@ -101,7 +101,7 @@ namespace BoundyShooter.Manager
             HitToGameObject();
             HitToLifeWall();
 
-            LifeWalls.RemoveAll(l => l.IsDead);
+            //LifeWalls.RemoveAll(l => l.IsDead);
             gameObjects.RemoveAll(obj => obj.IsDead);
             if (nextMap != null)
             {
@@ -114,7 +114,12 @@ namespace BoundyShooter.Manager
         {
             Map.Draw();
             gameObjects.ForEach(obj => obj.Draw());
-            LifeWalls.ForEach(l => l.Draw());
+            LifeWalls.ForEach(l => {
+                if (!l.IsDead)
+                {
+                    l.Draw();
+                }
+            });
         }
 
         /// <summary>
