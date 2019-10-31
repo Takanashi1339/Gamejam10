@@ -193,7 +193,7 @@ namespace BoundyShooter.Scene
                 next = Scene.Title;
             }
 
-            if (scroll == BossAlert.AlertHeight)
+            if (scroll == BossAlert.AlertHeight && Menu.GetDifficulty() != Menu.Difficulty.tutorial)
             {
                 if (!bossAlert.Initialized)
                 {
