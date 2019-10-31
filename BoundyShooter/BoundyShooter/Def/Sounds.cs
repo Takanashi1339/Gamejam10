@@ -30,6 +30,7 @@ namespace BoundyShooter.Def
             { "lifewall_heal", Path },
             { "success", Path },
             { "hit_heal", Path },
+            { "tentacle_cut", Path },
 
             //必要に応じて自分で追加
         };

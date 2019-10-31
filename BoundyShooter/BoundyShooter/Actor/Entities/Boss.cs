@@ -70,10 +70,6 @@ namespace BoundyShooter.Actor.Entities
 
         public override void Update(GameTime gameTime)
         {
-            if(hitAlpha < 1.0f)
-            {
-                hitAlpha += 0.01f;
-            }
             if (!IsInScreen()) return;
             attackTimer.Update(gameTime);
             if (attackTimer.IsTime)
@@ -111,16 +107,16 @@ namespace BoundyShooter.Actor.Entities
                         IsDead = true;
                     }
                 }
-                if(hitAlpha < 1.0f)
-                {
-                    hitAlpha += 0.03f;
-                }
-                if (hitFlashCount < maxFlashCount && hitAlpha >= 1.0f)
-                {
-                    hitAlpha = 0.2f;
-                    hitFlashCount++;
-                }
                 Velocity = vibrationVelocity;
+            }
+            if (hitAlpha < 1.0f)
+            {
+                hitAlpha += 0.07f;
+            }
+            if (hitFlashCount < maxFlashCount && hitAlpha >= 1.0f)
+            {
+                hitAlpha = 0.2f;
+                hitFlashCount++;
             }
             base.Update(gameTime);
             Velocity = Vector2.Zero;
