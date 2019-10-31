@@ -14,10 +14,12 @@ namespace BoundyShooter.Actor.Particles
 
         private int location = 0;
 
+        private int pixSize = 2;
+
         public HealParticle(string name, Vector2 position, Point size,int particleSize = 10)
             : base(name, position, size, particleSize, 0.05f)
         {
-            location = particleSize;
+            location = particleSize * pixSize * 2;
         }
 
         public override object Clone()
@@ -39,7 +41,6 @@ namespace BoundyShooter.Actor.Particles
         {
             var drawer = Drawer.Default;
             drawer.DisplayModify = true;
-            var pixSize = 2;
             for (int x = 0; x < Size.X; x += pixSize)
             {
                 for (int y = 0; y < Size.Y; y += pixSize)

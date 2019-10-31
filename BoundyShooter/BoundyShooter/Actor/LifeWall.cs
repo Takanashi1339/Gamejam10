@@ -136,7 +136,7 @@ namespace BoundyShooter.Actor
         {
             if(lifeWalls.Count(w => !w.IsDead) < maxWallCount)
             {
-                healParticles.Add(new HealParticle(wallNames[lifeWalls.Count(w => !w.IsDead)], lifeWalls.Last().Position, size));
+                healParticles.Add(new HealParticle(wallNames[wallNames.Length - lifeWalls.Count(w => !w.IsDead) - 1], lifeWalls.Last().Position, size));
             }
         }
     }
