@@ -60,6 +60,7 @@ namespace BoundyShooter.Def
                 { "tutorial6", Path },
                 { "fireworks", Path },
                 { "heal_item", Path },
+                { "boss_alert" ,Path },
 
                 //必要に応じて自分で追加
             };

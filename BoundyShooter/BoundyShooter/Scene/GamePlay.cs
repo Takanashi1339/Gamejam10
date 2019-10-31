@@ -19,6 +19,8 @@ namespace BoundyShooter.Scene
     {
         public static bool ScrollStop = false;
 
+
+
         private bool isEndFlag;
         private Scene next;
 
@@ -26,6 +28,7 @@ namespace BoundyShooter.Scene
         private ParticleManager particleManager;
         private HitStop hitStop;
         private FadeIn fade;
+        private BossAlert bossAlert;
 
         private float scroll = 0;
         private string nowMap;
@@ -49,6 +52,7 @@ namespace BoundyShooter.Scene
         public GamePlay()
         {
             isEndFlag = false;
+            bossAlert = new BossAlert();
         }
 
         public void Draw()
@@ -59,6 +63,7 @@ namespace BoundyShooter.Scene
             particleManager.Draw();
             gameObjectManager.Draw();
             if(!fade.IsEnd) fade.Draw();
+            if(bossAlert.Initialized) bossAlert.Draw(); 
             Renderer.Instance.End();
         }
 
@@ -85,7 +90,7 @@ namespace BoundyShooter.Scene
             ScrollStop = false;
             hitStop = new HitStop();
             fade = new FadeIn();
-
+            
             GameDevice.Instance().GetSound().PlayBGM(
                 (Menu.GetDifficulty() == Menu.Difficulty.tutorial || Menu.GetDifficulty() == Menu.Difficulty.easy)
                 ? "tutorial"
@@ -113,6 +118,10 @@ namespace BoundyShooter.Scene
             if (!fade.IsEnd)
             {
                 fade.Update(gameTime);
+            }
+            if (bossAlert.Initialized)
+            {
+                bossAlert.Update(gameTime);
             }
             hitStop.Update(gameTime);
             if(hitStop.isHitStop)
@@ -182,6 +191,15 @@ namespace BoundyShooter.Scene
             if(Menu.GetDifficulty() == Menu.Difficulty.tutorial)
             {
                 next = Scene.Title;
+            }
+
+            if (scroll == BossAlert.AlertHeight)
+            {
+                if (!bossAlert.Initialized)
+                {
+                    bossAlert.Initialize();
+                }
+                bossAlert.Update(gameTime);
             }
         }
     }

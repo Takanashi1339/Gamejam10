@@ -33,6 +33,7 @@
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blue_ball.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blue_particle.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/blue_tail.png</File>
+    <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/boss_alert.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/clear.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/death_boss.png</File>
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/easy.png</File>
@@ -74,6 +75,7 @@
     <File>C:/K019G1329/1年後期/チーム制作/Gamejam10/BoundyShooter/BoundyShooter/Content/Texture/white_block.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
